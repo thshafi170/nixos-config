@@ -1,0 +1,78 @@
+{ self, config, pkgs, lib, ... }:
+
+{
+  services = {
+    hardware.bolt.enable = true;
+    libinput.enable = true;
+    "06cb-009a-fingerprint-sensor" = {
+      enable = true;
+      backend = "python-validity";
+    };
+  };
+
+  security = {
+    hardware.bolt.enable = true;
+    pam.services = {
+      #login.fprintAuth = true;
+      sudo.fprintAuth = true;
+      kde-fingerprint.fprintAuth = true;
+    };
+    tpm2.enable = true;
+  };
+
+  nixpkgs.config.packageOverrides = pkgs: {
+    intel-vaapi-driver = pkgs.intel-vaapi-driver.override { enableHybridCodec = true; };
+  };
+
+  hardware = {
+    bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+    };
+    graphics = {
+      enable = true;
+      enable32Bit = true;
+      extraPackages = with pkgs; [
+        libva
+        mesa
+        intel-compute-runtime-legacy1
+        intel-media-driver
+        intel-vaapi-driver
+        libvdpau-va-gl
+        vulkan-loader
+        vulkan-extension-layer
+        vulkan-validation-layers
+      ];
+      extraPackages32 = with pkgs.driversi686Linux; [
+        mesa
+        intel-media-driver
+        intel-vaapi-driver
+        libvdpau-va-gl
+      ];
+    };
+    sensor.iio.enable = true;
+  };
+
+environment.sessionVariables = {
+    LIBVA_DRIVER_NAME = "iHD";
+  };
+
+  environment.systemPackages = with pkgs; [
+    (ffmpeg-full.override {
+      withUnfree = true;
+      withFullDeps = true;
+    })
+    gst_all_1.gstreamer
+    gst_all_1.gst-plugins-base
+    gst_all_1.gst-plugins-good
+    gst_all_1.gst-plugins-bad
+    gst_all_1.gst-plugins-ugly
+    gst_all_1.gst-libav
+    gst_all_1.gst-vaapi
+    iio-sensor-proxy
+    intel-media-sdk
+    lm_sensors
+    
+  ];
+
+}
