@@ -48,22 +48,32 @@
     ];
   };
 
-  services.flatpak.enable = true;
-  systemd.services.flatpak-repo = {
-    wantedBy = [ "multi-user.target" ];
-    path = [ pkgs.flatpak ];
-    script = ''
-      flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-    '';
+  services = {
+    flatpak.enable = true;
+    fstrim.enable = true;
+    btrfs.autoScrub.enable = true;
+    fwupd.enable = true;
+    irqbalance.enable = true;
+    udisks2.enable = true;
+    dbus.implementation = "broker";
   };
 
   systemd = {
     user.extraConfig = "DefaultLimitNOFILE=128000";
-    services.nix-daemon = {
-      environment.TMPDIR = "/var/tmp";
+    services = {
+      nix-daemon = {
+        environment.TMPDIR = "/var/tmp";
+      };
+      flatpak-repo = {
+        wantedBy = [ "multi-user.target" ];
+        path = [ pkgs.flatpak ];
+        script = ''
+          flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+        '';
+      };
     };
   };
-
+  
   nixpkgs.config.allowUnfree = true;
   nix = {
     package = pkgs.lix;
@@ -71,6 +81,16 @@
       auto-optimise-store = true;
       experimental-features = [ "nix-command" "flakes" ];
       trusted-users = [ "root" "shafael170" ];
+      substituters = [
+        "https://cache.nixos.org"
+        "https://nix-community.cachix.org"
+        "https://an-anime-team.cachix.org"
+      ];
+      trusted-public-keys = [
+        "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+        "an-anime-team.cachix.org-1:nr9QXfYG5tDXIImqxjSXd1b6ymLfGCvviuV8xRPIKPM="
+      ];
     };
     gc = {
       automatic = true;
