@@ -7,6 +7,7 @@
     bottles
     btop
     btrfs-progs
+    dconf-editor
     dosfstools
     element-desktop
     fastfetch
@@ -34,7 +35,7 @@
     vscode-fhs
     wineWowPackages.fonts
     wineWowPackages.stagingFull
-    wiretrick
+    winetricks
     xournalpp
   ];
 
@@ -43,13 +44,7 @@
   };
 
   programs = {
-    dconf = {
-      enable = true;
-      package = [
-        pkgs.dconf
-        pkgs.dconf-editor
-      ];
-    };
+    dconf.enable = true;
     adb.enable = true;
     java = {
       enable = true;
@@ -87,6 +82,4 @@
     gamescope.enable = true;
     gamemode.enable = true;
   };
-
-
 }

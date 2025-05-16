@@ -1,53 +1,51 @@
 { config, pkgs, lib, ... }:
 
 {
-  program.home-manager.enable = true;
-
   home = {
     username = "shafael170";
     homeDirectory = "/home/shafael170";
     stateVersion = "25.05";
   };
 
-  home-manager.users.shafael170 = {
-    program.fish = {
-      enable = true;
-      interactiveShellInit = ''
-        set fish_greeting # Disable greeting
+  programs.home-manager.enable = true;
+
+  programs.fish = {
+    enable = true;
+    interactiveShellInit = ''
+      set fish_greeting # Disable greeting
+    '';
+    shellAliases = {
+      free = "free -m";
+      nix-switch = "sudo nixos-rebuild switch";
+      nix-upgrade = "sudo nixos-rebuild switch --upgrade";
+      nix-clean = "sudo nix profile wipe-history --profile /nix/var/nix/profiles/system && sudo nix-collect-garbage";
+    };
+    functions = {
+      pythonEnv = ''
+        function pythonEnv --description 'start a nix-shell with the given python packages' --argument pythonVersion
+        if set -q argv[2]
+          set argv $argv[2..-1]
+        end
+      
+        for el in $argv
+          set ppkgs $ppkgs "python"$pythonVersion"Packages.$el"
+        end
+      
+        nix-shell -p $ppkgs
+        end
       '';
-      shellAliases = {
-        free = "free -m";
-        nix-switch = "sudo nixos-rebuild switch";
-        nix-upgrade = "sudo nixos-rebuild switch --upgrade";
-        nix-clean = "sudo nix profile wipe-history --profile /nix/var/nix/profiles/system && sudo nix-collect-garbage";
-      };
-      functions = {
-        pythonEnv = ''
-          function pythonEnv --description 'start a nix-shell with the given python packages' --argument pythonVersion
-          if set -q argv[2]
-            set argv $argv[2..-1]
-          end
-        
-          for el in $argv
-            set ppkgs $ppkgs "python"$pythonVersion"Packages.$el"
-          end
-        
-          nix-shell -p $ppkgs
-          end
-        '';
-      };
     };
   };
 
-  xdg.user-dirs = {
+  xdg.userDirs = {
     enable = true;
-    createUserDirs = true;
+    createDirectories = true;
   };
 
   programs.git = {
     enable = true;
     lfs.enable = true;
-    userName  = "shafael170";
+    userName  = "Shafa'el Zmeyev";
     userEmail = "shafael170@gmail.com";
   };
 
@@ -66,7 +64,6 @@
       enableReactDevtools = true;
       disableMinSize = true;
       plugins = {
-        dynamicImageModalAPI.enable = true;
         betterRoleContext = {
           enable = true;
           roleIconFileFormat = "png";
@@ -89,7 +86,7 @@
         };
         callTimer = {
           enable = true;
-          callTimer.format = "human";
+          format = "human";
         };
         clearURLs.enable = true;
         clientTheme = {
@@ -144,7 +141,7 @@
           nearestNeighbour = false;
           square = false;
           zoom = 2.0;
-          size = 100;
+          size = 100.0;
           zoomSpeed = 0.5;
         };
         implicitRelationships = {
@@ -181,11 +178,7 @@
           ignoreGuilds = "";
         };
         mutualGroupDMs.enable = true;
-        noBlockedMessages = {
-          enable = true;
-          ignoreMessages = true;
-          applyToIgnoredUsers = true;
-        };
+        noBlockedMessages.enable = true;
         noDevtoolsWarning.enable = true;
         noOnboardingDelay.enable = true;
         normalizeMessageLinks.enable = true;
@@ -196,10 +189,7 @@
           lockout = true;
           onboarding = true;
         };
-        permissionsViewer = {
-          enable = true;
-          permissionSortOrder = 0;
-        };
+        permissionsViewer.enable = true;
         platformIndicators = {
           enable = true;
           lists = true;
@@ -223,7 +213,6 @@
           memberList = true;
           voiceUsers = true;
           reactorsList = true;
-          pollResults = true;
           colorChatMessages = false;
           messageSaturation = 30;
         };
@@ -238,18 +227,17 @@
         serverInfo.enable = true;
         serverListIndicators = {
           enable = true;
-          mode = 3;
+          mode = "both";
         };
         showConnections = {
           enable = true;
-          iconSpacing = 1;
+          iconSpacing = "cozy";
           iconSize = 32;
         };
         showHiddenChannels = {
           enable = true;
           hideUnreads = false;
-          showMode = 1;
-          defaultAllowedUsersAndRolesDropdownState = true;
+          showMode = "muted";
         };
         showHiddenThings = {
           enable = true;
@@ -260,8 +248,6 @@
         showMeYourName = {
           enable = true;
           mode = "nick-user";
-          displayNames = false;
-          inReplies = false;
         };
         showTimeoutDuration = {
           enable = true;
@@ -276,36 +262,30 @@
           enable = true;
           hoverControls = false;
           useSpotifyUris = false;
-          previousButtonRestartsTrack = true;
         };
         spotifyCrack = {
           enable = true;
           noSpotifyAutoPause = true;
-          keepSpotifyActivityOnIdle = false
+          keepSpotifyActivityOnIdle = false;
         };
         superReactionTweaks = {
           enable = true;
           superReactByDefault = false;
-          ulimitedSuperReactionsPlaying = false;
+          unlimitedSuperReactionPlaying = false;
           superReactionPlayingLimit = 0;
         };
         themeAttributes.enable = true;
         translate = {
           enable = true;
           showChatBarButton = true;
-          service = "google";
-          deeplApiKey = "";
           autoTranslate = false;
-          showAutoTranslateTooltip = true;
-          receivedInput = "auto";
-          receivedOutput = "en";
         };
         typingIndicator = {
           enable = true;
           includeCurrentChannel = true;
           includeMutedChannels = true;
           includeBlockedUsers = true;
-          indicatorMode = 1;
+          indicatorMode = "animatedDots";
         };
         typingTweaks = {
           enable = true;
@@ -315,7 +295,6 @@
         };
         userVoiceShow = {
           enable = true;
-          userVoiceShow = true;
           showInMemberList = true;
           showInMessages = true;
         };
@@ -324,7 +303,7 @@
         viewIcons = {
           enable = true;
           format = "png";
-          imgSize = "4096";
+          imgSize = 4096;
         };
         voiceDownload.enable = true;
         voiceMessages = {

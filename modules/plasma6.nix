@@ -36,6 +36,7 @@
     dee
     gtk3
     gtk4
+    morewaita-icon-theme
     libadwaita
     libappindicator
     libappindicator-gtk2

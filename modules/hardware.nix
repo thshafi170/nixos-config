@@ -11,7 +11,6 @@
   };
 
   security = {
-    hardware.bolt.enable = true;
     pam.services = {
       #login.fprintAuth = true;
       sudo.fprintAuth = true;
@@ -72,7 +71,6 @@ environment.sessionVariables = {
     iio-sensor-proxy
     intel-media-sdk
     lm_sensors
-    
   ];
 
 }

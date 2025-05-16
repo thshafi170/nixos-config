@@ -26,8 +26,7 @@
     nixcord.url = "github:kaylorben/nixcord";
   };
 
-
-  outputs = { self, nixpkgs, home-manager, nix-alien, chaotic, nur, nixos-06cb-009a-fingerprint-sensor, ... }: {
+  outputs = { self, nixpkgs, home-manager, nix-alien, chaotic, nur, nixos-06cb-009a-fingerprint-sensor, ... }@inputs: {
     nixosConfigurations.X1-Yoga-2nd = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { inherit self; };
@@ -42,7 +41,7 @@
                 inputs.nixcord.homeModules.nixcord
               ];
             }
-            ({ self, ...}: {
+            ({ self, pkgs, ...}: {
               nixpkgs.overlays = [
                 self.inputs.nix-alien.overlays.default
               ];
@@ -57,4 +56,3 @@
     };
   };
 }
-

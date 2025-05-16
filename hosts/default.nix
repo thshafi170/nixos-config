@@ -4,8 +4,8 @@
   imports =
     [ 
       ./hardware-configuration.nix
-      ../modules
-      ../users
+      ../modules/default.nix
+      ../users/default.nix
     ];
 
   networking.hostName = "X1-Yoga-2nd";
@@ -83,11 +83,13 @@
       trusted-users = [ "root" "shafael170" ];
       substituters = [
         "https://cache.nixos.org"
+        "https://chaotic-nyx.cachix.org"
         "https://nix-community.cachix.org"
         "https://an-anime-team.cachix.org"
       ];
       trusted-public-keys = [
         "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+        "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
         "an-anime-team.cachix.org-1:nr9QXfYG5tDXIImqxjSXd1b6ymLfGCvviuV8xRPIKPM="
       ];

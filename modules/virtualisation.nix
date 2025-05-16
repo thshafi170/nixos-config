@@ -1,4 +1,5 @@
 { self, config, pkgs, lib, ... }:
+
 {
   virtualisation = {
     libvirtd = {
@@ -31,12 +32,11 @@
   programs.virt-manager.enable = true;
 
   environment.systemPackages = with pkgs; [
-    distrobox-git
+    distrobox_git
     libguestfs
     libguestfs-appliance
     OVMFFull
     python312Packages.guestfs
-    python313Packages.guestfs
     qemu
     qemu_kvm
     qemu-user
