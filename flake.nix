@@ -9,6 +9,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nix-alien.url = "github:thiagokokada/nix-alien";
+
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
     nur = {
@@ -25,9 +27,10 @@
   };
 
 
-  outputs = { self, nixpkgs, home-manager, chaotic, nur, nixos-06cb-009a-fingerprint-sensor, ... }: {
+  outputs = { self, nixpkgs, home-manager, nix-alien, chaotic, nur, nixos-06cb-009a-fingerprint-sensor, ... }: {
     nixosConfigurations.X1-Yoga-2nd = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
+        specialArgs = { inherit self; };
         modules = [
             ./hosts/default.nix
             home-manager.nixosModules.home-manager
@@ -39,6 +42,14 @@
                 inputs.nixcord.homeModules.nixcord
               ];
             }
+            ({ self, ...}: {
+              nixpkgs.overlays = [
+                self.inputs.nix-alien.overlays.default
+              ];
+              environment.systemPackages = with pkgs; [
+                nix-alien
+              ];
+            })
             chaotic.nixosModules.default
             nur.modules.nixos.default
             nixos-06cb-009a-fingerprint-sensor.nixosModules."06cb-009a-fingerprint-sensor"

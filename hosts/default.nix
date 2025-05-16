@@ -57,10 +57,26 @@
     '';
   };
 
+  systemd = {
+    user.extraConfig = "DefaultLimitNOFILE=128000";
+    services.nix-daemon = {
+      environment.TMPDIR = "/var/tmp";
+    };
+  };
+
   nixpkgs.config.allowUnfree = true;
-  nix.settings = {
-    experimental-features = [ "nix-command" "flakes" ];
-    trusted-users = [ "root" "shafael170" ];
+  nix = {
+    package = pkgs.lix;
+    settings = {
+      auto-optimise-store = true;
+      experimental-features = [ "nix-command" "flakes" ];
+      trusted-users = [ "root" "shafael170" ];
+    };
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
+    };
   };
 
   system.stateVersion = "25.05";

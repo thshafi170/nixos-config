@@ -1,11 +1,5 @@
 { config, pkgs, lib, ... }:
 
-let
-  nix-alien-pkgs = import (
-    builtins.fetchTarball "https://github.com/thiagokokada/nix-alien/tarball/master"
-  ) { };
-in
-
 {
   program.home-manager.enable = true;
 
@@ -13,9 +7,6 @@ in
     username = "shafael170";
     homeDirectory = "/home/shafael170";
     stateVersion = "25.05";
-    packages = with nix-alien-pkgs; [
-      nix-alien
-    ];
   };
 
   home-manager.users.shafael170 = {
