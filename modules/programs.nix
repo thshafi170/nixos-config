@@ -4,6 +4,7 @@
   environment.systemPackages = with pkgs; [
     android-tools
     android-udev-rules
+    arrpc
     bottles
     btop
     btrfs-progs
@@ -30,6 +31,7 @@
     telegram-desktop
     unzip
     unrar
+    vesktop
     vkbasalt
     vkbasalt-cli
     vscode-fhs

@@ -22,11 +22,9 @@
         url = "github:ahbnr/nixos-06cb-009a-fingerprint-sensor";
         inputs.nixpkgs.follows = "nixpkgs";
     };
-    
-    nixcord.url = "github:kaylorben/nixcord";
   };
 
-  outputs = { self, nixpkgs, home-manager, nix-alien, chaotic, nur, nixos-06cb-009a-fingerprint-sensor, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, nix-alien, chaotic, nur, nixos-06cb-009a-fingerprint-sensor, ... }: {
     nixosConfigurations.X1-Yoga-2nd = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { inherit self; };
@@ -37,9 +35,6 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.shafael170 = import ./home.nix;
-              home-manager.sharedModules = [
-                inputs.nixcord.homeModules.nixcord
-              ];
             }
             ({ self, pkgs, ...}: {
               nixpkgs.overlays = [
