@@ -41,6 +41,7 @@
     wineWowPackages.stagingFull
     winetricks
     xournalpp
+    zapzap
   ];
 
   environment.sessionVariables = {
