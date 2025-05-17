@@ -13,6 +13,7 @@
     element-desktop
     fastfetch
     freetype
+    gh
     git
     icoutils
     krita
