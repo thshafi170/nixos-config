@@ -74,6 +74,8 @@
       };
     };
   };
+
+  system.rebuild.enableNg = true;
   
   nixpkgs.config.allowUnfree = true;
   nix = {
