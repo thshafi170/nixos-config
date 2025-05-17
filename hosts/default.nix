@@ -51,6 +51,7 @@
   services = {
     flatpak.enable = true;
     fstrim.enable = true;
+    power-profiles-daemon.enable = true;
     btrfs.autoScrub.enable = true;
     fwupd.enable = true;
     irqbalance.enable = true;
