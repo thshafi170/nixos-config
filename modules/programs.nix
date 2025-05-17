@@ -24,6 +24,7 @@
     onlyoffice-desktopeditors
     pnpm
     protonplus
+    pwvucontrol
     python3Full
     qbittorrent
     rar
