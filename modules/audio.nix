@@ -49,8 +49,8 @@
             "node.always-process" = true;
             "dither.method" = "wannamaker3";
             "dither.noise" = 1;
-          }
-        }
+          };
+        };
       }
     ];
     "monitor.bluez.rules" = [
@@ -69,8 +69,8 @@
             "node.always-process" = true;
             "dither.method" = "wannamaker3";
             "dither.noise" = 1;
-          }
-        }
+          };
+        };
       }
     ];
   };
