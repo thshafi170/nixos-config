@@ -4,6 +4,11 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     
+    lix-module = {
+        url = "https://git.lix.systems/lix-project/nixos-module/archive/2.93.0.tar.gz";
+        inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -24,12 +29,13 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, nix-alien, chaotic, nur, nixos-06cb-009a-fingerprint-sensor, ... }: {
+  outputs = { self, nixpkgs, lix-module, home-manager, nix-alien, chaotic, nur, nixos-06cb-009a-fingerprint-sensor, ... }: {
     nixosConfigurations.X1-Yoga-2nd = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { inherit self; };
         modules = [
             ./hosts/default.nix
+            lix-module.nixosModules.default
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;

@@ -79,7 +79,6 @@
   
   nixpkgs.config.allowUnfree = true;
   nix = {
-    package = pkgs.lix;
     settings = {
       auto-optimise-store = true;
       experimental-features = [ "nix-command" "flakes" ];
