@@ -3,6 +3,8 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+    nixpkgs-master.url = "github:NixOS/nixpkgs/master";
     
     lix-module = {
         url = "https://git.lix.systems/lix-project/nixos-module/archive/2.93.0.tar.gz";
@@ -29,31 +31,39 @@
     };
   };
 
-  outputs = { self, nixpkgs, lix-module, home-manager, nix-alien, chaotic, nur, nixos-06cb-009a-fingerprint-sensor, ... }: {
-    nixosConfigurations.X1-Yoga-2nd = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = { inherit self; };
-        modules = [
-            ./hosts/default.nix
-            lix-module.nixosModules.default
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.shafael170 = import ./home.nix;
-            }
-            ({ self, pkgs, ...}: {
-              nixpkgs.overlays = [
-                self.inputs.nix-alien.overlays.default
-              ];
-              environment.systemPackages = with pkgs; [
-                nix-alien
-              ];
-            })
-            chaotic.nixosModules.default
-            nur.modules.nixos.default
-            nixos-06cb-009a-fingerprint-sensor.nixosModules."06cb-009a-fingerprint-sensor"
-        ];
+  outputs = { self, nixpkgs, nixpkgs-master, lix-module, home-manager, nix-alien, chaotic, nur, nixos-06cb-009a-fingerprint-sensor, ... }: {
+
+    let
+      pkgs-master = import nixpkgs-master {
+        inherit system
+      };
+
+    in {
+      nixosConfigurations.X1-Yoga-2nd = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = { inherit self pkgs-master; };
+          modules = [
+              ./hosts/default.nix
+              lix-module.nixosModules.default
+              home-manager.nixosModules.home-manager
+              {
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+                home-manager.users.shafael170 = import ./home.nix;
+              }
+              ({ self, pkgs, ...}: {
+                nixpkgs.overlays = [
+                  self.inputs.nix-alien.overlays.default
+                ];
+                environment.systemPackages = with pkgs; [
+                  nix-alien
+                ];
+              })
+              chaotic.nixosModules.default
+              nur.modules.nixos.default
+              nixos-06cb-009a-fingerprint-sensor.nixosModules."06cb-009a-fingerprint-sensor"
+          ];
+      };
     };
   };
 }
