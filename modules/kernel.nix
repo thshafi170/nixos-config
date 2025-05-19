@@ -10,6 +10,7 @@
       "quiet"
       "splash"
       "loglevel=3"
+      "preempt=full"
       "resume_offset=533760"
       "psi=1"
       "intel_iommu=on"
