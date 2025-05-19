@@ -5,7 +5,7 @@
     [ 
       ./audio.nix
       ./boot.nix
-      ./hardware.nix
+      ./drivers.nix
       ./input-method.nix
       ./kernel.nix
       ./locale.nix

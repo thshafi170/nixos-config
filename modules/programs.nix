@@ -84,7 +84,7 @@
             keyutils
           ];
       };
-      extraCompatPackages = with pkgs; [
+      extraCompatPackages = with pkgsMaster; [
         proton-ge-bin
       ];
       remotePlay.openFirewall = true;

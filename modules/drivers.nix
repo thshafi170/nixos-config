@@ -71,5 +71,4 @@ environment.sessionVariables = {
     intel-media-sdk
     lm_sensors
   ];
-
 }

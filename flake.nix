@@ -37,7 +37,7 @@
     pkgsMaster = import nixpkgs-master {
       inherit system;
     };
-    
+
   in {
     nixosConfigurations.X1-Yoga-2nd = nixpkgs.lib.nixosSystem {
       inherit system;

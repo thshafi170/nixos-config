@@ -56,7 +56,7 @@
     fwupd.enable = true;
     irqbalance.enable = true;
     udisks2.enable = true;
-    # dbus.implementation = "broker";
+    dbus.implementation = "broker";
   };
 
   systemd = {
