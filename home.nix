@@ -22,21 +22,6 @@
         description = "Start fastfetch at launch";
         body = "fastfetch";
       };
-      pythonEnv = {
-        description = "Start a nix-shall with given python packages";
-        argumentNames = [ "pythonVersion" ];
-        body = ''
-          set -l pythonVersion $argv[1]
-          set -e argv[1]
-
-          set -l ppkgs
-          for el in $argv
-            set ppkgs $ppkgs python${pythonVersion}Packages.$el
-          end
-
-          nix-shell -p $ppkgs
-        '';
-      };
     };
   };
 
