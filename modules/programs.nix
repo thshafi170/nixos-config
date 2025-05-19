@@ -1,14 +1,15 @@
-{ self, config, pkgs, pkgs-master, lib, ... }:
+{ self, config, pkgs, pkgsMaster, lib, ... }:
 
 {
   environment.systemPackages = (with pkgs; [
     android-tools
     android-udev-rules
     arrpc
-    # bottles
+    brave
     btop
     btrfs-progs
     dconf-editor
+    direnv
     dosfstools
     element-desktop
     fastfetch
@@ -36,13 +37,14 @@
     vesktop
     vkbasalt
     vkbasalt-cli
+    vlc
     vscode-fhs
     wineWowPackages.fonts
     wineWowPackages.stagingFull
     winetricks
     xournalpp
     zapzap
-  ]) ++ (with pkgs-master; [
+  ]) ++ (with pkgsMaster; [
     bottles
   ]);
 

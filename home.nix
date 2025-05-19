@@ -18,7 +18,7 @@
       free = "free -m";
       nix-switch = "sudo nixos-rebuild switch";
       nix-upgrade = "sudo nixos-rebuild switch --upgrade";
-      nix-clean = "sudo nix profile wipe-history --profile /nix/var/nix/profiles/system && sudo nix-collect-garbage";
+      nix-clean = "sudo nix profile wipe-history --profile /nix/var/nix/profiles/system && sudo nix-collect-garbage && sudo nixos-rebuild boot";
     };
     functions = {
       pythonEnv = ''
@@ -40,12 +40,5 @@
   xdg.userDirs = {
     enable = true;
     createDirectories = true;
-  };
-
-  programs.git = {
-    enable = true;
-    lfs.enable = true;
-    userName  = "Shafa'el Zmeyev";
-    userEmail = "shafael170@gmail.com";
   };
 }

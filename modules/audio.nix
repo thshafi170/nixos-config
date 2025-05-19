@@ -1,7 +1,13 @@
 { config, pkgs, lib, ... }:
 
 {
-  security.rtkit.enable = true;
+  security.rtkit = {
+    enable = true;
+    args = [
+      "--no-canary"
+    ];
+  };
+
   services.pipewire = {
     enable = true;
     socketActivation = true;
@@ -37,10 +43,10 @@
       {
         matches = [
           {
-            "node.name" = "alsa_input.*";
+            "node.name" = "~alsa_input.*";
           }
           {
-            "node.name" = "alsa_output.*";
+            "node.name" = "~alsa_output.*";
           }
         ];
         actions = {
@@ -48,7 +54,7 @@
             "session.suspend-timeout-seconds" = 0;
             "node.always-process" = true;
             "dither.method" = "wannamaker3";
-            "dither.noise" = 1;
+            "dither.noise" = 2;
           };
         };
       }
@@ -57,10 +63,10 @@
       {
         matches = [
           {
-            "node.name" = "bluez_input.*";
+            "node.name" = "~bluez_input.*";
           }
           {
-            "node.name" = "bluez_output.*";
+            "node.name" = "~bluez_output.*";
           }
         ];
         actions = {
@@ -68,7 +74,7 @@
             "session.suspend-timeout-seconds" = 0;
             "node.always-process" = true;
             "dither.method" = "wannamaker3";
-            "dither.noise" = 1;
+            "dither.noise" = 2;
           };
         };
       }
