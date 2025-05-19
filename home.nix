@@ -21,6 +21,11 @@
       nix-clean = "sudo nix profile wipe-history --profile /nix/var/nix/profiles/system && sudo nix-collect-garbage && sudo nixos-rebuild boot";
     };
     functions = {
+      fish_greeting = ''
+        function fish_greeting
+          fastfetch
+        end
+      '';
       pythonEnv = ''
         function pythonEnv --description 'start a nix-shell with the given python packages' --argument pythonVersion
         if set -q argv[2]
