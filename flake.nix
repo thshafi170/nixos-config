@@ -49,6 +49,7 @@
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
+	  home-manager.backupFileExtension = "bak";
           home-manager.users.shafael170 = import ./home.nix;
         }
         ({ self, pkgs, ... }: {

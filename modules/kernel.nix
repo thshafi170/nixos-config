@@ -3,9 +3,9 @@
 {
   boot = {
     kernelPackages = pkgs.linuxPackages_cachyos;
-    kernelModules = [ "vfio-pci" "ntsync" ];
+    kernelModules = [ "vfio-pci" "ntsync" "zram" ];
     kernel.sysctl."vm.max_map_count" = 2147483642;
-    resumeDevice = "/dev/disk/by-uuid/<UUID>";
+    resumeDevice = "/dev/disk/by-uuid/cd757395-1892-47d2-869d-1ffc0c8df123";
     kernelParams = [
       "quiet"
       "splash"

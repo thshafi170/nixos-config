@@ -19,6 +19,7 @@
     freetype
     gh
     git
+    icoextract
     icoutils
     krita
     lutris

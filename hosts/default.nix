@@ -56,7 +56,7 @@
     fwupd.enable = true;
     irqbalance.enable = true;
     udisks2.enable = true;
-    dbus.implementation = "broker";
+    # dbus.implementation = "broker";
   };
 
   systemd = {
@@ -73,6 +73,14 @@
         '';
       };
     };
+  };
+
+  zramSwap = {
+    enable = true;
+    priority = 100;
+    algorithm = "zstd";
+    swapDevices = 1;
+    memoryPercent = 75;
   };
 
   system.rebuild.enableNg = true;

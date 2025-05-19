@@ -19,7 +19,7 @@
     };
     functions = {
       fish_greeting = {
-        description = "Start fastfetch at launch";
+        description = "Start fastfetch at launch.";
         body = "fastfetch";
       };
     };
