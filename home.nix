@@ -11,9 +11,6 @@
 
   programs.fish = {
     enable = true;
-    interactiveShellInit = ''
-      set fish_greeting # Disable greeting
-    '';
     shellAliases = {
       free = "free -m";
       nix-switch = "sudo nixos-rebuild switch";
