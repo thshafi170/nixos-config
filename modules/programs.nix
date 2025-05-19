@@ -4,12 +4,15 @@
   environment.systemPackages = (with pkgs; [
     android-tools
     android-udev-rules
-    arrpc
     brave
     btop
     btrfs-progs
     dconf-editor
     direnv
+    (discord.override {
+      withOpenASAR = true;
+      withVencord = true;
+    })
     dosfstools
     element-desktop
     fastfetch
@@ -34,7 +37,6 @@
     telegram-desktop
     unzip
     unrar
-    vesktop
     vkbasalt
     vkbasalt-cli
     vlc
