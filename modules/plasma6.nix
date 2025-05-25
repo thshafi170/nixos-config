@@ -34,10 +34,7 @@
     adwaita-qt
     adw-gtk3
     dee
-    gtk3
-    gtk4
     morewaita-icon-theme
-    libadwaita
     libappindicator
     libappindicator-gtk2
     libayatana-appindicator

@@ -1,9 +1,10 @@
 { self, config, pkgs, pkgsMaster, lib, ... }:
 
 {
-  environment.systemPackages = (with pkgs; [
+  environment.systemPackages = with pkgs; [
     android-tools
     android-udev-rules
+    bottles
     brave
     btop
     btrfs-progs
@@ -47,9 +48,7 @@
     winetricks
     xournalpp
     zapzap
-  ]) ++ (with pkgsMaster; [
-    bottles
-  ]);
+  ];
 
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
