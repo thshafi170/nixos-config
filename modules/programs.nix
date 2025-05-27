@@ -4,7 +4,9 @@
   environment.systemPackages = with pkgs; [
     android-tools
     android-udev-rules
-    bottles
+    (bottles.override {
+      removeWarningPopup = true;
+    })
     brave
     btop
     btrfs-progs
@@ -16,6 +18,7 @@
     })
     dosfstools
     element-desktop
+    fakeroot
     fastfetch
     freetype
     gh
@@ -37,6 +40,7 @@
     rar
     steam-run
     telegram-desktop
+    umu-launcher
     unzip
     unrar
     vkbasalt
