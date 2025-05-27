@@ -1,7 +1,7 @@
 { self, config, pkgs, pkgsMaster, lib, ... }:
 
 {
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = (with pkgs; [
     android-tools
     android-udev-rules
     brave
@@ -49,7 +49,17 @@
     winetricks
     xournalpp
     zapzap
-  ];
+  ]) ++ (with pkgs.python312Packages; [
+      black
+      flake8
+      isort
+      ipython
+      jupyter
+      mypy
+      pip
+      pytest
+      virtualenv
+  ]);
 
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
