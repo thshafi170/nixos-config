@@ -29,7 +29,6 @@
       decompressFonts = true;
     };
     fontconfig = {
-      #enable = true;
       useEmbeddedBitmaps = true;
     };
     enableDefaultPackages = true;

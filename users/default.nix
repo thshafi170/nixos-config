@@ -8,6 +8,6 @@
     name = "shafael170";
     description = "Shafa'el Zmeyev";
     home = "/home/shafael170";
-    extraGroups = [ "adbusers" "adm" "audio" "kmem" "kvm" "libvirtd" "mem" "networkmanager" "podman" "power" "proc" "qemu" "qemu-libvirtd" "sys" "tss" "users" "wheel" ];
+    extraGroups = [ "adbusers" "adm" "audio" "kmem" "kvm" "libvirtd" "mem" "networkmanager" "podman" "power" "proc" "qemu" "qemu-libvirtd" "shafael170" "sys" "tss" "users" "wheel" ];
   };
 }

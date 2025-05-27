@@ -4,9 +4,6 @@
   environment.systemPackages = with pkgs; [
     android-tools
     android-udev-rules
-    (bottles.override {
-      removeWarningPopup = true;
-    })
     brave
     btop
     btrfs-progs

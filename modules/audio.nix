@@ -11,8 +11,10 @@
   services.pipewire = {
     enable = true;
     socketActivation = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
+    alsa = {
+      enable = true;
+      support32Bit = true;
+    };
     pulse.enable = true;
     jack.enable = true;
     wireplumber.enable = true;
@@ -54,7 +56,7 @@
             "session.suspend-timeout-seconds" = 0;
             "node.always-process" = true;
             "dither.method" = "wannamaker3";
-            "dither.noise" = 2;
+            "dither.noise" = 1;
           };
         };
       }
@@ -74,7 +76,7 @@
             "session.suspend-timeout-seconds" = 0;
             "node.always-process" = true;
             "dither.method" = "wannamaker3";
-            "dither.noise" = 2;
+            "dither.noise" = 1;
           };
         };
       }
