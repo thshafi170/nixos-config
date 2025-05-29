@@ -1,7 +1,6 @@
 { self, config, pkgs, pkgsMaster, lib, ... }:
 
 {
-
   nixpkgs.overlays = [
     (self: super: {
       vivaldi = (super.vivaldi.override {
