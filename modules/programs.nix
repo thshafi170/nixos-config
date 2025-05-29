@@ -1,18 +1,36 @@
 { self, config, pkgs, pkgsMaster, lib, ... }:
 
 {
+
+  nixpkgs.overlays = [
+    (self: super: {
+      vivaldi = (super.vivaldi.override {
+        proprietaryCodecs = true;
+        enableWidevine = true;
+        commandLineArgs = ''
+          --ozone-platform=wayland
+          --enable-wayland-ime
+          --wayland-text-input-version=3
+        '';
+      }).overrideAttrs (oldAttrs: {
+        dontWrapQtApps = false;
+        dontPatchELF = true;
+        nativeBuildInputs = oldAttrs.nativeBuildInputs ++ [super.kdePackages.wrapQtAppsHook];
+      });
+      vesktop = (super.vesktop.override {
+        withMiddleClickScroll = true;
+      });
+    })
+  ];
+
   environment.systemPackages = (with pkgs; [
     android-tools
     android-udev-rules
-    brave
+    arrpc
     btop
     btrfs-progs
     dconf-editor
     direnv
-    (discord.override {
-      withOpenASAR = true;
-      withVencord = true;
-    })
     dosfstools
     element-desktop
     fakeroot
@@ -40,6 +58,9 @@
     umu-launcher
     unzip
     unrar
+    vesktop
+    vivaldi
+    vivaldi-ffmpeg-codecs
     vkbasalt
     vkbasalt-cli
     vlc

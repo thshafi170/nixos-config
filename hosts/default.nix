@@ -88,6 +88,8 @@
   nix = {
     settings = {
       auto-optimise-store = true;
+      cores = 4;
+      max-jobs = 4;
       experimental-features = [ "nix-command" "flakes" ];
       trusted-users = [ "root" "shafael170" ];
       substituters = [
