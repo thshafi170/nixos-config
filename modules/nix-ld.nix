@@ -88,6 +88,7 @@
       libdrm
       mesa
       libxkbcommon
+      fakeroot
     ];
   };
 }

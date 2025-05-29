@@ -59,6 +59,10 @@
       pip
       pytest
       virtualenv
+  ]) ++ (with pkgsMaster; [
+    (bottles.override {
+      removeWarningPopup = true;
+    })
   ]);
 
   environment.sessionVariables = {
