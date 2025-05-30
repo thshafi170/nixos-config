@@ -10,6 +10,28 @@
     };
   };
 
+  systemd.services.python3-validity-suspend-hotfix = {
+    after = [
+      "hibernate.target"
+      "hybrid-sleep.target"
+      "suspend.target"
+      "suspend-then-hibernate.target"
+    ];
+
+    wantedBy = [
+      "hibernate.target"
+      "hybrid-sleep.target"
+      "suspend.target"
+      "suspend-then-hibernate.target"
+    ];
+
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = "${config.systemd.package}/bin/systemctl --no-block restart python3-validity.service open-fprintd.service";
+    };
+  };
+
+
   security = {
     pam.services = {
       #login.fprintAuth = true;
