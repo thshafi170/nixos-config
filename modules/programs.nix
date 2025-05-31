@@ -41,6 +41,8 @@
     icoutils
     krita
     lutris
+    mangohud
+    goverlay
     mtools
     nil
     nodejs_22
@@ -52,6 +54,7 @@
     python3Full
     qbittorrent
     rar
+    steamcmd
     steam-run
     telegram-desktop
     umu-launcher
@@ -79,10 +82,6 @@
       pip
       pytest
       virtualenv
-  ]) ++ (with pkgsMaster; [
-    (bottles.override {
-      removeWarningPopup = true;
-    })
   ]);
 
   environment.sessionVariables = {
@@ -125,7 +124,10 @@
       gamescopeSession.enable = true;
       protontricks.enable = true;
     };
-    gamescope.enable = true;
+    gamescope = {
+      enable = true;
+      capSysNice = true;
+    };
     gamemode.enable = true;
   };
 }

@@ -1,4 +1,4 @@
-{ self, config, pkgs, lib, ... }:
+{ self, config, pkgs, pkgsMaster, lib, ... }:
 
 {
   services = {
@@ -79,9 +79,12 @@ environment.sessionVariables = {
   };
 
   environment.systemPackages = with pkgs; [
-    (ffmpeg-full.override {
+    ((ffmpeg-full.override {
       withUnfree = true;
-    })
+      withOpengl = true;
+    }).overrideAttrs (_: {
+      doCheck = false;
+    }))
     gst_all_1.gstreamer
     gst_all_1.gst-plugins-base
     gst_all_1.gst-plugins-good
@@ -92,5 +95,6 @@ environment.sessionVariables = {
     iio-sensor-proxy
     intel-media-sdk
     lm_sensors
+    openh264
   ];
 }

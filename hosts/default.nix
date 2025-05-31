@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, pkgsMaster, lib, ... }:
 
 {
   imports =
@@ -59,7 +59,7 @@
   };
 
   systemd = {
-    user.extraConfig = "DefaultLimitNOFILE=128000";
+    user.extraConfig = "DefaultLimitNOFILE=524288";
     services = {
       nix-daemon = {
         environment.TMPDIR = "/var/tmp";
