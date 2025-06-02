@@ -1,14 +1,6 @@
 { config, pkgs, lib, ... }:
 
 {
-  home = {
-    username = "shafael170";
-    homeDirectory = "/home/shafael170";
-    stateVersion = "25.11";
-  };
-
-  programs.home-manager.enable = true;
-
   programs.fish = {
     enable = true;
     shellAliases = {
@@ -23,10 +15,5 @@
         body = "fastfetch";
       };
     };
-  };
-
-  xdg.userDirs = {
-    enable = true;
-    createDirectories = true;
   };
 }

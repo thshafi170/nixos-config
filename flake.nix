@@ -2,7 +2,7 @@
   description = "shafael170's NixOS configuration";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/staging";
 
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
 
@@ -10,6 +10,8 @@
         url = "https://git.lix.systems/lix-project/nixos-module/archive/2.93.0.tar.gz";
         inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixcord.url = "github:kaylorben/nixcord";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -31,7 +33,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-master, lix-module, home-manager, nix-alien, chaotic, nur, nixos-06cb-009a-fingerprint-sensor, ... }:
+  outputs = { self, nixpkgs, nixpkgs-master, lix-module, home-manager, nix-alien, chaotic, nur, nixos-06cb-009a-fingerprint-sensor, ... }@inputs:
   let
     system = "x86_64-linux";
     pkgsMaster = import nixpkgs-master {
@@ -49,17 +51,12 @@
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
+          home-manager.sharedModules = [
+            inputs.nixcord.homeModules.nixcord
+          ];
 	        home-manager.backupFileExtension = "bak";
-          home-manager.users.shafael170 = import ./home.nix;
+          home-manager.users.shafael170 = import ./home/default.nix;
         }
-        ({ self, pkgs, ... }: {
-          nixpkgs.overlays = [
-            self.inputs.nix-alien.overlays.default
-          ];
-          environment.systemPackages = with pkgs; [
-            nix-alien
-          ];
-        })
         chaotic.nixosModules.default
         nur.modules.nixos.default
         nixos-06cb-009a-fingerprint-sensor.nixosModules."06cb-009a-fingerprint-sensor"
