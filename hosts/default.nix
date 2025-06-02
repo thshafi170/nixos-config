@@ -55,6 +55,7 @@
     fwupd.enable = true;
     irqbalance.enable = true;
     udisks2.enable = true;
+    thermald.enable = true;
     dbus.implementation = "broker";
   };
 

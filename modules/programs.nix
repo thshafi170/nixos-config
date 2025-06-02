@@ -2,6 +2,7 @@
 
 {
   nixpkgs.overlays = [
+    self.inputs.nix-alien.overlays.default
     (self: super: {
       vivaldi = (super.vivaldi.override {
         proprietaryCodecs = true;
@@ -44,7 +45,8 @@
     mangohud
     goverlay
     mtools
-    nil
+    nix-alien
+    nixd
     nodejs_22
     ntfs3g
     onlyoffice-desktopeditors
@@ -82,6 +84,10 @@
       pip
       pytest
       virtualenv
+  ]) ++ (with pkgsMaster; [
+    (bottles.override {
+      removeWarningPopup = true;
+    })
   ]);
 
   environment.sessionVariables = {

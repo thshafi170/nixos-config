@@ -6,7 +6,7 @@
   systemd.sleep.extraConfig = ''
     [Sleep]
     AllowSuspendThenHibernate=yes
-    HibernateMode=shutdown
+    HibernateMode=platform
     HibernateDelaySec=3600    
   '';
 }
