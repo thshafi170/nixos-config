@@ -15,11 +15,26 @@
     hardwareClockInLocalTime = false;
   };
 
+    i18n = {
+    defaultLocale = "en_US.UTF-8";
+    extraLocaleSettings = {
+      LC_ADDRESS = "en_US.UTF-8";
+      LC_IDENTIFICATION = "en_US.UTF-8";
+      LC_MEASUREMENT = "en_US.UTF-8";
+      LC_MONETARY = "en_US.UTF-8";
+      LC_NAME = "en_US.UTF-8";
+      LC_NUMERIC = "en_US.UTF-8";
+      LC_PAPER = "en_US.UTF-8";
+      LC_TELEPHONE = "en_US.UTF-8";
+      LC_TIME = "en_US.UTF-8";
+    };
+  };
+
   console = {
     packages = with pkgs; [
       pkgs.terminus_font
     ];
-    font = "ter-122n";
+    font = "${pkgs.terminus_font}/share/consolefonts/ter-122n.psf.gz";
     keyMap = "us";
   };
 
@@ -82,10 +97,11 @@
     swapDevices = 1;
     memoryPercent = 75;
   };
-
-  system.rebuild.enableNg = true;
   
-  nixpkgs.config.allowUnfree = true;
+  environment.sessionVariables = {
+    NIXPKGS_ALLOW_UNFREE = "1";
+  };
+
   nix = {
     settings = {
       auto-optimise-store = true;
@@ -113,6 +129,9 @@
     };
   };
 
-  system.stateVersion = "25.11";
+  system = {
+    rebuild.enableNg = true;
+    stateVersion = "25.11";
+  };
 
 }

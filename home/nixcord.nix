@@ -269,8 +269,8 @@
       discordColorways = "github:DaBluLite/DiscordColorways-VencordUserplugin/0e52af670756425cdd1edc3f022d2ab8835cbe29";
       loginWithQR = "github:nexpid/vc-loginWithQR/37213a3f7365471bb2dcb3eb934537c7676fc92d";
       messageLoggerEnhanced = "github:Syncxv/vc-message-logger-enhanced/2714caba22ddcad395bf32071c6c64c30bb74f47";
-      themeLibrary = "github:Faf4a/ThemeLibrary/8ffc2ad39786bac29e9513f6745bda6f03bacb5e";
-      sidebarChat = "github:Masterjoona/vc-sidebarchat/1ca8b3cafd5eb8b347d728fc774886a6ddd49dba";
+      themeLibrary = "github:Faf4a/ThemeLibrary/5a1f64e52623e913dbf3a715257cc20bf50510c0";
+      sidebarChat = "github:Masterjoona/vc-sidebarchat/47df8d7dc4fedf87ccb2d6f1c0a953f445b640f0";
       silentTypingEnhanced = "github:D3SOX/vc-silentTypingEnhanced/c2fdd7005d80e888b7f5df45999487a78fbdb8b4";
     };
     extraConfig = {
