@@ -5,6 +5,6 @@
     [ 
       ./fish.nix
       ./home-manager.nix
-      ./nixcord.nix
+      # ./nixcord.nix
     ];
 }
