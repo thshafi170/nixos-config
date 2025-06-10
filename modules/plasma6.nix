@@ -47,6 +47,7 @@
     sddm-kcm
     flatpak-kcm
     kjournald
+    ksystemlog
     ocean-sound-theme
     xwaylandvideobridge
   ]);
