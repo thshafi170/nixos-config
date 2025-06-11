@@ -302,8 +302,8 @@
           cacheLimit = 100000;
           whitelistedIds = "";
           blacklistedIds = "";
-          imageCacheDir = "/home/shafael170/.config/Vencord/MessageLoggerData/savedImages";
-          logsDir = "/home/shafael170/.config/Vencord/MessageLoggerData";
+          imageCacheDir = "/home/thshafi170/.config/Vencord/MessageLoggerData/savedImages";
+          logsDir = "/home/thshafi170/.config/Vencord/MessageLoggerData";
         };
         themeLibrary = {
           enable = true;

@@ -35,6 +35,7 @@
   programs.virt-manager.enable = true;
 
   environment.systemPackages = with pkgs; [
+    boxbuddy
     distrobox_git
     libguestfs
     libguestfs-appliance

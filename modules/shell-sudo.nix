@@ -4,11 +4,11 @@
     security.sudo.extraConfig = ''
     Defaults env_reset,pwfeedback
     root ALL=(ALL:ALL) ALL
-    shafael170 ALL=(ALL:ALL) ALL
+    thshafi170 ALL=(ALL:ALL) ALL
   '';
 
   users.defaultUserShell = pkgs.zsh;
-  users.users.shafael170.useDefaultShell = lib.mkForce false;
+  users.users.thshafi170.useDefaultShell = lib.mkForce false;
   environment.systemPackages = with pkgs; [
     fishPlugins.done
     fishPlugins.fzf-fish
