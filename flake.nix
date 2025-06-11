@@ -1,5 +1,5 @@
 {
-  description = "shafael170's NixOS configuration";
+  description = "thshafi170's NixOS configuration";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/staging";
@@ -55,7 +55,7 @@
             inputs.nixcord.homeModules.nixcord
           ];
 	        home-manager.backupFileExtension = "bak";
-          home-manager.users.shafael170 = import ./home/default.nix;
+          home-manager.users.thshafi170 = import ./home/default.nix;
         }
         chaotic.nixosModules.default
         nur.modules.nixos.default

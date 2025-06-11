@@ -29,6 +29,7 @@
     arrpc
     btop
     btrfs-progs
+    cartridges
     dconf-editor
     direnv
     dosfstools
@@ -62,6 +63,7 @@
     umu-launcher
     unzip
     unrar
+    varia
     vesktop
     vivaldi
     vivaldi-ffmpeg-codecs

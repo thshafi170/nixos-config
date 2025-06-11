@@ -108,7 +108,7 @@
       cores = 4;
       max-jobs = 4;
       experimental-features = [ "nix-command" "flakes" ];
-      trusted-users = [ "root" "shafael170" ];
+      trusted-users = [ "root" "thshafi170" ];
       substituters = [
         "https://cache.nixos.org"
         "https://chaotic-nyx.cachix.org"

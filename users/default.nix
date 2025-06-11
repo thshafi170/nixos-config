@@ -1,13 +1,13 @@
 { config, pkgs, lib, ... }:
 
 {
-  users.users.shafael170 = {
+  users.users.thshafi170 = {
     isNormalUser = true;
     shell = pkgs.fish;
     createHome = true;
-    name = "shafael170";
-    description = "Shafa'el Zmeyev";
-    home = "/home/shafael170";
-    extraGroups = [ "adbusers" "adm" "audio" "kmem" "kvm" "libvirtd" "mem" "networkmanager" "podman" "power" "proc" "qemu" "qemu-libvirtd" "shafael170" "sys" "tss" "users" "wheel" ];
+    name = "thshafi170";
+    description = "Tawsif Hossain Shafi";
+    home = "/home/thshafi170";
+    extraGroups = [ "adbusers" "adm" "audio" "kmem" "kvm" "libvirtd" "mem" "networkmanager" "podman" "power" "proc" "qemu" "qemu-libvirtd" "thshafi170" "sys" "tss" "users" "wheel" ];
   };
 }
