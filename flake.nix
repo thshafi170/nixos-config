@@ -2,7 +2,7 @@
   description = "thshafi170's NixOS configuration";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/staging";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
 
