@@ -1,10 +1,8 @@
-{ config, pkgs, lib, ... }:
+{ config, lib, ... }:
 
 {
-  imports =
-    [ 
-      ./fish.nix
-      ./home-manager.nix
-      # ./nixcord.nix
-    ];
+  imports = [
+    ./fish.nix
+    ./home-manager.nix
+  ];
 }

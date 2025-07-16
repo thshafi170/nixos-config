@@ -2,11 +2,11 @@
 
 {
   powerManagement.enable = true;
-  
+
   systemd.sleep.extraConfig = ''
     [Sleep]
     AllowSuspendThenHibernate=yes
     HibernateMode=shutdown
-    HibernateDelaySec=3600    
+    HibernateDelaySec=3600
   '';
 }

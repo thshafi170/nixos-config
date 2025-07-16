@@ -1,20 +1,20 @@
-{ config, pkgs, lib, ... }:
+{ config, lib, ... }:
 
 {
-  imports =
-    [ 
-      ./audio.nix
-      ./boot.nix
-      ./drivers.nix
-      ./input-method.nix
-      ./kernel.nix
-      ./networking.nix
-      ./nix-ld.nix
-      ./plasma6.nix
-      ./power.nix
-      ./programs.nix
-      ./shell-sudo.nix
-      ./virtualisation.nix
-      ./xorg.nix
-    ];
+  imports = [
+    ./audio.nix
+    ./boot.nix
+    ./drivers.nix
+    ./input-method.nix
+    ./kernel.nix
+    ./networking.nix
+    # ./niri.nix
+    ./nix-ld.nix
+    ./plasma6.nix
+    ./power.nix
+    ./programs.nix
+    ./shell-sudo.nix
+    ./virtualisation.nix
+    ./xorg.nix
+  ];
 }
