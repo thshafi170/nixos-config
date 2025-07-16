@@ -24,6 +24,7 @@
   ];
 
   environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
     GTK_USE_PORTAL = "1";
   };
 
@@ -39,7 +40,7 @@
     libappindicator-gtk2
     libayatana-appindicator
     libunity
-    ]) ++ (with pkgs.kdePackages; [
+  ]) ++ (with pkgs.kdePackages; [
     markdownpart
     alligator
     isoimagewriter

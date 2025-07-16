@@ -1,6 +1,7 @@
-{ self, config, pkgs, lib, ... }:
+{ config, pkgs, lib, ... }:
 
 {
+  # Hardware services configuration
   services = {
     hardware.bolt.enable = true;
     libinput.enable = true;
@@ -10,6 +11,7 @@
     };
   };
 
+  # Suspend/resume hotfix for fingerprint sensor
   systemd.services.python3-validity-suspend-hotfix = {
     after = [
       "hibernate.target"
@@ -31,25 +33,28 @@
     };
   };
 
-
+  # Security configuration
   security = {
     pam.services = {
-      #login.fprintAuth = true;
       sudo.fprintAuth = true;
       kde-fingerprint.fprintAuth = true;
     };
     tpm2.enable = true;
   };
 
+  # Package overrides for Intel hardware acceleration
   nixpkgs.config.packageOverrides = pkgs: {
     intel-vaapi-driver = pkgs.intel-vaapi-driver.override { enableHybridCodec = true; };
   };
 
+  # Hardware configuration
   hardware = {
     bluetooth = {
       enable = true;
       powerOnBoot = true;
     };
+
+    # Graphics acceleration
     graphics = {
       enable = true;
       enable32Bit = true;
@@ -71,13 +76,16 @@
         libvdpau-va-gl
       ];
     };
+
     sensor.iio.enable = true;
   };
 
-environment.sessionVariables = {
+  # Environment variables for hardware acceleration
+  environment.sessionVariables = {
     LIBVA_DRIVER_NAME = "iHD";
   };
 
+  # Media and hardware packages
   environment.systemPackages = with pkgs; [
     ((ffmpeg-full.override {
       withUnfree = true;

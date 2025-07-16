@@ -1,12 +1,11 @@
 { config, pkgs, pkgsMaster, lib, ... }:
 
 {
-  imports =
-    [ 
-      ./hardware-configuration.nix
-      ../modules/default.nix
-      ../users/default.nix
-    ];
+  imports = [
+    ./hardware-configuration.nix
+    ../modules/default.nix
+    ../users/default.nix
+  ];
 
   networking.hostName = "X1-Yoga-2nd";
 
@@ -15,7 +14,7 @@
     hardwareClockInLocalTime = false;
   };
 
-    i18n = {
+  i18n = {
     defaultLocale = "en_US.UTF-8";
     extraLocaleSettings = {
       LC_ADDRESS = "en_US.UTF-8";
@@ -32,7 +31,7 @@
 
   console = {
     packages = with pkgs; [
-      pkgs.terminus_font
+      terminus_font
     ];
     font = "${pkgs.terminus_font}/share/consolefonts/ter-122n.psf.gz";
     keyMap = "us";
@@ -97,7 +96,7 @@
     swapDevices = 1;
     memoryPercent = 75;
   };
-  
+
   environment.sessionVariables = {
     NIXPKGS_ALLOW_UNFREE = "1";
   };
@@ -121,11 +120,6 @@
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
         "an-anime-team.cachix.org-1:nr9QXfYG5tDXIImqxjSXd1b6ymLfGCvviuV8xRPIKPM="
       ];
-    };
-    gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 7d";
     };
   };
 
