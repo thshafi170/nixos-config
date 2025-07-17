@@ -4,6 +4,7 @@
   imports = [
     ./audio.nix
     ./boot.nix
+    # ./cosmic.nix
     ./drivers.nix
     ./input-method.nix
     ./kernel.nix
