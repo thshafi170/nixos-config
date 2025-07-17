@@ -101,7 +101,7 @@ in {
       binfmt = true;
     };
 
-    # Gaming setup
+    # Steam
     steam = {
       enable = true;
       package = pkgs.steam.override {
