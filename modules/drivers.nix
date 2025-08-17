@@ -1,10 +1,16 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   # Hardware services configuration
   services = {
     hardware.bolt.enable = true;
     libinput.enable = true;
+    power-profiles-daemon.enable = true;
     "06cb-009a-fingerprint-sensor" = {
       enable = true;
       backend = "python-validity";
@@ -35,10 +41,7 @@
 
   # Security configuration
   security = {
-    pam.services = {
-      sudo.fprintAuth = true;
-      kde-fingerprint.fprintAuth = true;
-    };
+    pam.services.sudo.fprintAuth = true;
     tpm2.enable = true;
   };
 
@@ -76,23 +79,27 @@
         libvdpau-va-gl
       ];
     };
-
+    opentabletdriver = {
+      enable = true;
+      daemon.enable = true;
+    };
     sensor.iio.enable = true;
   };
 
-  # Environment variables for hardware acceleration
-  environment.sessionVariables = {
-    LIBVA_DRIVER_NAME = "iHD";
-  };
+  # Environment variables for graphics driver
+  environment.sessionVariables.LIBVA_DRIVER_NAME = "iHD";
 
   # Media and hardware packages
   environment.systemPackages = with pkgs; [
-    ((ffmpeg-full.override {
-      withUnfree = true;
-      withOpengl = true;
-    }).overrideAttrs (_: {
-      doCheck = false;
-    }))
+    (
+      (ffmpeg-full.override {
+        withUnfree = true;
+        withOpengl = true;
+      }).overrideAttrs
+      (_: {
+        doCheck = false;
+      })
+    )
     gst_all_1.gstreamer
     gst_all_1.gst-plugins-base
     gst_all_1.gst-plugins-good

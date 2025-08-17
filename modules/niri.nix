@@ -1,66 +1,135 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  inputs,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
-  # Niri Wayland compositor
-  programs.niri.enable = true;
-
-  # Display manager configuration
-  services.displayManager.gdm = {
-    autoSuspend = true;
-    enable = true;
-    wayland = true;
-  };
-
-  # GNOME services for Wayland environment
-  services.gnome = {
-    gnome-keyring.enable = true;
-    gnome-settings-daemon.enable = true;
-  };
-
-  # Essential Niri and Wayland packages
-  environment.systemPackages = with pkgs; [
-    # Core Niri tools
-    niri quickshell
-
-    # GNOME utilities
-    nautilus gnome-control-center
-    gnome-tweaks gnome-system-monitor
-
-    # Wayland utilities
-    wl-clipboard wlr-randr grim slurp
-
-    # Launcher and notifications
-    rofi-wayland mako
+  imports = [
+    ../services
   ];
 
-  # XDG portal configuration for Wayland
+  # Niri Wayland compositor + IIO support
+  programs = {
+    niri.enable = true;
+    iio-niri.enable = true;
+  };
+
+  # Essential services
+  services = {
+    # Display manager
+    displayManager.ly.enable = true;
+
+    # Desktop services
+    gnome.gnome-keyring.enable = true;
+    geoclue2.enable = true;
+    gvfs.enable = true;
+
+    # Printing
+    printing.enable = true;
+    avahi = {
+      enable = true;
+      nssmdns4 = true;
+      openFirewall = true;
+    };
+
+    # System services
+    blueman.enable = true;
+    tumbler.enable = true;
+    timesyncd.enable = true;
+  };
+
+  # Security
+  security = {
+    polkit = {
+      enable = true;
+      package = pkgs.polkit_gnome;
+    };
+    pam.services = {
+      login.enableGnomeKeyring = true;
+      ly.enableGnomeKeyring = true;
+    };
+  };
+
+  # Essential packages
+  environment.systemPackages = with pkgs; [
+    # Niri essentials
+    niri
+    niriswitcher
+    walker
+    quickshell
+
+    # Desktop utilities
+    wl-clipboard
+    cliphist
+    brightnessctl
+    wlr-randr
+
+    # File manager and basic apps
+    nautilus
+    nemo
+    file-roller
+
+    # Control and monitoring
+    gnome-tweaks
+
+    # Terminal and audio
+    kitty
+    pwvucontrol
+    pavucontrol
+
+    # Theming
+    bibata-cursors
+    papirus-folders
+    papirus-icon-theme
+    adw-gtk3
+
+    # System tools
+    polkit_gnome
+    xdg-utils
+    xdg-user-dirs
+
+    # Wayland support
+    xwayland
+    wayland-utils
+  ];
+
+  # XDG portals
   xdg.portal = {
     enable = true;
     wlr.enable = true;
     extraPortals = with pkgs; [
-      xdg-desktop-portal-wlr
       xdg-desktop-portal-gtk
       xdg-desktop-portal-gnome
     ];
     config.common.default = "gnome";
   };
 
-  # Additional services
-  services = {
-    geoclue2.enable = true;
-    gvfs.enable = true;
-    printing.enable = true;
+  # Programs
+  programs = {
+    dconf.enable = true;
+    seahorse.enable = true;
+    gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+    };
   };
 
   # Wayland environment variables
   environment.sessionVariables = {
-    NIXOS_OZONE_WL = "1";
-    MOZ_ENABLE_WAYLAND = "1";
-    QT_QPA_PLATFORM = "wayland";
-    GDK_BACKEND = "wayland";
-    SDL_VIDEODRIVER = "wayland";
+    # Desktop environment
     XDG_CURRENT_DESKTOP = "niri";
-    ELECTRON_ENABLE_HARDWARE_ACCELERATION = "1";
+    XDG_SESSION_TYPE = "wayland";
+
+    # Application compatibility
+    MOZ_ENABLE_WAYLAND = "1";
+    QT_QPA_PLATFORM = "wayland;xcb";
+    GDK_BACKEND = "wayland,x11";
+    SDL_VIDEODRIVER = "wayland,x11";
     _JAVA_AWT_WM_NONREPARENTING = "1";
+    ELECTRON_OZONE_PLATFORM_HINT = "wayland";
   };
+
 }

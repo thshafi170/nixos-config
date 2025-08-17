@@ -1,93 +1,100 @@
-{ config, inputs, lib, pkgs, pkgsMaster, pkgsStaging, pkgsNxt, ... }:
+{
+  config,
+  inputs,
+  lib,
+  pkgs,
+  pkgsMaster,
+  pkgsStaging,
+  pkgsNext,
+  ...
+}:
 
-let
-  # Rust toolchain with essential components
-  rustToolchain = pkgs.rust-bin.stable.latest.default.override {
-    extensions = [ "rust-src" "rust-analyzer" "clippy" "rustfmt" ];
-  };
+{
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
 
-  # Python environment with development packages
-  pythonEnv = pkgs.python312.withPackages (ps: with ps; [
-    # Package management
-    pip
-    
-    # Code formatting and linting
-    black flake8 mypy pytest
-    
-    # Common libraries
-    requests numpy pandas
-    
-    # Language server and plugins
-    python-lsp-server pylsp-mypy python-lsp-black
-  ]);
+  environment.systemPackages = with pkgs; [
+    # Rust toolchain
+    (fenix.complete.withComponents [
+      "cargo"
+      "clippy"
+      "rust-src"
+      "rustc"
+      "rustfmt"
+    ])
+    rust-analyzer-nightly
 
-  # Development tools and IDEs
-  devTools = with pkgs; [
-    # IDEs and editors
-    vscode-fhs jetbrains.pycharm-community nano neovim
-    
-    # Build tools and compilers
-    gcc clang cmake gnumake gdb
-    
-    # .NET development
-    dotnet-sdk mono
-    
-    # Version control and utilities
-    git curl jq tree ripgrep fd bat fastfetch
-    
+    # Python with essential packages
+    (python312.withPackages (
+      ps: with ps; [
+        pip
+        black
+        flake8
+        mypy
+        pytest
+        requests
+        numpy
+        pandas
+        python-lsp-server
+        pylsp-mypy
+        python-lsp-black
+      ]
+    ))
+
+    # Core development tools
+    jdk
+    gcc
+    clang
+    cmake
+    gnumake
+    gdb
+    dotnet-sdk
+    mono
+
+    # IDEs
+    vscode-fhs
+    jetbrains.pycharm-community-bin
+
+    # CLI utilities
+    jq
+    tree
+    ripgrep
+    fd
+    bat
+    gh
+    direnv
+    fakeroot
+    git
+
+    # Language servers & tools
+    nixd
+    nixfmt-rfc-style
+    clang-tools
+    omnisharp-roslyn
+    jdt-language-server
+    yaml-language-server
+
+    # Node.js & package managers
+    nodejs_22
+    pnpm
+
     # Android development
-    android-tools android-udev-rules
-    
-    # Other development utilities
-    direnv fakeroot gh nixd
+    android-tools
+    android-udev-rules
   ];
 
-  # Language servers and development support
-  languageServers = with pkgs; [
-    clang-tools omnisharp-roslyn jdt-language-server 
-    nixd yaml-language-server
-  ];
-
-  # Node.js LTS and package managers
-  nodePackages = with pkgs; [
-    nodejs_22 pnpm
-  ];
-
-  # Additional packages from other channels
-  extraPackages = with pkgsNxt; [
-    msedit # Microsoft Edit
-  ];
-
-in {
-  # Java development program
+  # Java configuration
   programs.java = {
     enable = true;
     package = pkgs.jdk;
   };
-  
-  environment = {
-    systemPackages = [ rustToolchain pythonEnv pkgs.jdk ] 
-                   ++ devTools 
-                   ++ languageServers 
-                   ++ nodePackages 
-                   ++ extraPackages;
 
-    variables = {
-      # Rust environment
-      RUST_BACKTRACE = "1";
-      RUST_SRC_PATH = "${rustToolchain}/lib/rustlib/src/rust/library";
-      
-      # .NET environment
-      DOTNET_CLI_TELEMETRY_OPTOUT = "1";
-      
-      # C/C++ toolchain
-      CC = "${pkgs.gcc}/bin/gcc";
-      CXX = "${pkgs.gcc}/bin/g++";
-      
-      # Java environment
-      JAVA_HOME = "${pkgs.jdk}/lib/openjdk";
-    };
+  # Development environment variables
+  environment.sessionVariables = {
+    RUST_BACKTRACE = "1";
+    DOTNET_CLI_TELEMETRY_OPTOUT = "1";
+    JAVA_HOME = "${pkgs.jdk}/lib/openjdk";
+    CC = "${pkgs.gcc}/bin/gcc";
+    CXX = "${pkgs.gcc}/bin/g++";
   };
-
-  nixpkgs.config.allowUnfree = true;
 }

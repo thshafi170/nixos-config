@@ -6,7 +6,7 @@
 
 {
   imports = [
-    ./fish.nix
-    ./home-manager.nix
+    ./niri-session.nix
+
   ];
 }

@@ -1,6 +1,12 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
+  # sudo configuration
   security.sudo.extraConfig = ''
     Defaults env_reset,pwfeedback
     root ALL=(ALL:ALL) ALL
@@ -31,9 +37,15 @@
     zsh-syntax-highlighting
 
     # Common utilities
+    bat
+    eza
+    fastfetch
+    fd
     fzf
     grc
+    msedit
     nano
+    neovim
     vim
   ];
 
@@ -50,7 +62,12 @@
     # Enable oh-my-zsh if you want more features
     ohMyZsh = {
       enable = true;
-      plugins = [ "git" "sudo" "docker" "kubectl" ];
+      plugins = [
+        "git"
+        "sudo"
+        "docker"
+        "kubectl"
+      ];
       theme = "robbyrussell";
     };
   };

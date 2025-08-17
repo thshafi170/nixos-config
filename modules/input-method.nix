@@ -1,9 +1,11 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
-  environment.sessionVariables = {
-    XMODIFIERS = "@im=fcitx";
-  };
 
   i18n = {
     inputMethod = {
@@ -12,6 +14,7 @@
       fcitx5 = {
         waylandFrontend = true;
         addons = with pkgs; [
+          fcitx5-material-color
           fcitx5-gtk
           fcitx5-anthy
           fcitx5-mozc

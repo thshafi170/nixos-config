@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   # Network configuration
@@ -18,6 +23,7 @@
   # Network utilities
   environment.systemPackages = with pkgs; [
     curl
+    dhcpcd
     networkmanagerapplet
     protonvpn-cli
     protonvpn-gui

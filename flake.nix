@@ -10,7 +10,7 @@
     flake-utils.url = "github:numtide/flake-utils";
 
     lix-module = {
-      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.93.2-1.tar.gz";
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.93.3-1.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -19,21 +19,32 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    rust-overlay = {
-      url = "github:oxalica/rust-overlay";
+    fenix = {
+      url = "github:nix-community/fenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-alien.url = "github:thiagokokada/nix-alien";
-
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+
     nur = {
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     niri = {
-      url = "github:YaLTeR/niri";
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    iio-niri = {
+      url = "github:Zhaith-Izaliel/iio-niri";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    walker.url = "github:abenz1267/walker/0.13.26";
+
+    xwayland-satellite = {
+      url = "github:Supreeeme/xwayland-satellite";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -42,59 +53,85 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    walker.url = "github:abenz1267/walker";
-
     nixos-06cb-009a-fingerprint-sensor = {
       url = "github:ahbnr/nixos-06cb-009a-fingerprint-sensor";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-master, nixpkgs-staging, nixpkgs-staging-next, home-manager, ... }@inputs:
-  let
-    system = "x86_64-linux";
-    
-    mkPkgs = nixpkgs: import nixpkgs {
-      inherit system;
-      config.allowUnfree = true;
-    };
-    
-    pkgs = mkPkgs nixpkgs;
-    pkgsMaster = mkPkgs nixpkgs-master;
-    pkgsStaging = mkPkgs nixpkgs-staging;
-    pkgsNxt = mkPkgs nixpkgs-staging-next;
+  outputs =
+    {
+      self,
+      nixpkgs,
+      nixpkgs-master,
+      nixpkgs-staging,
+      nixpkgs-staging-next,
+      home-manager,
+      ...
+    }@inputs:
+    let
+      system = "x86_64-linux";
 
-    commonModules = [
-      inputs.lix-module.nixosModules.default
-      inputs.home-manager.nixosModules.home-manager
-      inputs.chaotic.nixosModules.default
-      inputs.nur.modules.nixos.default
-      inputs.nixos-06cb-009a-fingerprint-sensor.nixosModules."06cb-009a-fingerprint-sensor"
-    ];
+      mkPkgs =
+        nixpkgs:
+        import nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+        };
 
-    nixpkgsConfig = {
-      nixpkgs.overlays = [ inputs.rust-overlay.overlays.default ];
-      nixpkgs.config.allowUnfree = true;
-    };
+      pkgs = mkPkgs nixpkgs;
+      pkgsMaster = mkPkgs nixpkgs-master;
+      pkgsStaging = mkPkgs nixpkgs-staging;
+      pkgsNext = mkPkgs nixpkgs-staging-next;
 
-    homeManagerConfig = {
-      home-manager = {
-        useGlobalPkgs = true;
-        useUserPackages = true;
-        backupFileExtension = "bak";
-        users.thshafi170 = import ./home/default.nix;
+    in
+    {
+      packages.x86_64-linux.default = inputs.fenix.packages.x86_64-linux.minimal.toolchain;
+      nixosConfigurations.X1-Yoga-2nd = nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = {
+          inherit
+            self
+            inputs
+            pkgs
+            pkgsMaster
+            pkgsStaging
+            pkgsNext
+            ;
+        };
+        modules = [
+          # Core modules
+          inputs.lix-module.nixosModules.default
+          inputs.home-manager.nixosModules.home-manager
+          inputs.chaotic.nixosModules.default
+          inputs.nur.modules.nixos.default
+          inputs.niri.nixosModules.niri
+          inputs.iio-niri.nixosModules.default
+          inputs.nixos-06cb-009a-fingerprint-sensor.nixosModules."06cb-009a-fingerprint-sensor"
+
+          # Configuration modules
+          ./hosts/default.nix
+
+          # Global nixpkgs configuration
+          {
+            nixpkgs.overlays = [
+              inputs.fenix.overlays.default
+              inputs.iio-niri.overlays.default
+              (import ./overlays.nix)
+            ];
+            nixpkgs.config.allowUnfree = true;
+          }
+
+          # Home Manager configuration
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              backupFileExtension = "bak";
+              users.thshafi170 = import ./home/default.nix;
+            };
+          }
+        ];
       };
     };
-
-  in {
-    nixosConfigurations.X1-Yoga-2nd = nixpkgs.lib.nixosSystem {
-      inherit system;
-      specialArgs = { inherit self pkgs pkgsMaster pkgsStaging pkgsNxt; };
-      modules = [
-        ./hosts/default.nix
-        nixpkgsConfig
-        homeManagerConfig
-      ] ++ commonModules;
-    };
-  };
 }
