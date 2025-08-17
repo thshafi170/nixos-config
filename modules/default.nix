@@ -1,4 +1,8 @@
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  ...
+}:
 
 {
   imports = [
@@ -9,12 +13,13 @@
     ./input-method.nix
     ./kernel.nix
     ./networking.nix
-    # ./niri.nix
+    ./niri.nix
     ./nix-ld.nix
-    ./plasma6.nix
+    # ./plasma6.nix
     ./power.nix
     ./programs.nix
     ./shell-sudo.nix
+    ./system-devenv.nix
     ./virtualisation.nix
     ./xorg.nix
   ];

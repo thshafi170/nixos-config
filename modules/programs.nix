@@ -1,99 +1,121 @@
-{ self, config, lib, pkgs, pkgsMaster, pkgsStaging, pkgsNxt, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  pkgsMaster,
+  ...
+}:
 
 {
-  # Package overlays for custom configurations
-  nixpkgs.overlays = [
-    self.inputs.nix-alien.overlays.default
-    (final: prev: {
-      vivaldi = prev.vivaldi.override {
-        proprietaryCodecs = true;
-        enableWidevine = true;
-        commandLineArgs = "--ozone-platform=wayland --enable-wayland-ime";
-      };
-      
-      discord = prev.discord.override {
-        commandLineArgs = "--ozone-platform=wayland --enable-wayland-ime";
-      };
-
-      bottles = prev.bottles.override {
-        removeWarningPopup = true;
-      };
-    })
-  ];
-
+  # System packages
   environment.systemPackages = with pkgs; [
     # System utilities
-    btop btrfs-progs dconf-editor dosfstools mtools ntfs3g
+    btop
+    btrfs-progs
+    dconf-editor
+    dgop
+    dosfstools
+    mtools
+    ntfs3g
 
-    # Media and graphics
-    icoextract icoutils krita pwvucontrol vlc xournalpp
+    # Media & Graphics
+    icoextract
+    icoutils
+    krita
+    xournalpp
 
     # Communication
-    discord element-desktop telegram-desktop zapzap
+    discord
+    element-desktop
+    telegram-desktop
+    zapzap
 
     # Web browsers
-    vivaldi vivaldi-ffmpeg-codecs
+    vivaldi
+    vivaldi-ffmpeg-codecs
 
-    # Gaming
-    bottles cartridges lutris mangohud goverlay protonplus
-    steamcmd steam-run umu-launcher vkbasalt vkbasalt-cli 
+    # Gaming & Wine
+    bottles
+    cartridges
+    lutris
+    mangohud
+    goverlay
+    protonplus
+    steamcmd
+    steam-run
+    umu-launcher
+    vkbasalt
+    vkbasalt-cli
+    wineWowPackages.fonts
+    wineWowPackages.stagingFull
+    winetricks
 
-    # Wine
-    wineWowPackages.fonts wineWowPackages.stagingFull winetricks
+    # Productivity
+    onlyoffice-desktopeditors
+    qbittorrent
 
-    # Office and productivity
-    onlyoffice-desktopeditors qbittorrent
+    # Archives & Tools
+    rar
+    p7zip
+    unzip
+    unrar
+    arrpc
+    equicord
+    freetype
+    varia
 
-    # Archives
-    rar unzip unrar
-
-    # Other
-    arrpc equicord freetype nix-alien varia
+    # Other programs
+    proton-authenticator
   ];
 
+  # Environment variables
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
     ELECTRON_ENABLE_HARDWARE_ACCELERATION = "1";
   };
 
-  # Flatpak configuration
+  # Services
   services.flatpak.enable = true;
 
+  # Flatpak repo setup
   systemd.services.flatpak-repo = {
     wantedBy = [ "multi-user.target" ];
     path = [ pkgs.flatpak ];
-    script = ''
-      flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-    '';
+    script = "flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo";
   };
 
+  # Programs configuration
   programs = {
+    # Basic programs
     dconf.enable = true;
     adb.enable = true;
     chromium.enable = true;
     appimage.enable = true;
     gamemode.enable = true;
+    gamescope.enable = true;
 
+    # Steam configuration
     steam = {
       enable = true;
       extraCompatPackages = with pkgsMaster; [ proton-ge-bin ];
-      extraPkgs = pkgs: with pkgs; [
-        # X11 support
-        xorg.libXcursor xorg.libXi xorg.libXinerama xorg.libXcomposite
-        # Graphics 
-        libGL vulkan-loader
-        # Audio
-        libpulseaudio alsa-lib
-        # System
-        libkrb5 systemd
-        # Wayland
-        wayland libxkbcommon
-      ];
+      extraPkgs =
+        pkgs: with pkgs; [
+          xorg.libXcursor
+          xorg.libXi
+          xorg.libXinerama
+          xorg.libXcomposite
+          libGL
+          vulkan-loader
+          libpulseaudio
+          alsa-lib
+          libkrb5
+          systemd
+          wayland
+          libxkbcommon
+        ];
       remotePlay.openFirewall = true;
       gamescopeSession.enable = true;
       protontricks.enable = true;
     };
-
-    gamescope.enable = true;
   };
 }

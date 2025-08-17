@@ -1,10 +1,16 @@
-{ config, pkgs, pkgsMaster, lib, ... }:
+{
+  config,
+  inputs,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   imports = [
     ./hardware-configuration.nix
-    ../modules/default.nix
-    ../users/default.nix
+    ../modules
+    ../users
   ];
 
   networking.hostName = "X1-Yoga-2nd";
@@ -30,41 +36,61 @@
   };
 
   console = {
-    packages = with pkgs; [
-      terminus_font
-    ];
+    packages = [ pkgs.terminus_font ];
     font = "${pkgs.terminus_font}/share/consolefonts/ter-122n.psf.gz";
     keyMap = "us";
   };
 
+  # Font configuration
   fonts = {
     fontDir = {
       enable = true;
       decompressFonts = true;
     };
-    fontconfig = {
-      useEmbeddedBitmaps = true;
-    };
+    fontconfig.useEmbeddedBitmaps = true;
     enableDefaultPackages = true;
     packages = with pkgs; [
+      # Essential fonts
       noto-fonts
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
-      noto-fonts-emoji
-      nerd-fonts.meslo-lg
+      noto-fonts-color-emoji
       liberation_ttf
+      dejavu_fonts
+      cantarell-fonts
+      jetbrains-mono
       fira-code
       fira-code-symbols
       terminus_font
+
+      # Development fonts
+      nerd-fonts.meslo-lg
+      source-code-pro
+
+      # UI fonts
+      adwaita-fonts
+      font-awesome
+      material-icons
+      material-symbols
+      powerline-fonts
+      powerline-symbols
+
+      # Language-specific fonts
       lohit-fonts.bengali
-      dejavu_fonts
+      source-sans
+      source-serif
+      source-han-sans
+      source-han-serif
+      source-han-mono
+
+      # Custom fonts
+      inter-font
     ];
   };
 
+  # System services
   services = {
-    flatpak.enable = true;
     fstrim.enable = true;
-    power-profiles-daemon.enable = true;
     btrfs.autoScrub.enable = true;
     fwupd.enable = true;
     irqbalance.enable = true;
@@ -73,22 +99,7 @@
     dbus.implementation = "broker";
   };
 
-  systemd = {
-    user.extraConfig = "DefaultLimitNOFILE=524288";
-    services = {
-      nix-daemon = {
-        environment.TMPDIR = "/var/tmp";
-      };
-      flatpak-repo = {
-        wantedBy = [ "multi-user.target" ];
-        path = [ pkgs.flatpak ];
-        script = ''
-          flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-        '';
-      };
-    };
-  };
-
+  # Memory management
   zramSwap = {
     enable = true;
     priority = 100;
@@ -97,31 +108,47 @@
     memoryPercent = 75;
   };
 
-  environment.sessionVariables = {
-    NIXPKGS_ALLOW_UNFREE = "1";
+  # System limits and optimization
+  systemd = {
+    user.extraConfig = "DefaultLimitNOFILE=524288";
+    services.nix-daemon.environment.TMPDIR = "/var/tmp";
   };
 
-  nix = {
-    settings = {
-      auto-optimise-store = true;
-      cores = 4;
-      max-jobs = 4;
-      experimental-features = [ "nix-command" "flakes" ];
-      trusted-users = [ "root" "thshafi170" ];
-      substituters = [
-        "https://cache.nixos.org"
-        "https://chaotic-nyx.cachix.org"
-        "https://nix-community.cachix.org"
-        "https://an-anime-team.cachix.org"
-      ];
-      trusted-public-keys = [
-        "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-        "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
-        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-        "an-anime-team.cachix.org-1:nr9QXfYG5tDXIImqxjSXd1b6ymLfGCvviuV8xRPIKPM="
-      ];
-    };
+  # Nix configuration
+  nix.settings = {
+    auto-optimise-store = true;
+    cores = 4;
+    max-jobs = 4;
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+    trusted-users = [
+      "root"
+      "thshafi170"
+    ];
+    substituters = [
+      "https://cache.nixos.org"
+      "https://cache.lix.systems"
+      "https://chaotic-nyx.cachix.org"
+      "https://nix-community.cachix.org"
+      "https://an-anime-team.cachix.org"
+      "https://niri.cachix.org"
+      "https://walker.cachix.org"
+    ];
+    trusted-public-keys = [
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      "cache.lix.systems:aBnZUw8zA7H35Cz2RyKFVs3H4PlGTLawyY5KRbvJR8o="
+      "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "an-anime-team.cachix.org-1:nr9QXfYG5tDXIImqxjSXd1b6ymLfGCvviuV8xRPIKPM="
+      "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
+      "walker.cachix.org-1:fG8q+uAaMqhsMxWjwvk0IMb4mFPFLqHjuvfwQxE4oJM="
+    ];
   };
+
+  # System environment variable
+  environment.sessionVariables.NIXPKGS_ALLOW_UNFREE = "1";
 
   system = {
     rebuild.enableNg = true;

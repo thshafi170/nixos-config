@@ -1,4 +1,10 @@
-{ config, inputs, lib, pkgs, ... }:
+{
+  config,
+  inputs,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   programs.fish = {
@@ -13,6 +19,24 @@
       fish_greeting = {
         description = "Start fastfetch at launch.";
         body = "fastfetch";
+      };
+      git-pull-all = {
+        description = "Recursively pull all git repositories with error handling";
+        body = ''
+          for gitdir in (find . -name ".git" -type d)
+            set repo (dirname "$gitdir")
+            echo "Pulling $repo..."
+            cd "$repo"
+
+            if not git pull
+              echo "Normal pull failed, trying force pull..."
+              git fetch origin
+              git reset --hard origin/(git rev-parse --abbrev-ref HEAD)
+            end
+
+            cd -
+          end
+        '';
       };
     };
   };

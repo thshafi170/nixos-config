@@ -1,7 +1,14 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
+  # Enable Plasma 6 desktop environment
   services = {
+    accounts-daemon.enable = true;
     desktopManager = {
       plasma6 = {
         enable = true;
@@ -17,49 +24,61 @@
     };
   };
 
+  # FPrintAuth
+  security.pam.services.kde-fingerprint.fprintAuth = true;
+
+  # fcitx5 configuration
   i18n.inputMethod.fcitx5.plasma6Support = true;
 
+  # Package Exclusion
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
     elisa
   ];
 
-  environment.sessionVariables = {
-    NIXOS_OZONE_WL = "1";
-    GTK_USE_PORTAL = "1";
-  };
+  # Packages
+  environment.systemPackages =
+    (with pkgs; [
+      adwaita-fonts
+      adwaita-icon-theme
+      adwaita-icon-theme-legacy
+      adwaita-qt
+      adw-gtk3
+      dee
+      morewaita-icon-theme
+      libappindicator
+      libappindicator-gtk2
+      libayatana-appindicator
+      libunity
+    ])
+    ++ (with pkgs.kdePackages; [
+      markdownpart
+      alligator
+      isoimagewriter
+      kcmutils
+      sddm-kcm
+      flatpak-kcm
+      kjournald
+      ksystemlog
+      ocean-sound-theme
+      xwaylandvideobridge
+    ]);
 
-  environment.systemPackages = (with pkgs; [
-    adwaita-fonts
-    adwaita-icon-theme
-    adwaita-icon-theme-legacy
-    adwaita-qt
-    adw-gtk3
-    dee
-    morewaita-icon-theme
-    libappindicator
-    libappindicator-gtk2
-    libayatana-appindicator
-    libunity
-  ]) ++ (with pkgs.kdePackages; [
-    markdownpart
-    alligator
-    isoimagewriter
-    kcmutils
-    sddm-kcm
-    flatpak-kcm
-    kjournald
-    ksystemlog
-    ocean-sound-theme
-    xwaylandvideobridge
-  ]);
-
+  # XDG configuration
   xdg.portal = {
     enable = true;
     xdgOpenUsePortal = true;
     extraPortals = with pkgs; [
-        xdg-desktop-portal-gtk
+      xdg-desktop-portal-gtk
     ];
+    config.common.default = "kde";
   };
 
+  # KDE-specific environment variables
+  environment.sessionVariables = {
+    GTK_USE_PORTAL = "1";
+    XMODIFIERS = "@im=fcitx";
+  };
+
+  # Enable Plasma Browser Integration for Chromium
   programs.chromium.enablePlasmaBrowserIntegration = true;
 }
