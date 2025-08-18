@@ -1,7 +1,5 @@
 {
-  config,
   pkgs,
-  lib,
   ...
 }:
 
@@ -72,6 +70,7 @@
     };
   };
 
+  # Enable fish shell
   programs.fish = {
     enable = true;
     vendor = {

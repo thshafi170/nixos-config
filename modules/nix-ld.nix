@@ -1,10 +1,9 @@
 {
-  config,
   pkgs,
-  lib,
   ...
 }:
 
+# nix-alien source
 let
   nix-alien-pkgs =
     import (builtins.fetchTarball "https://github.com/thiagokokada/nix-alien/tarball/master")
@@ -146,7 +145,4 @@ in
       xorg.libxshmfence
     ];
   };
-
-  # Enable envfs for better filesystem compatibility
-  services.envfs.enable = true;
 }

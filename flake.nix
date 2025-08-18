@@ -86,7 +86,7 @@
 
     in
     {
-      packages.x86_64-linux.default = inputs.fenix.packages.x86_64-linux.minimal.toolchain;
+      packages.x86_64-linux.default = inputs.fenix.packages.x86_64-linux.default.toolchain;
       nixosConfigurations.X1-Yoga-2nd = nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = {

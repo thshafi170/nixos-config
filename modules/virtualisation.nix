@@ -1,13 +1,12 @@
 {
-  config,
   pkgs,
-  lib,
   ...
 }:
 
 {
-  # Virtualization services
+  # Virtualization services configuration
   virtualisation = {
+    # KVM/QEMU virtualization with libvirt
     libvirtd = {
       enable = true;
       qemu = {
@@ -30,6 +29,7 @@
     containers.enable = true;
     waydroid.enable = true;
 
+    # Podman container runtime
     podman = {
       enable = true;
       dockerCompat = true;
@@ -38,30 +38,31 @@
     };
   };
 
+  # Enable virt-manager GUI for VM management
   programs.virt-manager.enable = true;
 
   environment.systemPackages = with pkgs; [
-    # QEMU and KVM
+    # QEMU virtualization tools
     qemu
     qemu_kvm
     qemu-user
     qemu-utils
     OVMFFull
 
-    # Guest management
+    # VM guest management tools
     libguestfs
     libguestfs-appliance
     python312Packages.guestfs
 
-    # Container tools
+    # Container management tools
     boxbuddy
     distrobox_git
 
-    # Android emulation
+    # Android emulation tools
     waydroid
     waydroid-helper
 
-    # Utilities
+    # Virtualization utilities
     swtpm
   ];
 }

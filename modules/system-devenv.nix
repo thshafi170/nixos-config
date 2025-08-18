@@ -1,11 +1,5 @@
 {
-  config,
-  inputs,
-  lib,
   pkgs,
-  pkgsMaster,
-  pkgsStaging,
-  pkgsNext,
   ...
 }:
 
@@ -14,7 +8,7 @@
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
-    # Rust toolchain
+    # Rust development tools
     (fenix.complete.withComponents [
       "cargo"
       "clippy"
@@ -22,9 +16,9 @@
       "rustc"
       "rustfmt"
     ])
-    rust-analyzer-nightly
+    rust-analyzer
 
-    # Python with essential packages
+    # Python with development packages
     (python312.withPackages (
       ps: with ps; [
         pip
@@ -51,11 +45,12 @@
     dotnet-sdk
     mono
 
-    # IDEs
-    vscode-fhs
+    # Code editors and IDEs
     jetbrains.pycharm-community-bin
+    vscode-fhs
+    zed-editor
 
-    # CLI utilities
+    # Command line tools
     jq
     tree
     ripgrep
@@ -66,35 +61,40 @@
     fakeroot
     git
 
-    # Language servers & tools
-    nixd
+    # Language servers and formatters
+    nil
     nixfmt-rfc-style
     clang-tools
     omnisharp-roslyn
     jdt-language-server
     yaml-language-server
 
-    # Node.js & package managers
+    # JavaScript/Node.js development
     nodejs_22
     pnpm
 
-    # Android development
+    # Android development tools
     android-tools
     android-udev-rules
   ];
 
-  # Java configuration
+  # Enable Java system-wide
   programs.java = {
     enable = true;
     package = pkgs.jdk;
   };
 
-  # Development environment variables
+  # Set development environment variables
   environment.sessionVariables = {
     RUST_BACKTRACE = "1";
+    CARGO_HOME = "$HOME/.cargo";
     DOTNET_CLI_TELEMETRY_OPTOUT = "1";
-    JAVA_HOME = "${pkgs.jdk}/lib/openjdk";
+    DOTNET_ROOT = "${pkgs.dotnet-sdk}";
+    JAVA_HOME = "${pkgs.jdk}";
     CC = "${pkgs.gcc}/bin/gcc";
     CXX = "${pkgs.gcc}/bin/g++";
+    PKG_CONFIG_PATH = "${pkgs.pkg-config}/lib/pkgconfig";
+    NODE_OPTIONS = "--max-old-space-size=4096";
+    PYTHONPATH = "$HOME/.local/lib/python3.12/site-packages";
   };
 }

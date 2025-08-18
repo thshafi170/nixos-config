@@ -7,19 +7,23 @@
 }:
 
 {
+  # Import hardware config, modules, and users
   imports = [
     ./hardware-configuration.nix
     ../modules
     ../users
   ];
 
+  # System hostname
   networking.hostName = "X1-Yoga-2nd";
 
+  # Time configuration
   time = {
     timeZone = "Asia/Dhaka";
     hardwareClockInLocalTime = false;
   };
 
+  # Language and locale settings
   i18n = {
     defaultLocale = "en_US.UTF-8";
     extraLocaleSettings = {
@@ -35,13 +39,14 @@
     };
   };
 
+  # Console configuration
   console = {
     packages = [ pkgs.terminus_font ];
     font = "${pkgs.terminus_font}/share/consolefonts/ter-122n.psf.gz";
     keyMap = "us";
   };
 
-  # Font configuration
+  # System font configuration
   fonts = {
     fontDir = {
       enable = true;
@@ -88,18 +93,7 @@
     ];
   };
 
-  # System services
-  services = {
-    fstrim.enable = true;
-    btrfs.autoScrub.enable = true;
-    fwupd.enable = true;
-    irqbalance.enable = true;
-    udisks2.enable = true;
-    thermald.enable = true;
-    dbus.implementation = "broker";
-  };
-
-  # Memory management
+  # zRAM swap configuration
   zramSwap = {
     enable = true;
     priority = 100;
@@ -114,7 +108,7 @@
     services.nix-daemon.environment.TMPDIR = "/var/tmp";
   };
 
-  # Nix configuration
+  # Nix package manager configuration
   nix.settings = {
     auto-optimise-store = true;
     cores = 4;
@@ -127,15 +121,17 @@
       "root"
       "thshafi170"
     ];
+    # Binary cache sources
     substituters = [
-      "https://cache.nixos.org"
-      "https://cache.lix.systems"
-      "https://chaotic-nyx.cachix.org"
-      "https://nix-community.cachix.org"
-      "https://an-anime-team.cachix.org"
-      "https://niri.cachix.org"
-      "https://walker.cachix.org"
+      "https://cache.nixos.org" # Official NixOS cache
+      "https://cache.lix.systems" # Lix cache
+      "https://chaotic-nyx.cachix.org" # Chaotic AUR packages
+      "https://nix-community.cachix.org" # Community packages
+      "https://an-anime-team.cachix.org" # Anime team packages
+      "https://niri.cachix.org" # Niri compositor
+      "https://walker.cachix.org" # Walker application launcher
     ];
+    # Public keys for binary caches
     trusted-public-keys = [
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
       "cache.lix.systems:aBnZUw8zA7H35Cz2RyKFVs3H4PlGTLawyY5KRbvJR8o="
@@ -147,12 +143,13 @@
     ];
   };
 
-  # System environment variable
+  # Allow unfree packages globally
   environment.sessionVariables.NIXPKGS_ALLOW_UNFREE = "1";
 
+  # System configuration
   system = {
-    rebuild.enableNg = true;
-    stateVersion = "25.11";
+    rebuild.enableNg = true; # Enable new nixos-rebuild
+    stateVersion = "25.11"; # NixOS state version
   };
 
 }

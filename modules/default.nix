@@ -1,6 +1,4 @@
 {
-  config,
-  lib,
   ...
 }:
 
@@ -18,6 +16,7 @@
     # ./plasma6.nix
     ./power.nix
     ./programs.nix
+    ./services.nix
     ./shell-sudo.nix
     ./system-devenv.nix
     ./virtualisation.nix
