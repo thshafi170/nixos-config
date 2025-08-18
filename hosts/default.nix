@@ -123,13 +123,13 @@
     ];
     # Binary cache sources
     substituters = [
-      "https://cache.nixos.org" # Official NixOS cache
-      "https://cache.lix.systems" # Lix cache
-      "https://chaotic-nyx.cachix.org" # Chaotic AUR packages
-      "https://nix-community.cachix.org" # Community packages
-      "https://an-anime-team.cachix.org" # Anime team packages
-      "https://niri.cachix.org" # Niri compositor
-      "https://walker.cachix.org" # Walker application launcher
+      "https://cache.nixos.org"
+      "https://cache.lix.systems"
+      "https://chaotic-nyx.cachix.org"
+      "https://nix-community.cachix.org"
+      "https://an-anime-team.cachix.org"
+      "https://niri.cachix.org"
+      "https://walker.cachix.org"
     ];
     # Public keys for binary caches
     trusted-public-keys = [
