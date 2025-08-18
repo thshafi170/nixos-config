@@ -14,9 +14,6 @@
     # Desktop services
     gnome.gnome-keyring.enable = true;
     gvfs.enable = true;
-
-    # System services
-    blueman.enable = true;
   };
 
   # XDG portals for COSMIC

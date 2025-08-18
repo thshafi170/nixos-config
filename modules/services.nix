@@ -35,6 +35,12 @@
       openFirewall = true;
     };
 
+    # seatd configuration
+    seatd = {
+      enable = true;
+      user = "thshafi170";
+    };
+
     # Desktop services
     tumbler.enable = true;
     timesyncd.enable = true;

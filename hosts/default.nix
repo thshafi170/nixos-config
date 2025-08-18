@@ -1,13 +1,10 @@
 {
-  config,
-  inputs,
   pkgs,
-  lib,
   ...
 }:
 
 {
-  # Import hardware config, modules, and users
+  # Import other configurations for reference
   imports = [
     ./hardware-configuration.nix
     ../modules

@@ -44,7 +44,10 @@
     msedit
     nano
     neovim
+    pywal
+    pciutils
     vim
+    zenity
   ];
 
   programs.zsh = {
