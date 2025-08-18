@@ -8,7 +8,7 @@
   glibc,
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation {
   pname = "dgop";
   version = "0.0.6";
 

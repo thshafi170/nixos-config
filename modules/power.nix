@@ -1,13 +1,12 @@
 {
-  config,
-  pkgs,
-  lib,
   ...
 }:
 
 {
+  # Enable power management features
   powerManagement.enable = true;
-  services.upower.enable = true;
+
+  # Configure sleep and hibernation behavior
   systemd.sleep.extraConfig = ''
     [Sleep]
     AllowSuspendThenHibernate=yes

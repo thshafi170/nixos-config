@@ -1,29 +1,27 @@
 {
-  config,
   pkgs,
-  lib,
   ...
 }:
 
 {
   boot = {
-    # CachyOS kernel for performance
+    # Use CachyOS kernel as the default kernel
     kernelPackages = pkgs.linuxPackages_cachyos;
 
-    # Kernel modules
+    # Load essential kernel modules at boot time
     kernelModules = [
       "vfio-pci"
       "ntsync"
       "zram"
     ];
 
-    # Kernel parameters
+    # Kernel runtime parameters (sysctl)
     kernel.sysctl."vm.max_map_count" = 2147483642;
 
-    # Resume device for hibernation
+    # Resume device for hibernation support
     resumeDevice = "Ignored for now";
 
-    # Boot parameters
+    # Kernel boot parameters for optimization and hardware support
     kernelParams = [
       "quiet"
       "splash"
@@ -43,7 +41,7 @@
     '';
   };
 
-  # sched_ext scheduler configuration
+  # sched_ext configuration
   services.scx = {
     enable = true;
     package = pkgs.scx_git.full;

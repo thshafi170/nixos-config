@@ -1,11 +1,9 @@
 {
-  config,
-  pkgs,
-  lib,
   ...
 }:
 
 {
+  # Real-time kit configuration
   security.rtkit = {
     enable = true;
     args = [
@@ -13,6 +11,7 @@
     ];
   };
 
+  # PipeWire configuration
   services.pipewire = {
     enable = true;
     socketActivation = true;
@@ -25,6 +24,7 @@
     wireplumber.enable = true;
   };
 
+  # Echo cancellation configuration
   services.pipewire.extraConfig.pipewire."60-echo-cancel" = {
     "context.modules" = [
       {
@@ -46,6 +46,7 @@
     ];
   };
 
+  # WirePlumber configuration for disabling audio device suspension
   services.pipewire.wireplumber.extraConfig."51-disable-suspension" = {
     "monitor.alsa.rules" = [
       {

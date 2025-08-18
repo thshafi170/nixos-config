@@ -1,22 +1,22 @@
 {
-  config,
-  lib,
   pkgs,
   ...
 }:
 
 {
-  # Enable COSMIC Desktop Environment
-  services.desktopManager = {
-    cosmic.enable = true;
-    cosmic-greeter.enable = true;
-  };
-
-  # Essential system services for COSMIC
   services = {
-    upower.enable = true;
-    geoclue2.enable = true;
-    accounts-daemon.enable = true;
+    # COSMIC Desktop Environment
+    desktopManager = {
+      cosmic.enable = true;
+      cosmic-greeter.enable = true;
+    };
+
+    # Desktop services
+    gnome.gnome-keyring.enable = true;
+    gvfs.enable = true;
+
+    # System services
+    blueman.enable = true;
   };
 
   # XDG portals for COSMIC
@@ -39,12 +39,6 @@
     cosmic-settings
     cosmic-term
     cosmic-store
-
-    # Minimal additional apps
-    firefox
-
-    # System utilities
-    gnome.gnome-system-monitor
   ];
 
   # COSMIC-specific environment variables
@@ -53,16 +47,12 @@
     XDG_CURRENT_DESKTOP = "cosmic";
     XDG_SESSION_DESKTOP = "cosmic";
     XDG_SESSION_TYPE = "wayland";
-
-    # Wayland optimization
     GDK_BACKEND = "wayland,x11";
     QT_QPA_PLATFORM = "wayland;xcb";
     QT_AUTO_SCREEN_SCALE_FACTOR = "1";
     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
     MOZ_ENABLE_WAYLAND = "1";
     ELECTRON_OZONE_PLATFORM_HINT = "wayland";
-
-    # UI theming
     _JAVA_AWT_WM_NONREPARENTING = "1";
   };
 

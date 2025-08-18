@@ -1,14 +1,11 @@
 {
-  config,
-  inputs,
   pkgs,
-  lib,
   ...
 }:
 
 {
   imports = [
-    ../services
+    ./services/niri-session.nix
   ];
 
   # Niri Wayland compositor + IIO support
@@ -24,21 +21,10 @@
 
     # Desktop services
     gnome.gnome-keyring.enable = true;
-    geoclue2.enable = true;
     gvfs.enable = true;
-
-    # Printing
-    printing.enable = true;
-    avahi = {
-      enable = true;
-      nssmdns4 = true;
-      openFirewall = true;
-    };
 
     # System services
     blueman.enable = true;
-    tumbler.enable = true;
-    timesyncd.enable = true;
   };
 
   # Security
@@ -85,6 +71,7 @@
     papirus-folders
     papirus-icon-theme
     adw-gtk3
+    colloid-gtk-theme
 
     # System tools
     polkit_gnome
@@ -117,13 +104,10 @@
     };
   };
 
-  # Wayland environment variables
+  # Environment variables
   environment.sessionVariables = {
-    # Desktop environment
     XDG_CURRENT_DESKTOP = "niri";
     XDG_SESSION_TYPE = "wayland";
-
-    # Application compatibility
     MOZ_ENABLE_WAYLAND = "1";
     QT_QPA_PLATFORM = "wayland;xcb";
     GDK_BACKEND = "wayland,x11";
