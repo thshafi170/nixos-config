@@ -148,8 +148,8 @@
 
   # System configuration
   system = {
-    rebuild.enableNg = true; # Enable new nixos-rebuild
-    stateVersion = "25.11"; # NixOS state version
+    rebuild.enableNg = true;
+    stateVersion = "25.11";
   };
 
 }
