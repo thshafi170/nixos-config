@@ -22,7 +22,7 @@
     };
   };
 
-  # FPrintAuth
+  # PAM setting for using fingerprint authentication in Plasma 6
   security.pam.services.kde-fingerprint.fprintAuth = true;
 
   # fcitx5 configuration
@@ -33,7 +33,7 @@
     elisa
   ];
 
-  # Packages
+  # Essential programs
   environment.systemPackages =
     (with pkgs; [
       adwaita-fonts
@@ -47,12 +47,14 @@
       libappindicator-gtk2
       libayatana-appindicator
       libunity
+      vlc
     ])
     ++ (with pkgs.kdePackages; [
       markdownpart
       alligator
       isoimagewriter
       kcmutils
+      phonon-vlc
       sddm-kcm
       flatpak-kcm
       kjournald

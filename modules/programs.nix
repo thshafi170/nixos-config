@@ -6,65 +6,73 @@
 
 {
   # System packages
-  environment.systemPackages = with pkgs; [
-    # System utilities
-    btop
-    btrfs-progs
-    dconf-editor
-    dgop
-    dosfstools
-    mtools
-    ntfs3g
+  environment.systemPackages =
+    (with pkgs; [
+      # System utilities
+      btop
+      btrfs-progs
+      colord
+      dconf-editor
+      dgop
+      dosfstools
+      mtools
+      ntfs3g
+      seatd
 
-    # Media & Graphics
-    icoextract
-    icoutils
-    krita
-    xournalpp
+      # Media & Graphics
+      ffmpegthumbnailer
+      gdk-pixbuf
+      icoextract
+      icoutils
+      imagemagick
+      krita
+      webp-pixbuf-loader
+      wpgtk
+      xournalpp
 
-    # Communication
-    discord
-    element-desktop
-    telegram-desktop
-    zapzap
+      # Communication
+      discord
+      element-desktop
+      telegram-desktop
+      zapzap
 
-    # Web browsers
-    vivaldi
-    vivaldi-ffmpeg-codecs
+      # Web browsers
+      vivaldi
+      vivaldi-ffmpeg-codecs
 
-    # Gaming & Wine
-    bottles
-    cartridges
-    lutris
-    mangohud
-    goverlay
-    protonplus
-    steamcmd
-    steam-run
-    umu-launcher
-    vkbasalt
-    vkbasalt-cli
-    wineWowPackages.fonts
-    wineWowPackages.stagingFull
-    winetricks
+      # Gaming & Wine
+      bottles
+      cartridges
+      lutris
+      mangohud
+      goverlay
+      protonplus
+      steamcmd
+      steam-run
+      umu-launcher
+      vkbasalt
+      vkbasalt-cli
+      wineWowPackages.fonts
+      wineWowPackages.stagingFull
+      winetricks
 
-    # Productivity
-    onlyoffice-desktopeditors
-    qbittorrent
+      # Productivity
+      onlyoffice-desktopeditors
+      qbittorrent
 
-    # Archives & Tools
-    rar
-    p7zip
-    unzip
-    unrar
-    arrpc
-    equicord
-    freetype
-    varia
-
-    # Other programs
-    proton-authenticator
-  ];
+      # Archives & Tools
+      rar
+      p7zip
+      unzip
+      unrar
+      arrpc
+      equicord
+      freetype
+      varia
+    ])
+    ++ (with pkgsMaster; [
+      proton-authenticator
+    ]);
 
   # Environment variables
   environment.sessionVariables = {

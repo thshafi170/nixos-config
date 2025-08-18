@@ -2,7 +2,6 @@ final: prev: {
   # Custom packages
   inter-font = final.callPackage ./packages/inter-font.nix { };
   dgop = final.callPackage ./packages/dgop.nix { };
-  proton-authenticator = final.callPackage ./packages/proton-authenticator.nix { };
 
   # Wayland-optimized applications
   vivaldi = prev.vivaldi.override {
