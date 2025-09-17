@@ -1,3 +1,5 @@
+# Severely screwed up thanks to the stupid hallucinating box. DO NOT USE!
+
 # NixOS Configuration
 
 Personal NixOS configuration for my ThinkPad X1 Yoga 2nd Gen using flakes and modular architecture.

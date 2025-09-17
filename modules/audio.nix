@@ -31,6 +31,14 @@
         name = "libpipewire-module-echo-cancel";
         args = {
           "monitor.mode" = "true";
+          "capture.props" = {
+            # "node.target" = "alsa_input.usb-UGREEN_Camera_UGREEN_Camera_SN0001-02.analog-stereo";
+            "node.passive" = "true";
+            # "node.force-quantum" = "256";
+          };
+          # "sink.props" = {
+          #   "node.target" = "alsa_output.usb-UGREEN_Camera_UGREEN_Camera_SN0001-02.analog-stereo";
+          # };
           "source.props" = {
             "node.name" = "source_ec";
             "node.description" = "Echo-cancelled source";

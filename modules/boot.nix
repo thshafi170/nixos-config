@@ -23,14 +23,17 @@
 
     # Initial RAM disk configuration
     initrd = {
-      systemd.tmpfiles.settings = {
-        # Low latency settings for real-time applications
-        "10-lowlatency" = {
-          "/sys/class/rtc/rtc0/max_user_freq" = {
-            w.argument = "128";
-          };
-          "/proc/sys/dev/hpet/max-user-freq" = {
-            w.argument = "128";
+      systemd = {
+        fido2.enable = true;
+        tmpfiles.settings = {
+          # Low latency settings for real-time applications
+          "10-lowlatency" = {
+            "/sys/class/rtc/rtc0/max_user_freq" = {
+              w.argument = "128";
+            };
+            "/proc/sys/dev/hpet/max-user-freq" = {
+              w.argument = "128";
+            };
           };
         };
       };

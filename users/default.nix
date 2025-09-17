@@ -15,6 +15,7 @@
       "adbusers"
       "adm"
       "audio"
+      "input"
       "kmem"
       "kvm"
       "libvirtd"

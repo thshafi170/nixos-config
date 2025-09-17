@@ -15,7 +15,20 @@
       ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
       Restart = "on-failure";
       RestartSec = 1;
-      TimeoutStopSec = 10;
+    };
+  };
+
+  # Quickshell
+  systemd.user.services.quickshell = {
+    description = "Flexible toolkit for making desktop shells with QtQuick, for Wayland and X11";
+    wantedBy = [ "graphical-session.target" ];
+    wants = [ "graphical-session.target" ];
+    after = [ "graphical-session.target" ];
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = "${pkgs.quickshell}/bin/qs -c DankMaterialShell";
+      Restart = "on-failure";
+      RestartSec = 1;
     };
   };
 }

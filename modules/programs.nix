@@ -15,6 +15,8 @@
       dconf-editor
       dgop
       dosfstools
+      gammastep
+      libsecret
       mtools
       ntfs3g
       seatd
@@ -29,6 +31,10 @@
       webp-pixbuf-loader
       wpgtk
       xournalpp
+
+      # Android development tools
+      android-tools
+      android-udev-rules
 
       # Communication
       discord
@@ -65,7 +71,7 @@
       p7zip
       unzip
       unrar
-      arrpc
+      # arrpc
       equicord
       freetype
       varia
@@ -83,6 +89,16 @@
   # Services
   services.flatpak.enable = true;
 
+  # XDG configuration
+  xdg = {
+    autostart.enable = true;
+    icons.enable = true;
+    menus.enable = true;
+    mime.enable = true;
+    portal.xdgOpenUsePortal = true;
+    sounds.enable = true;
+  };
+
   # Flatpak repo setup
   systemd.services.flatpak-repo = {
     wantedBy = [ "multi-user.target" ];
@@ -93,9 +109,10 @@
   # Programs configuration
   programs = {
     # Basic programs
-    dconf.enable = true;
     adb.enable = true;
+    command-not-found.enable = true;
     chromium.enable = true;
+    dconf.enable = true;
     appimage.enable = true;
     gamemode.enable = true;
     gamescope.enable = true;
@@ -104,7 +121,7 @@
     steam = {
       enable = true;
       extraCompatPackages = with pkgsMaster; [ proton-ge-bin ];
-      extraPkgs =
+      extraPackages =
         pkgs: with pkgs; [
           xorg.libXcursor
           xorg.libXi
