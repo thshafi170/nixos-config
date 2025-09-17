@@ -21,6 +21,7 @@
 
     # Desktop services
     gnome.gnome-keyring.enable = true;
+    gnome-settings-daemon.enable = true;
     gvfs.enable = true;
 
     # System services
@@ -44,7 +45,6 @@
     # Niri essentials
     niri
     niriswitcher
-    walker
     quickshell
 
     # Necessary programs
@@ -57,12 +57,16 @@
     pwvucontrol
     pavucontrol
     nwg-look
+    slurp
+    grim
+    satty
 
     # GNOME programs
     file-roller
     nautilus
     gnome-boxes
     gnome-control-center
+    gnome-settings-daemon
     gnome-tweaks
     gnome-text-editor
     loupe
@@ -85,6 +89,7 @@
     polkit_gnome
     xdg-utils
     xdg-user-dirs
+    xsettingsd
 
     # Wayland support
     xwayland
@@ -145,5 +150,4 @@
     SDL_VIDEODRIVER = "wayland,x11";
     _JAVA_AWT_WM_NONREPARENTING = "1";
   };
-
 }

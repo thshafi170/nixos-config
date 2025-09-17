@@ -40,7 +40,10 @@
 
   # Security configuration
   security = {
-    pam.services.sudo.fprintAuth = true;
+    pam = {
+      services.sudo.fprintAuth = true;
+      u2f.enable = true;
+    };
     tpm2.enable = true;
   };
 

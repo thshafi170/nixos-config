@@ -5,6 +5,9 @@
 }:
 
 {
+  #Set location provider to geoclue2
+  location.provider = "geoclue2";
+
   services = {
     # Hardware and system optimization
     fstrim.enable = true;
@@ -14,17 +17,33 @@
     thermald.enable = true;
     dbus.implementation = "broker";
 
-    # Power and device management
-    upower.enable = true;
-    udisks2.enable = true;
-    geoclue2.enable = true;
+    # UDisk configuration
+    udisks2 = {
+      enable = true;
+      mountOnMedia = true;
+    };
+
+    # Device management
     accounts-daemon.enable = true;
     envfs.enable = true;
 
-    # Security and authentication
-    gpg-agent = {
+    # Geoclue2 configuration
+    geoclue2 = {
       enable = true;
-      enableSshSupport = true;
+      geoProviderUrl = "https://api.beacondb.net/v1/geolocate";
+      submissionUrl = "https://api.beacondb.net/v2/geosubmit";
+      submissionNick = "geoclue";
+
+      appConfig = {
+        gammastep = {
+          isAllowed = true;
+          isSystem = false;
+        };
+        vivaldi = {
+          isAllowed = true;
+          isSystem = false;
+        };
+      };
     };
 
     # Printing services

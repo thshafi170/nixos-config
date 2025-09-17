@@ -23,6 +23,15 @@
   # Language and locale settings
   i18n = {
     defaultLocale = "en_US.UTF-8";
+    extraLocales = [
+      "bn_BD.UTF-8"
+      "ja_JP.UTF-8"
+      "ko_KR.UTF-8"
+      "ru_RU.UTF-8"
+      "ru_UA.UTF-8"
+      "zh_CN.UTF-8"
+      "zh_TW.UTF-8"
+    ];
     extraLocaleSettings = {
       LC_ADDRESS = "en_US.UTF-8";
       LC_IDENTIFICATION = "en_US.UTF-8";
@@ -50,7 +59,7 @@
       decompressFonts = true;
     };
     fontconfig.useEmbeddedBitmaps = true;
-    enableDefaultPackages = true;
+    enableDefaultPackages = false;
     packages = with pkgs; [
       # Essential fonts
       noto-fonts
@@ -108,6 +117,7 @@
   # Nix package manager configuration
   nix.settings = {
     auto-optimise-store = true;
+    builders-use-substitutes = true;
     cores = 4;
     max-jobs = 4;
     experimental-features = [
@@ -126,7 +136,6 @@
       "https://nix-community.cachix.org"
       "https://an-anime-team.cachix.org"
       "https://niri.cachix.org"
-      "https://walker.cachix.org"
     ];
     # Public keys for binary caches
     trusted-public-keys = [
@@ -136,7 +145,6 @@
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "an-anime-team.cachix.org-1:nr9QXfYG5tDXIImqxjSXd1b6ymLfGCvviuV8xRPIKPM="
       "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
-      "walker.cachix.org-1:fG8q+uAaMqhsMxWjwvk0IMb4mFPFLqHjuvfwQxE4oJM="
     ];
   };
 

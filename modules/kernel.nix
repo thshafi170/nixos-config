@@ -5,8 +5,8 @@
 
 {
   boot = {
-    # Use CachyOS kernel as the default kernel
-    kernelPackages = pkgs.linuxPackages_cachyos;
+    # Use CachyOS kernel from Chaotic Nyx
+    kernelPackages =
 
     # Load essential kernel modules at boot time
     kernelModules = [
@@ -19,7 +19,7 @@
     kernel.sysctl."vm.max_map_count" = 2147483642;
 
     # Resume device for hibernation support
-    resumeDevice = "Ignored for now";
+    resumeDevice = "/dev/disk/by-uuid/33f3c9e4-5166-4410-b9ff-b6ae0e259ff6";
 
     # Kernel boot parameters for optimization and hardware support
     kernelParams = [
@@ -44,7 +44,7 @@
   # sched_ext configuration
   services.scx = {
     enable = true;
-    package = pkgs.scx_git.full;
+    package = pkgs.scx.full;
     scheduler = "scx_rusty";
   };
 }

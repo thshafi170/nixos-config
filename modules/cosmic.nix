@@ -35,7 +35,6 @@
     cosmic-files
     cosmic-settings
     cosmic-term
-    cosmic-store
   ];
 
   # COSMIC-specific environment variables

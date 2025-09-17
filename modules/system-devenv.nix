@@ -35,6 +35,9 @@
       ]
     ))
 
+    # More development languages
+    go
+
     # Core development tools
     jdk
     gcc
@@ -44,6 +47,7 @@
     gdb
     dotnet-sdk
     mono
+    pkg-config
 
     # Code editors and IDEs
     jetbrains.pycharm-community-bin
@@ -60,6 +64,9 @@
     direnv
     fakeroot
     git
+    gh
+    libcap
+    nix-search-tv
 
     # Language servers and formatters
     nil
@@ -72,16 +79,22 @@
     # JavaScript/Node.js development
     nodejs_22
     pnpm
-
-    # Android development tools
-    android-tools
-    android-udev-rules
   ];
 
-  # Enable Java system-wide
-  programs.java = {
-    enable = true;
-    package = pkgs.jdk;
+  # Enable some development tools
+  programs = {
+    # Enable Java
+    java = {
+      enable = true;
+      package = pkgs.jdk;
+    };
+    # Enable direnv
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+      enableFishIntegration = true;
+      enableZshIntegration = true;
+    };
   };
 
   # Set development environment variables
