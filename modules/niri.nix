@@ -1,11 +1,13 @@
 {
+  inputs,
   pkgs,
   ...
 }:
 
 {
   imports = [
-    ./services/niri-session.nix
+    ../services/niri-session.nix
+    ../services/power-wm.nix
   ];
 
   # Niri Wayland compositor + IIO support

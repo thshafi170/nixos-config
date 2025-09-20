@@ -25,9 +25,6 @@
   # PAM setting for using fingerprint authentication in Plasma 6
   security.pam.services.kde-fingerprint.fprintAuth = true;
 
-  # fcitx5 configuration
-  i18n.inputMethod.fcitx5.plasma6Support = true;
-
   # Package Exclusion
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
     elisa

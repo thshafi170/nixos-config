@@ -1,17 +1,12 @@
 {
   pkgs,
+  inputs,
   ...
 }:
 
-# nix-alien source
-let
-  nix-alien-pkgs =
-    import (builtins.fetchTarball "https://github.com/thiagokokada/nix-alien/tarball/master")
-      { };
-in
 {
   # Enable nix-alien
-  environment.systemPackages = with nix-alien-pkgs; [
+  environment.systemPackages = with inputs.nix-alien.packages."${pkgs.system}"; [
     nix-alien
   ];
 

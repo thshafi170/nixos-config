@@ -1,12 +1,15 @@
 {
+  config,
+  chaotic,
+  lib,
   pkgs,
   ...
 }:
 
 {
   boot = {
-    # Use CachyOS kernel from Chaotic Nyx
-    kernelPackages =
+    # CachyOS kernel from Chaotic Nyx
+    kernelPackages = pkgs.linuxKernel.packagesFor chaotic.linux_cachyos;
 
     # Load essential kernel modules at boot time
     kernelModules = [
@@ -41,10 +44,18 @@
     '';
   };
 
+  # Configure sleep and hibernation behavior
+  systemd.sleep.extraConfig = ''
+    [Sleep]
+    AllowSuspendThenHibernate=yes
+    HibernateMode=shutdown
+    HibernateDelaySec=3600
+  '';
+
   # sched_ext configuration
   services.scx = {
     enable = true;
-    package = pkgs.scx.full;
+    package = pkgs.chaotic.scx_git;
     scheduler = "scx_rusty";
   };
 }

@@ -110,7 +110,6 @@
     gst_all_1.gst-libav
     gst_all_1.gst-vaapi
     iio-sensor-proxy
-    intel-media-sdk
     lm_sensors
     openh264
   ];

@@ -1,5 +1,6 @@
 {
   pkgs,
+  inputs,
   ...
 }:
 
@@ -9,7 +10,7 @@
 
   environment.systemPackages = with pkgs; [
     # Rust development tools
-    (fenix.complete.withComponents [
+    (inputs.fenix.packages.${pkgs.system}.complete.withComponents [
       "cargo"
       "clippy"
       "rust-src"

@@ -1,6 +1,7 @@
 {
   pkgs,
   pkgsMaster,
+  inputs,
   ...
 }:
 
@@ -13,7 +14,7 @@
       btrfs-progs
       colord
       dconf-editor
-      dgop
+      inputs.dgop.packages."${pkgs.system}".dgop
       dosfstools
       gammastep
       libsecret
@@ -121,21 +122,20 @@
     steam = {
       enable = true;
       extraCompatPackages = with pkgsMaster; [ proton-ge-bin ];
-      extraPackages =
-        pkgs: with pkgs; [
-          xorg.libXcursor
-          xorg.libXi
-          xorg.libXinerama
-          xorg.libXcomposite
-          libGL
-          vulkan-loader
-          libpulseaudio
-          alsa-lib
-          libkrb5
-          systemd
-          wayland
-          libxkbcommon
-        ];
+      extraPackages = with pkgs; [
+        xorg.libXcursor
+        xorg.libXi
+        xorg.libXinerama
+        xorg.libXcomposite
+        libGL
+        vulkan-loader
+        libpulseaudio
+        alsa-lib
+        libkrb5
+        systemd
+        wayland
+        libxkbcommon
+      ];
       remotePlay.openFirewall = true;
       gamescopeSession.enable = true;
       protontricks.enable = true;

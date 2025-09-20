@@ -14,11 +14,6 @@
   # Default shell
   users.defaultUserShell = pkgs.zsh;
 
-  # User shell override
-  users.users.thshafi170 = {
-    shell = pkgs.fish;
-  };
-
   environment.systemPackages = with pkgs; [
     # Fish plugins
     fishPlugins.done
