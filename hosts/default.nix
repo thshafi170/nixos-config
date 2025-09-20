@@ -134,7 +134,6 @@
     # Binary cache sources
     substituters = [
       "https://cache.nixos.org"
-      "https://cache.lix.systems"
       "https://chaotic-nyx.cachix.org"
       "https://nix-community.cachix.org"
       "https://an-anime-team.cachix.org"
@@ -143,13 +142,31 @@
     # Public keys for binary caches
     trusted-public-keys = [
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-      "cache.lix.systems:aBnZUw8zA7H35Cz2RyKFVs3H4PlGTLawyY5KRbvJR8o="
       "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "an-anime-team.cachix.org-1:nr9QXfYG5tDXIImqxjSXd1b6ymLfGCvviuV8xRPIKPM="
       "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
     ];
   };
+
+  # Use Lix as Nix-replacement
+  nixpkgs.overlays = [
+    (final: prev: {
+      my-new-package = prev.my-new-package.override {
+        nix = final.lixPackageSets.stable.lix;
+      }; # Adapt to your specific use case.
+
+      inherit (final.lixPackageSets.stable)
+        nixpkgs-review
+        nix-direnv
+        nix-eval-jobs
+        nix-fast-build
+        colmena
+        ;
+    })
+  ];
+
+  nix.package = pkgs.lixPackageSets.stable.lix;
 
   # Allow unfree packages globally
   environment.sessionVariables.NIXPKGS_ALLOW_UNFREE = "1";
