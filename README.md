@@ -34,8 +34,8 @@ Personal NixOS configuration for my ThinkPad X1 Yoga 2nd Gen using flakes and mo
 │   ├── networking.nix      # Network configurations
 │   ├── niri.nix            # Niri compositor
 │   ├── plasma6.nix         # KDE Plasma 6
-|   ├── programs.nix        # Essential programs
-|   ├── system-devenv.nix   # Integrated Development Environment
+│   ├── programs.nix        # Essential programs
+│   ├── system-devenv.nix   # Integrated Development Environment
 │   ├── virtualisation.nix  # Docker & VMs
 │   └── ...
 ├── packages/                # Custom packages
