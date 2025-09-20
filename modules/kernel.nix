@@ -55,7 +55,7 @@
   # sched_ext configuration
   services.scx = {
     enable = true;
-    package = pkgs.chaotic.scx_git;
+    package = pkgs.scx.full;
     scheduler = "scx_rusty";
   };
 }
