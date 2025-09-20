@@ -20,10 +20,10 @@ Personal NixOS configuration for my ThinkPad X1 Yoga 2nd Gen using flakes and mo
 ※ Not all files are shown here
 
 ├── home/                    # Home Manager configurations
-|   ├── fish.nix            # Fish configuration, user-wide
-|   └── home-manager.nix    # Home Manager configurations
+│   ├── fish.nix            # Fish configuration, user-wide
+│   └── home-manager.nix    # Home Manager configurations
 ├── hosts/                   # Host-specific configurations
-|   └── default.nix         # Main NixOS configurations
+│   └── default.nix         # Main NixOS configurations
 ├── modules/                 # System modules
 │   ├── audio.nix           # Audio (PipeWire)
 │   ├── boot.nix            # Boot loader and Plymouth configurations
