@@ -29,11 +29,11 @@ Personal NixOS configuration for my ThinkPad X1 Yoga 2nd Gen using flakes and mo
 │   ├── boot.nix            # Boot loader and Plymouth configurations
 │   ├── cosmic.nix          # COSMIC desktop
 │   ├── drivers.nix         # Hardware drivers
-|   ├── kernel.nix          # Kernel configurations
+│   ├── fcitx5-im.nix       # Input method configurations (fcitx5 as default)
+│   ├── kernel.nix          # Kernel configurations
 │   ├── networking.nix      # Network configurations
 │   ├── niri.nix            # Niri compositor
 │   ├── plasma6.nix         # KDE Plasma 6
-│   ├── power.nix           # Power management
 |   ├── programs.nix        # Essential programs
 |   ├── system-devenv.nix   # Integrated Development Environment
 │   ├── virtualisation.nix  # Docker & VMs
