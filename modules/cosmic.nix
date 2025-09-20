@@ -4,6 +4,10 @@
 }:
 
 {
+  imports = [
+    ../services/power-wm.nix
+  ];
+
   services = {
     # COSMIC Desktop Environment
     desktopManager = {

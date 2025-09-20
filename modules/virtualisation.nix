@@ -1,4 +1,8 @@
 {
+  config,
+  chaotic,
+  inputs,
+  lib,
   pkgs,
   ...
 }:
@@ -56,7 +60,7 @@
 
     # Container management tools
     boxbuddy
-    distrobox_git
+    chaotic.distrobox_git
 
     # Android emulation tools
     waydroid

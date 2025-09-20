@@ -14,7 +14,6 @@
     # ./niri.nix
     ./nix-ld.nix
     ./plasma6.nix
-    ./power.nix
     ./programs.nix
     ./services.nix
     ./shell-sudo.nix

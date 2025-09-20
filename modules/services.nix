@@ -8,6 +8,9 @@
   #Set location provider to geoclue2
   location.provider = "geoclue2";
 
+  # Enable power management
+  powerManagement.enable = true;
+
   services = {
     # Hardware and system optimization
     fstrim.enable = true;

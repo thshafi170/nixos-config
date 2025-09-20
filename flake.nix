@@ -9,11 +9,6 @@
 
     flake-utils.url = "github:numtide/flake-utils";
 
-    lix-module = {
-      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.93.3-1.tar.gz";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -28,6 +23,11 @@
 
     nur = {
       url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nix-alien = {
+      url = "github:thiagokokada/nix-alien";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -57,7 +57,7 @@
     };
 
     nixos-06cb-009a-fingerprint-sensor = {
-      url = "github:ahbnr/nixos-06cb-009a-fingerprint-sensor";
+      url = "github:iedame/nixos-06cb-009a-fingerprint-sensor/25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -68,29 +68,24 @@
 
       # Helper function to create package sets with unfree allowed
       mkPkgs = nixpkgsInput: import nixpkgsInput {
-        inherit system;
-        config.allowUnfree = true;
+        inherit system overlays;
+        config = nixpkgsConfig;
       };
 
       # Define overlays first
       overlays = [
         (import ./overlays.nix)
-        inputs.chaotic.overlays.default
       ];
 
-      # Package sets from different nixpkgs branches with overlays
-      pkgs = import nixpkgs {
-        inherit system overlays;
-        config.allowUnfree = true;
-      };
+      # nixpkgs branches
+      pkgs = mkPkgs inputs.nixpkgs;
       pkgsMaster = mkPkgs inputs.nixpkgs-master;
       pkgsStaging = mkPkgs inputs.nixpkgs-staging;
       pkgsNext = mkPkgs inputs.nixpkgs-staging-next;
 
-      # Common nixpkgs configuration
+      # nixpkgs configuration
       nixpkgsConfig = {
-        inherit overlays;
-        config.allowUnfree = true;
+        allowUnfree = true;
       };
 
     in {
@@ -100,19 +95,23 @@
         inherit system;
 
         specialArgs = {
-          inherit self inputs pkgs pkgsMaster pkgsStaging pkgsNext;
+          inherit
+            self
+            inputs
+            pkgs
+            pkgsMaster
+            pkgsStaging
+            pkgsNext
+            ;
           chaotic = inputs.chaotic.packages.${system};
         };
 
         modules = [
+          ./hosts/default.nix
           inputs.chaotic.nixosModules.default
-          inputs.lix-module.nixosModules.default
           inputs.niri.nixosModules.niri
           inputs.iio-niri.nixosModules.default
           inputs.nixos-06cb-009a-fingerprint-sensor.nixosModules."06cb-009a-fingerprint-sensor"
-
-          ./hosts/default.nix
-
           inputs.home-manager.nixosModules.home-manager
           {
             home-manager = {

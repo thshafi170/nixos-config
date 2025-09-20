@@ -1,4 +1,7 @@
 {
+  config,
+  inputs,
+  lib,
   pkgs,
   ...
 }:
@@ -24,13 +27,13 @@
   i18n = {
     defaultLocale = "en_US.UTF-8";
     extraLocales = [
-      "bn_BD.UTF-8"
-      "ja_JP.UTF-8"
-      "ko_KR.UTF-8"
-      "ru_RU.UTF-8"
-      "ru_UA.UTF-8"
-      "zh_CN.UTF-8"
-      "zh_TW.UTF-8"
+      "bn_BD/UTF-8"
+      "ja_JP.UTF-8/UTF-8"
+      "ko_KR.UTF-8/UTF-8"
+      "ru_RU.UTF-8/UTF-8"
+      "ru_UA.UTF-8/UTF-8"
+      "zh_CN.UTF-8/UTF-8"
+      "zh_TW.UTF-8/UTF-8"
     ];
     extraLocaleSettings = {
       LC_ADDRESS = "en_US.UTF-8";

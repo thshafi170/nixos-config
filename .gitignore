@@ -1,2 +1,3 @@
-hosts/hardware-configuration.nix
-flake.lock
+# The following files are ignored by git until I get a proper working build
+# hosts/hardware-configuration.nix
+# flake.lock
