@@ -11,9 +11,9 @@
     ./fcitx5-im.nix
     ./kernel.nix
     ./networking.nix
-    # ./niri.nix
+    ./niri.nix
     ./nix-ld.nix
-    ./plasma6.nix
+    # ./plasma6.nix
     ./programs.nix
     ./services.nix
     ./shell-sudo.nix

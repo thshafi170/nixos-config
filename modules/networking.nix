@@ -1,4 +1,6 @@
 {
+  config,
+  lib,
   pkgs,
   ...
 }:
@@ -6,12 +8,16 @@
 {
   # Network configuration
   networking = {
+    wireless.iwd.enable = true;
     firewall = {
       enable = false;
       checkReversePath = "loose";
     };
     useDHCP = false;
-    networkmanager.enable = true;
+    networkmanager = {
+      enable = true;
+      wifi.backend = "iwd";
+    };
     resolvconf.enable = true;
   };
 

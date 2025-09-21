@@ -10,10 +10,19 @@
     ../services/power-wm.nix
   ];
 
-  # Niri Wayland compositor + IIO support
+  # Niri + other essentials
   programs = {
     niri.enable = true;
-    iio-niri.enable = true;
+    dconf.enable = true;
+    seahorse.enable = true;
+    gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+    };
+    nautilus-open-any-terminal = {
+      enable = true;
+      terminal = "kitty";
+    };
   };
 
   # Essential services
@@ -23,8 +32,9 @@
 
     # Desktop services
     gnome.gnome-keyring.enable = true;
-    gnome-settings-daemon.enable = true;
+    gnome.gnome-settings-daemon.enable = true;
     gvfs.enable = true;
+    iio-niri.enable = true;
 
     # System services
     blueman.enable = true;
@@ -42,23 +52,24 @@
     };
   };
 
-  # Essential packages
+  # Essential packages - DMS handles quickshell, dgop, and many utilities
   environment.systemPackages = with pkgs; [
     # Niri essentials
     niri
     niriswitcher
-    quickshell
 
-    # Necessary programs
+    # Basic Wayland utilities (DMS provides many of these, but keeping essentials)
     wl-clipboard
-    cliphist
     brightnessctl
     wlr-randr
     nemo
     kitty
+
+    # Audio control utilities
     pwvucontrol
     pavucontrol
-    nwg-look
+
+    # Screenshot tools
     slurp
     grim
     satty
@@ -93,6 +104,20 @@
     xdg-user-dirs
     xsettingsd
 
+    # Other programs
+    (steam.override {
+      extraArgs = [
+        "-system-composer"
+      ];
+    })
+    (vivaldi.override {
+      extraArgs = [
+        "--password-store=gnome-libsecret"
+        "--ozone-platform=wayland"
+        "--enable-wayland-ime"
+        "--wayland-text-input-version=3"
+      ];
+    })
     # Wayland support
     xwayland
     xwayland-satellite
@@ -108,20 +133,6 @@
       xdg-desktop-portal-gnome
     ];
     config.common.default = "gnome";
-  };
-
-  # Programs
-  programs = {
-    dconf.enable = true;
-    seahorse.enable = true;
-    gnupg.agent = {
-      enable = true;
-      enableSSHSupport = true;
-    };
-    nautilus-open-any-terminal = {
-      enable = true;
-      terminal = "kitty";
-    };
   };
 
   # Environment variables

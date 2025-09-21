@@ -15,13 +15,8 @@
   ];
 
   # nixpkgs configuration
-  nixpkgs = {
-    overlays = [
-      (import ../overlays.nix)
-    ];
-    config = {
-      allowUnfree = true;
-    };
+  nixpkgs.config = {
+    allowUnfree = true;
   };
 
   # System hostname
@@ -94,6 +89,7 @@
       # UI fonts
       adwaita-fonts
       font-awesome
+      inter
       material-icons
       material-symbols
       powerline-fonts
@@ -106,9 +102,6 @@
       source-han-sans
       source-han-serif
       source-han-mono
-
-      # Custom fonts
-      inter-font
     ];
   };
 

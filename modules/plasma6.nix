@@ -45,6 +45,19 @@
       libayatana-appindicator
       libunity
       vlc
+
+      # Plasma 6 optimized Vivaldi (Qt6 support only)
+      (vivaldi.overrideAttrs (oldAttrs: {
+        buildPhase =
+          builtins.replaceStrings
+            [ "for f in libGLESv2.so libqt5_shim.so ; do" ]
+            [ "for f in libGLESv2.so libqt5_shim.so libqt6_shim.so ; do" ]
+            oldAttrs.buildPhase;
+      })).override
+      {
+        proprietaryCodecs = true;
+        enableWidevine = true;
+      }
     ])
     ++ (with pkgs.kdePackages; [
       markdownpart

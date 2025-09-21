@@ -1,9 +1,15 @@
 {
   pkgs,
+  inputs,
   ...
 }:
 
 {
+  # Import DMS home module
+  imports = [
+    inputs.dank-material-shell.homeModules.dankMaterialShell
+  ];
+
   # Basic home configuration
   home = {
     username = "thshafi170";
@@ -24,5 +30,21 @@
   xdg.userDirs = {
     enable = true;
     createDirectories = true;
+  };
+
+  # Configure Dank Material Shell
+  programs.dankMaterialShell = {
+    enable = true;
+    enableKeybinds = false;
+    enableSystemd = true;
+    enableSpawn = true;
+    enableSystemMonitoring = true;
+    enableClipboard = true;
+    enableVPN = true;
+    enableBrightnessControl = true;
+    enableNightMode = true;
+    enableDynamicTheming = true;
+    enableAudioWavelength = true;
+    enableCalendarEvents = true;
   };
 }

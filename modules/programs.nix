@@ -1,7 +1,7 @@
 {
+  inputs,
   pkgs,
   pkgsMaster,
-  inputs,
   ...
 }:
 
@@ -14,7 +14,7 @@
       btrfs-progs
       colord
       dconf-editor
-      inputs.dgop.packages."${pkgs.system}".dgop
+      # dgop removed - provided by DMS
       dosfstools
       gammastep
       libsecret
@@ -37,18 +37,25 @@
       android-tools
       android-udev-rules
 
-      # Communication
-      discord
+      # Communication - with Wayland optimizations
+      (discord.override {
+        commandLineArgs = [
+          "--ozone-platform=wayland"
+          "--enable-wayland-ime"
+          "--wayland-text-input-version=3"
+        ];
+      })
       element-desktop
       telegram-desktop
       zapzap
 
       # Web browsers
-      vivaldi
       vivaldi-ffmpeg-codecs
 
       # Gaming & Wine
-      bottles
+      (bottles.override {
+        removeWarningPopup = true;
+      })
       cartridges
       lutris
       mangohud

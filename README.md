@@ -38,19 +38,16 @@ Personal NixOS configuration for my ThinkPad X1 Yoga 2nd Gen using flakes and mo
 │   ├── system-devenv.nix   # Integrated Development Environment
 │   ├── virtualisation.nix  # Docker & VMs
 │   └── ...
-├── packages/                # Custom packages
 ├── services/                # Autostart programs, mainly for Niri
 ├── users/                   # User configurations
 ├── configuration.nix        # Main system config
-├── flake.nix                # Flake definition
-└── overlays.nix             # Package overlays
-
+└── flake.nix                # Flake definition
 ```
 
 ## Default Features
 
 - **Kernel**: Uses CachyOS kernel from [Chaotic Nyx](https://www.nyx.chaotic.cx) with 'rusty' sched_ext schedulers profile.
-- **Desktop**: Has configurations for COSMIC, KDE Plasma 6, Niri (Wayland TWM). Uses Plasma 6 by default.
+- **Desktop**: Has configurations for COSMIC, KDE Plasma 6, Niri (Wayland TWM). Uses Niri by default.
 - **Audio**: PipeWire with ALSA compatibility.
 - **Development**: Integrate Development Environment for Python, Rust, C/++ and Java. Nix-ld enabled with nix-alien to run unpatched binaries.
 - **Virtualization**: Uses QEMU/KVM, KVM is enabled by default. Waydroid for Android emulation.

@@ -41,18 +41,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    dgop = {
-      url = "github:AvengeMedia/dgop";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     xwayland-satellite = {
       url = "github:Supreeeme/xwayland-satellite";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    quickshell = {
-      url = "github:outfoxxed/quickshell";
+    dank-material-shell = {
+      url = "github:AvengeMedia/DankMaterialShell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -67,15 +62,11 @@
       self,
       nixpkgs,
       home-manager,
+      dank-material-shell,
       ...
     }@inputs:
     let
       system = "x86_64-linux";
-
-      # Define overlays first
-      overlays = [
-        (import ./overlays.nix)
-      ];
 
       # nixpkgs configuration
       nixpkgsConfig = {
@@ -86,7 +77,7 @@
       mkPkgs =
         nixpkgsInput:
         import nixpkgsInput {
-          inherit system overlays;
+          inherit system;
           config = nixpkgsConfig;
         };
 
@@ -94,7 +85,6 @@
       pkgsMaster = mkPkgs inputs.nixpkgs-master;
       pkgsStaging = mkPkgs inputs.nixpkgs-staging;
       pkgsNext = mkPkgs inputs.nixpkgs-staging-next;
-
     in
     {
       packages.${system}.default = inputs.fenix.packages.${system}.stable.toolchain;
@@ -110,12 +100,9 @@
           inputs.nixos-06cb-009a-fingerprint-sensor.nixosModules."06cb-009a-fingerprint-sensor"
           inputs.home-manager.nixosModules.home-manager
 
-          # Configure nixpkgs properly
+          # Configure nixpkgs
           {
-            nixpkgs = {
-              overlays = overlays;
-              config = nixpkgsConfig;
-            };
+            nixpkgs.config = nixpkgsConfig;
           }
 
           # Home Manager configuration
@@ -132,7 +119,6 @@
           }
         ];
 
-        # Only pass non-pkgs values through specialArgs
         specialArgs = {
           inherit
             self
