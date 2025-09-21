@@ -47,11 +47,6 @@
     tpm2.enable = true;
   };
 
-  # Package overrides for Intel hardware acceleration
-  nixpkgs.config.packageOverrides = pkgs: {
-    intel-vaapi-driver = pkgs.intel-vaapi-driver.override { enableHybridCodec = true; };
-  };
-
   # Hardware configuration
   hardware = {
     bluetooth = {

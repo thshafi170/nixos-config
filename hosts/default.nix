@@ -14,6 +14,16 @@
     ../users
   ];
 
+  # nixpkgs configuration
+  nixpkgs = {
+    overlays = [
+      (import ../overlays.nix)
+    ];
+    config = {
+      allowUnfree = true;
+    };
+  };
+
   # System hostname
   networking.hostName = "X1-Yoga-2nd";
 
@@ -150,23 +160,16 @@
   };
 
   # Use Lix as Nix-replacement
-  nixpkgs.overlays = [
-    (final: prev: {
-      my-new-package = prev.my-new-package.override {
-        nix = final.lixPackageSets.stable.lix;
-      }; # Adapt to your specific use case.
-
-      inherit (final.lixPackageSets.stable)
-        nixpkgs-review
-        nix-direnv
-        nix-eval-jobs
-        nix-fast-build
-        colmena
-        ;
-    })
-  ];
-
   nix.package = pkgs.lixPackageSets.stable.lix;
+
+  # Required packages for Lix
+  environment.systemPackages = with pkgs; [
+    lixPackageSets.latest.nixpkgs-review
+    lixPackageSets.latest.nix-direnv
+    lixPackageSets.latest.nix-eval-jobs
+    lixPackageSets.latest.nix-fast-build
+    lixPackageSets.latest.colmena
+  ];
 
   # Allow unfree packages globally
   environment.sessionVariables.NIXPKGS_ALLOW_UNFREE = "1";

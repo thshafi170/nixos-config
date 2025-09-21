@@ -62,49 +62,45 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      ...
+    }@inputs:
     let
       system = "x86_64-linux";
-
-      # Helper function to create package sets with unfree allowed
-      mkPkgs = nixpkgsInput: import nixpkgsInput {
-        inherit system overlays;
-        config = nixpkgsConfig;
-      };
 
       # Define overlays first
       overlays = [
         (import ./overlays.nix)
       ];
 
-      # nixpkgs branches
-      pkgs = mkPkgs inputs.nixpkgs;
-      pkgsMaster = mkPkgs inputs.nixpkgs-master;
-      pkgsStaging = mkPkgs inputs.nixpkgs-staging;
-      pkgsNext = mkPkgs inputs.nixpkgs-staging-next;
-
       # nixpkgs configuration
       nixpkgsConfig = {
         allowUnfree = true;
       };
 
-    in {
+      # Helper function to create package sets with unfree allowed
+      mkPkgs =
+        nixpkgsInput:
+        import nixpkgsInput {
+          inherit system overlays;
+          config = nixpkgsConfig;
+        };
+
+      # Create alternative package sets for use in modules
+      pkgsMaster = mkPkgs inputs.nixpkgs-master;
+      pkgsStaging = mkPkgs inputs.nixpkgs-staging;
+      pkgsNext = mkPkgs inputs.nixpkgs-staging-next;
+
+    in
+    {
       packages.${system}.default = inputs.fenix.packages.${system}.stable.toolchain;
 
       nixosConfigurations."X1-Yoga-2nd" = nixpkgs.lib.nixosSystem {
         inherit system;
-
-        specialArgs = {
-          inherit
-            self
-            inputs
-            pkgs
-            pkgsMaster
-            pkgsStaging
-            pkgsNext
-            ;
-          chaotic = inputs.chaotic.packages.${system};
-        };
 
         modules = [
           ./hosts/default.nix
@@ -113,6 +109,16 @@
           inputs.iio-niri.nixosModules.default
           inputs.nixos-06cb-009a-fingerprint-sensor.nixosModules."06cb-009a-fingerprint-sensor"
           inputs.home-manager.nixosModules.home-manager
+
+          # Configure nixpkgs properly
+          {
+            nixpkgs = {
+              overlays = overlays;
+              config = nixpkgsConfig;
+            };
+          }
+
+          # Home Manager configuration
           {
             home-manager = {
               useGlobalPkgs = true;
@@ -125,6 +131,18 @@
             };
           }
         ];
+
+        # Only pass non-pkgs values through specialArgs
+        specialArgs = {
+          inherit
+            self
+            inputs
+            pkgsMaster
+            pkgsStaging
+            pkgsNext
+            ;
+          chaotic = inputs.chaotic.packages.${system};
+        };
       };
     };
 }

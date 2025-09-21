@@ -5,9 +5,8 @@
 }:
 
 {
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
 
+  # Development environment configuration
   environment.systemPackages = with pkgs; [
     # Rust development tools
     (inputs.fenix.packages.${pkgs.system}.complete.withComponents [
