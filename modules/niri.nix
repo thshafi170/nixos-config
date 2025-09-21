@@ -42,10 +42,7 @@
 
   # Security
   security = {
-    polkit = {
-      enable = true;
-      package = pkgs.polkit_gnome;
-    };
+    polkit.enable = true;
     pam.services = {
       login.enableGnomeKeyring = true;
       ly.enableGnomeKeyring = true;
@@ -106,12 +103,12 @@
 
     # Other programs
     (steam.override {
-      extraArgs = [
-        "-system-composer"
-      ];
+      extraArgs = ''
+        -system-composer
+      '';
     })
     (vivaldi.override {
-      extraArgs = [
+      commandLineArgs = [
         "--password-store=gnome-libsecret"
         "--ozone-platform=wayland"
         "--enable-wayland-ime"
