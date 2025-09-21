@@ -102,21 +102,6 @@
     xdg-user-dirs
     xsettingsd
 
-    # Other programs
-    (steam.override {
-      extraArgs = ''
-        -system-composer
-      '';
-    })
-    (vivaldi.override {
-      commandLineArgs = [
-        "--password-store=gnome-libsecret"
-        "--ozone-platform=wayland"
-        "--enable-wayland-ime"
-        "--wayland-text-input-version=3"
-      ];
-    })
-
     # Wayland support
     xwayland
     xwayland-satellite
