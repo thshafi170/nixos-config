@@ -22,7 +22,7 @@
     };
   };
 
-  # PAM setting for using fingerprint authentication in Plasma 6
+  # Fingerprint authentication PAM setting for Plasma 6
   security.pam.services.kde-fingerprint.fprintAuth = true;
 
   # Package Exclusion
@@ -46,7 +46,7 @@
       libunity
       vlc
 
-      # Plasma 6 optimized Vivaldi (Qt6 support only)
+      # Vivaldi (Qt6 support only for Plasma 6)
       (vivaldi.overrideAttrs (oldAttrs: {
         buildPhase =
           builtins.replaceStrings
@@ -55,6 +55,12 @@
             oldAttrs.buildPhase;
       })).override
       {
+        qt5 = pkgs.qt6;
+        commandLineArgs = [
+          "--ozone-platform=wayland"
+          "--enable-wayland-ime"
+          "--wayland-text-input-version=3"
+        ];
         proprietaryCodecs = true;
         enableWidevine = true;
       }

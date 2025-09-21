@@ -5,7 +5,7 @@
 }:
 
 {
-  # Import DMS home module
+  # Import home-manager modules
   imports = [
     inputs.dank-material-shell.homeModules.dankMaterialShell
   ];

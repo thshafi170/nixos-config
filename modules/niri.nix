@@ -5,6 +5,7 @@
 }:
 
 {
+  # Module imports
   imports = [
     ../services/niri-session.nix
     ../services/power-wm.nix
@@ -49,13 +50,13 @@
     };
   };
 
-  # Essential packages - DMS handles quickshell, dgop, and many utilities
+  # Essential packages
   environment.systemPackages = with pkgs; [
     # Niri essentials
     niri
     niriswitcher
 
-    # Basic Wayland utilities (DMS provides many of these, but keeping essentials)
+    # Basic Wayland utilities
     wl-clipboard
     brightnessctl
     wlr-randr
@@ -115,6 +116,7 @@
         "--wayland-text-input-version=3"
       ];
     })
+
     # Wayland support
     xwayland
     xwayland-satellite

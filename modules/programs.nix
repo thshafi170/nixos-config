@@ -14,7 +14,6 @@
       btrfs-progs
       colord
       dconf-editor
-      # dgop removed - provided by DMS
       dosfstools
       gammastep
       libsecret
@@ -37,7 +36,7 @@
       android-tools
       android-udev-rules
 
-      # Communication - with Wayland optimizations
+      # Communication
       (discord.override {
         commandLineArgs = [
           "--ozone-platform=wayland"

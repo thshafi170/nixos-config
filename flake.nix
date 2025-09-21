@@ -119,6 +119,7 @@
           }
         ];
 
+        # Only pass non-pkgs values through specialArgs
         specialArgs = {
           inherit
             self
