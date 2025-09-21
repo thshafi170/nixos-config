@@ -69,7 +69,7 @@
     nix-search-tv
 
     # Language servers and formatters
-    nil
+    nixd
     nixfmt-rfc-style
     clang-tools
     omnisharp-roslyn
