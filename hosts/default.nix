@@ -128,39 +128,39 @@
   };
 
   # Nix package manager configuration
-  nix.settings = {
-    auto-optimise-store = true;
-    builders-use-substitutes = true;
-    cores = 4;
-    max-jobs = 4;
-    experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
-    trusted-users = [
-      "root"
-      "thshafi170"
-    ];
-    # Binary cache sources
-    substituters = [
-      "https://cache.nixos.org"
-      "https://chaotic-nyx.cachix.org"
-      "https://nix-community.cachix.org"
-      "https://an-anime-team.cachix.org"
-      "https://niri.cachix.org"
-    ];
-    # Public keys for binary caches
-    trusted-public-keys = [
-      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-      "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
-      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      "an-anime-team.cachix.org-1:nr9QXfYG5tDXIImqxjSXd1b6ymLfGCvviuV8xRPIKPM="
-      "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
-    ];
+  nix = {
+    package = pkgs.lixPackageSets.stable.lix;
+    settings = {
+      auto-optimise-store = true;
+      builders-use-substitutes = true;
+      cores = 4;
+      max-jobs = 4;
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+      trusted-users = [
+        "root"
+        "thshafi170"
+      ];
+      # Binary cache sources
+      substituters = [
+        "https://cache.nixos.org"
+        "https://chaotic-nyx.cachix.org"
+        "https://nix-community.cachix.org"
+        "https://an-anime-team.cachix.org"
+        "https://niri.cachix.org"
+      ];
+      # Public keys for binary caches
+      trusted-public-keys = [
+        "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+        "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+        "an-anime-team.cachix.org-1:nr9QXfYG5tDXIImqxjSXd1b6ymLfGCvviuV8xRPIKPM="
+        "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
+      ];
+    };
   };
-
-  # Use Lix as Nix-replacement
-  nix.package = pkgs.lixPackageSets.stable.lix;
 
   # Required packages for Lix
   environment.systemPackages = with pkgs; [
