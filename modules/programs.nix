@@ -1,104 +1,102 @@
 {
   inputs,
   pkgs,
-  pkgsMaster,
   ...
 }:
 
 {
   # System packages
-  environment.systemPackages =
-    (with pkgs; [
-      # System utilities
-      btop
-      btrfs-progs
-      colord
-      dconf-editor
-      dosfstools
-      gammastep
-      libsecret
-      mtools
-      ntfs3g
-      seatd
+  environment.systemPackages = with pkgs; [
+    # System utilities
+    btop
+    btrfs-progs
+    colord
+    dconf-editor
+    dosfstools
+    gammastep
+    libsecret
+    mtools
+    ntfs3g
+    seatd
 
-      # Media & Graphics
-      ffmpegthumbnailer
-      gdk-pixbuf
-      icoextract
-      icoutils
-      imagemagick
-      krita
-      webp-pixbuf-loader
-      wpgtk
-      xournalpp
+    # Media & Graphics
+    ffmpegthumbnailer
+    gdk-pixbuf
+    icoextract
+    icoutils
+    imagemagick
+    krita
+    webp-pixbuf-loader
+    wpgtk
+    xournalpp
 
-      # Android development tools
-      android-tools
-      android-udev-rules
+    # Android development tools
+    android-tools
+    android-udev-rules
 
-      # Communication
-      (discord.override {
-        commandLineArgs = [
-          "--ozone-platform=wayland"
-          "--enable-wayland-ime"
-          "--wayland-text-input-version=3"
-        ];
-      })
-      element-desktop
-      telegram-desktop
-      zapzap
+    # Communication
+    (discord.override {
+      commandLineArgs = [
+        "--ozone-platform=wayland"
+        "--enable-wayland-ime"
+        "--wayland-text-input-version=3"
+      ];
+    })
+    element-desktop
+    telegram-desktop
+    zapzap
 
-      # Web browsers
-      (vivaldi.override {
-        commandLineArgs = [
-          "--password-store=gnome-libsecret"
-          "--ozone-platform=wayland"
-          "--enable-wayland-ime"
-          "--wayland-text-input-version=3"
-        ];
-      })
-      vivaldi-ffmpeg-codecs
+    # Web browsers
+    (vivaldi.override {
+      commandLineArgs = [
+        "--password-store=gnome-libsecret"
+        "--ozone-platform=wayland"
+        "--enable-wayland-ime"
+        "--wayland-text-input-version=3"
+      ];
+    })
+    vivaldi-ffmpeg-codecs
 
-      # Gaming & Wine
-      (bottles.override {
-        removeWarningPopup = true;
-      })
-      cartridges
-      lutris
-      mangohud
-      goverlay
-      protonplus
-      (steam.override {
-        extraArgs = ''
-          -system-composer
-        '';
-      })
-      steamcmd
-      steam-run
-      umu-launcher
-      vkbasalt
-      vkbasalt-cli
-      wineWowPackages.fonts
-      wineWowPackages.stagingFull
-      winetricks
+    # Gaming & Wine
+    (bottles.override {
+      removeWarningPopup = true;
+    })
+    cartridges
+    lutris
+    mangohud
+    goverlay
+    protonplus
+    (steam.override {
+      extraArgs = ''
+        -system-composer
+      '';
+    })
+    steamcmd
+    steam-run
+    umu-launcher
+    vkbasalt
+    vkbasalt-cli
+    wineWowPackages.fonts
+    wineWowPackages.stagingFull
+    winetricks
 
-      # Productivity
-      onlyoffice-desktopeditors
-      qbittorrent
+    # Other programs
+    proton-authenticator
 
-      # Archives & Tools
-      rar
-      p7zip
-      unzip
-      unrar
-      # arrpc
-      equicord
-      freetype
-      varia
-    ])
-    ++ (with pkgsMaster; [
-      proton-authenticator
-    ]);
+    # Productivity
+    onlyoffice-desktopeditors
+    qbittorrent
+
+    # Archives & Tools
+    rar
+    p7zip
+    unzip
+    unrar
+    # arrpc
+    equicord
+    freetype
+    varia
+  ];
 
   # Environment variables
   environment.sessionVariables = {
@@ -140,7 +138,6 @@
     # Steam configuration
     steam = {
       enable = true;
-      extraCompatPackages = with pkgsMaster; [ proton-ge-bin ];
       extraPackages = with pkgs; [
         xorg.libXcursor
         xorg.libXi
