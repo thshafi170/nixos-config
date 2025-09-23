@@ -68,11 +68,4 @@
     package = pkgs.scx_git.full;
     scheduler = "scx_rustland";
   };
-
-  # Additional CachyOS optimizations
-  environment.systemPackages = with pkgs; [
-    # CachyOS specific tools if needed
-    linuxPackages_cachyos.cpupower
-    linuxPackages_cachyos.turbostat
-  ];
 }
