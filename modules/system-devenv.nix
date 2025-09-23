@@ -52,7 +52,7 @@
     # Code editors and IDEs
     jetbrains.pycharm-community-bin
     vscode-fhs
-    zed-editor
+    zed-editor-fhs
 
     # Command line tools
     jq
@@ -70,7 +70,7 @@
 
     # Language servers and formatters
     nixd
-    nixfmt-rfc-style
+    nixfmt
     clang-tools
     omnisharp-roslyn
     jdt-language-server

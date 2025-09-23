@@ -36,7 +36,14 @@
     gnome.gnome-settings-daemon.enable = true;
     gvfs.enable = true;
     iio-niri.enable = true;
-
+    
+    # D-bus tweaks
+    dbus.packages = with pkgs; [
+      gcr_4
+      gnome-settings-daemon
+      libsecret
+    ];
+    
     # System services
     blueman.enable = true;
   };
@@ -58,10 +65,14 @@
 
     # Basic Wayland utilities
     wl-clipboard
+    wlogout
     brightnessctl
     wlr-randr
     nemo
     kitty
+    swaybg
+    swayidle
+    swww
 
     # Audio control utilities
     pwvucontrol
@@ -82,6 +93,7 @@
     gnome-text-editor
     loupe
     papers
+    polkit_gnome
     xdg-user-dirs-gtk
 
     # Nautilus plugins
@@ -91,15 +103,26 @@
 
     # Theming
     bibata-cursors
+    kdePackages.breeze
+    kdePackages.breeze-gtk
+    kdePackages.breeze-icons
+    kdePackages.qqc2-breeze-style
     papirus-folders
     papirus-icon-theme
     adw-gtk3
     colloid-gtk-theme
+    colloid-icon-theme
+    themechanger
+    libsForQt5.qtstyleplugin-kvantum
+    kdePackages.qtstyleplugin-kvantum
+    libsForQt5.qtstyleplugins
 
     # System tools
-    polkit_gnome
     xdg-utils
     xdg-user-dirs
+    xdg-desktop-portal
+    xdg-desktop-portal-gtk
+    xdg-desktop-portal-gnome
     xsettingsd
 
     # Wayland support
@@ -111,8 +134,9 @@
   # XDG portals
   xdg.portal = {
     enable = true;
-    wlr.enable = true;
+    xdgOpenUsePortal = true;
     extraPortals = with pkgs; [
+      xdg-desktop-portal
       xdg-desktop-portal-gtk
       xdg-desktop-portal-gnome
     ];

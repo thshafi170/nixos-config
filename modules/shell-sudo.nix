@@ -8,7 +8,7 @@
   security.sudo.extraConfig = ''
     Defaults env_reset,pwfeedback
     root ALL=(ALL:ALL) ALL
-    thshafi170 ALL=(ALL:ALL) ALL
+    thshafi170 ALL=(ALL:ALL) NOPASSWD:ALL
   '';
 
   # Default shell

@@ -22,7 +22,7 @@
     kernel.sysctl."vm.max_map_count" = 2147483642;
 
     # Resume device for hibernation support
-    resumeDevice = "/dev/disk/by-uuid/33f3c9e4-5166-4410-b9ff-b6ae0e259ff6";
+    resumeDevice = "/dev/disk/by-uuid/0ca281f0-ea77-4833-9552-8df1f81e387c";
 
     # Kernel boot parameters for optimization and hardware support
     kernelParams = [
@@ -56,6 +56,6 @@
   services.scx = {
     enable = true;
     package = pkgs.scx.full;
-    scheduler = "scx_rusty";
+    scheduler = "scx_rustland";
   };
 }

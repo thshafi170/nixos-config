@@ -1,14 +1,20 @@
 {
+  config,
+  lib,
+  pkgs,
   ...
 }:
 
 {
-  # Real-time kit configuration
-  security.rtkit = {
-    enable = true;
-    args = [
-      "--no-canary"
-    ];
+  # Real-time configuration
+  security.rtkit.enable = true;
+  systemd.services.rtkit-daemon = {
+    serviceConfig = {
+      ExecStart = [
+        ""
+        "${pkgs.rtkit}/libexec/rtkit-daemon --no-canary"
+      ];
+    };
   };
 
   # PipeWire configuration
@@ -69,7 +75,6 @@
         actions = {
           update-props = {
             "session.suspend-timeout-seconds" = 0;
-            "node.always-process" = true;
             "dither.method" = "wannamaker3";
             "dither.noise" = 1;
           };
@@ -89,7 +94,6 @@
         actions = {
           update-props = {
             "session.suspend-timeout-seconds" = 0;
-            "node.always-process" = true;
             "dither.method" = "wannamaker3";
             "dither.noise" = 1;
           };

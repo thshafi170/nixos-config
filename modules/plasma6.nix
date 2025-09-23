@@ -45,25 +45,20 @@
       libayatana-appindicator
       libunity
       vlc
-
-      # Vivaldi (Qt6 support only for Plasma 6)
-      (vivaldi.overrideAttrs (oldAttrs: {
-        buildPhase =
-          builtins.replaceStrings
-            [ "for f in libGLESv2.so libqt5_shim.so ; do" ]
-            [ "for f in libGLESv2.so libqt5_shim.so libqt6_shim.so ; do" ]
-            oldAttrs.buildPhase;
-      })).override
-      {
-        qt5 = pkgs.qt6;
-        commandLineArgs = [
-          "--ozone-platform=wayland"
-          "--enable-wayland-ime"
-          "--wayland-text-input-version=3"
-        ];
-        proprietaryCodecs = true;
-        enableWidevine = true;
-      }
+      (
+        (vivaldi.override {
+          commandLineArgs = [
+            "--ozone-platform=wayland"
+            "--enable-wayland-ime"
+            "--wayland-text-input-version=3"
+          ];
+        }).overrideAttrs
+        (oldAttrs: {
+          dontWrapQtApps = false;
+          dontPatchELF = true;
+          nativeBuildInputs = oldAttrs.nativeBuildInputs ++ [ pkgs.kdePackages.wrapQtAppsHook ];
+        })
+      )
     ])
     ++ (with pkgs.kdePackages; [
       markdownpart

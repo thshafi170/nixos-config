@@ -15,44 +15,43 @@
   boot.supportedFilesystems = [ "btrfs" ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/33f3c9e4-5166-4410-b9ff-b6ae0e259ff6";
+    { device = "/dev/disk/by-uuid/0ca281f0-ea77-4833-9552-8df1f81e387c";
       fsType = "btrfs";
       options = [ "subvol=@" "noatime" "compress=zstd:3" "ssd" "discard=async" "space_cache=v2" "commit=120" ];
     };
 
   fileSystems."/nix" =
-    { device = "/dev/disk/by-uuid/33f3c9e4-5166-4410-b9ff-b6ae0e259ff6";
+    { device = "/dev/disk/by-uuid/0ca281f0-ea77-4833-9552-8df1f81e387c";
       fsType = "btrfs";
       options = [ "subvol=@nix" "noatime" "compress=zstd:3" "ssd" "discard=async" "space_cache=v2" "commit=120" ];
     };
 
   fileSystems."/root" =
-    { device = "/dev/disk/by-uuid/33f3c9e4-5166-4410-b9ff-b6ae0e259ff6";
+    { device = "/dev/disk/by-uuid/0ca281f0-ea77-4833-9552-8df1f81e387c";
       fsType = "btrfs";
       options = [ "subvol=@root" "noatime" "compress=zstd:3" "ssd" "discard=async" "space_cache=v2" "commit=120" ];
     };
 
   fileSystems."/srv" =
-    { device = "/dev/disk/by-uuid/33f3c9e4-5166-4410-b9ff-b6ae0e259ff6";
+    { device = "/dev/disk/by-uuid/0ca281f0-ea77-4833-9552-8df1f81e387c";
       fsType = "btrfs";
       options = [ "subvol=@srv" "noatime" "compress=zstd:3" "ssd" "discard=async" "space_cache=v2" "commit=120" ];
-
     };
 
   fileSystems."/swap" =
-    { device = "/dev/disk/by-uuid/33f3c9e4-5166-4410-b9ff-b6ae0e259ff6";
+    { device = "/dev/disk/by-uuid/0ca281f0-ea77-4833-9552-8df1f81e387c";
       fsType = "btrfs";
       options = [ "subvol=@swap" "noatime" "compress=zstd:3" "ssd" "discard=async" "space_cache=v2" "commit=120" ];
     };
 
   fileSystems."/var" =
-    { device = "/dev/disk/by-uuid/33f3c9e4-5166-4410-b9ff-b6ae0e259ff6";
+    { device = "/dev/disk/by-uuid/0ca281f0-ea77-4833-9552-8df1f81e387c";
       fsType = "btrfs";
       options = [ "subvol=@var" "noatime" "compress=zstd:3" "ssd" "discard=async" "space_cache=v2" "commit=120" ];
     };
 
   fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/3d840c5b-654a-49c3-945d-9165389ed52d";
+    { device = "/dev/disk/by-uuid/12bc920b-e987-411c-ad68-996e96efe9e1";
       fsType = "btrfs";
       options = [ "noatime" "compress=zstd:3" "ssd" "discard=async" "space_cache=v2" "commit=120" ];
     };
@@ -64,7 +63,7 @@
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/A799-7230";
+    { device = "/dev/disk/by-uuid/80AD-D9D6";
       fsType = "vfat";
       options = [ "fmask=0077" "dmask=0077" ];
     };

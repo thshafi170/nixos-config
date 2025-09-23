@@ -15,12 +15,6 @@
     username = "thshafi170";
     homeDirectory = "/home/thshafi170";
     stateVersion = "25.11";
-
-    # Zed editor remote server setup
-    file.".zed_server" = {
-      source = "${pkgs.zed-editor.remote_server}/bin";
-      recursive = true;
-    };
   };
 
   # Enable home-manager self-management
@@ -33,18 +27,5 @@
   };
 
   # Configure Dank Material Shell
-  programs.dankMaterialShell = {
-    enable = true;
-    enableKeybinds = false;
-    enableSystemd = true;
-    enableSpawn = true;
-    enableSystemMonitoring = true;
-    enableClipboard = true;
-    enableVPN = true;
-    enableBrightnessControl = true;
-    enableNightMode = true;
-    enableDynamicTheming = true;
-    enableAudioWavelength = true;
-    enableCalendarEvents = true;
-  };
+  # programs.dankMaterialShell.enable = true;
 }

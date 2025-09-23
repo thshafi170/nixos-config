@@ -15,9 +15,17 @@
   ];
 
   # nixpkgs configuration
-  nixpkgs.config = {
-    allowUnfree = true;
+  nixpkgs = {
+    config.allowUnfree = true;
+    overlays = [ (final: prev: {
+      inherit (prev.lixPackageSets.latest)
+        nixpkgs-review
+        nix-eval-jobs
+        nix-fast-build
+        colmena;
+    }) ];
   };
+
 
   # System hostname
   networking.hostName = "X1-Yoga-2nd";
@@ -122,7 +130,7 @@
 
   # Nix package manager configuration
   nix = {
-    package = pkgs.lixPackageSets.stable.lix;
+    package = pkgs.lixPackageSets.latest.lix;
     settings = {
       auto-optimise-store = true;
       builders-use-substitutes = true;
@@ -154,15 +162,6 @@
       ];
     };
   };
-
-  # Required packages for Lix
-  environment.systemPackages = with pkgs; [
-    lixPackageSets.latest.nixpkgs-review
-    lixPackageSets.latest.nix-direnv
-    lixPackageSets.latest.nix-eval-jobs
-    lixPackageSets.latest.nix-fast-build
-    lixPackageSets.latest.colmena
-  ];
 
   # Allow unfree packages globally
   environment.sessionVariables.NIXPKGS_ALLOW_UNFREE = "1";

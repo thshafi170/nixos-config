@@ -47,14 +47,14 @@
     zapzap
 
     # Web browsers
-    (vivaldi.override {
-      commandLineArgs = [
-        "--password-store=gnome-libsecret"
-        "--ozone-platform=wayland"
-        "--enable-wayland-ime"
-        "--wayland-text-input-version=3"
-      ];
-    })
+    # (vivaldi.override {
+    #  commandLineArgs = [
+    #    "--password-store=gnome-libsecret"
+    #    "--ozone-platform=wayland"
+    #    "--enable-wayland-ime"
+    #    "--wayland-text-input-version=3"
+    #  ];
+    #})
     vivaldi-ffmpeg-codecs
 
     # Gaming & Wine
@@ -66,11 +66,11 @@
     mangohud
     goverlay
     protonplus
-    (steam.override {
-      extraArgs = ''
-        -system-composer
-      '';
-    })
+    #(steam.override {
+    #  extraArgs = ''
+    #    -system-composer
+    #  '';
+    #})
     steamcmd
     steam-run
     umu-launcher
