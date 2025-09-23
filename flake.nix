@@ -2,10 +2,12 @@
   description = "thshafi170's NixOS configuration";
 
   inputs = {
+    # Repositories
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
     nixpkgs-staging.url = "github:NixOS/nixpkgs/staging";
     nixpkgs-staging-next.url = "github:NixOS/nixpkgs/staging-next";
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
     flake-utils.url = "github:numtide/flake-utils";
 
@@ -18,8 +20,6 @@
       url = "github:nix-community/fenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
     nur = {
       url = "github:nix-community/NUR";
@@ -61,6 +61,7 @@
     {
       self,
       nixpkgs,
+      chaotic,
       home-manager,
       dank-material-shell,
       ...
@@ -94,15 +95,36 @@
 
         modules = [
           ./hosts/default.nix
-          inputs.chaotic.nixosModules.default
+          chaotic.nixosModules.default
           inputs.niri.nixosModules.niri
           inputs.iio-niri.nixosModules.default
           inputs.nixos-06cb-009a-fingerprint-sensor.nixosModules."06cb-009a-fingerprint-sensor"
           inputs.home-manager.nixosModules.home-manager
 
-          # Configure nixpkgs
+          # Configure nixpkgs with Chaotic overlay
           {
-            nixpkgs.config = nixpkgsConfig;
+            nixpkgs = {
+              config = nixpkgsConfig;
+              # Use cache-friendly overlay for better performance
+              overlays = [ chaotic.overlays.cache-friendly ];
+            };
+          }
+
+          # Chaotic Nyx configuration
+          {
+            chaotic = {
+              nyx = {
+                # Enable binary cache for faster builds
+                cache.enable = true;
+                # Use cache-friendly overlay for better performance
+                overlay = {
+                  enable = true;
+                  onTopOf = "flake-nixpkgs";
+                };
+                # Add to registry for convenience
+                registry.enable = true;
+              };
+            };
           }
 
           # Home Manager configuration
@@ -119,7 +141,7 @@
           }
         ];
 
-        # Only pass non-pkgs values through specialArgs
+        # Pass inputs through specialArgs
         specialArgs = {
           inherit
             self
@@ -128,7 +150,6 @@
             pkgsStaging
             pkgsNext
             ;
-          chaotic = inputs.chaotic.packages.${system};
         };
       };
     };
