@@ -20,7 +20,7 @@
           fcitx5-mozc
           fcitx5-skk
           fcitx5-m17n
-#           fcitx5-openbangla-keyboard
+          # fcitx5-openbangla-keyboard
           fcitx5-chinese-addons
         ];
       };

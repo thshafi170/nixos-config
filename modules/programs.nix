@@ -42,8 +42,6 @@
         "--wayland-text-input-version=3"
       ];
     })
-    element-desktop
-    telegram-desktop
     zapzap
 
     # Web browsers
