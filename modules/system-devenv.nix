@@ -52,7 +52,7 @@
     # Code editors and IDEs
     jetbrains.pycharm-community-bin
     vscode-fhs
-    zed-editor-fhs
+    zed-editor
 
     # Command line tools
     jq

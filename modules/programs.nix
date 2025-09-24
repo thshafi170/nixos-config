@@ -12,12 +12,16 @@
     btrfs-progs
     colord
     dconf-editor
+    dee
     dosfstools
     gammastep
     libsecret
     mtools
     ntfs3g
     seatd
+    libunity
+    libappindicator
+    libappindicator-gtk2
 
     # Media & Graphics
     ffmpegthumbnailer
@@ -33,6 +37,7 @@
     # Android development tools
     android-tools
     android-udev-rules
+    heimdall
 
     # Communication
     (discord.override {

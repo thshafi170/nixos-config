@@ -52,9 +52,9 @@
     OVMFFull
 
     # VM guest management tools
-    libguestfs
     libguestfs-appliance
     python312Packages.guestfs
+    python313Packages.guestfs
 
     # Container management tools
     boxbuddy
