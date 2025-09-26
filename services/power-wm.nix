@@ -9,9 +9,10 @@
   # Configure power management settings
   services = {
     logind.settings.Login = {
+      SleepOperation = "suspend-then-hibernate";
+      HandleLidSwitch = "suspend-then-hibernate";
       HandlePowerKey = "lock";
       HandlePowerKeyLongPress = "poweroff";
-      HandleLidSwitch = "suspend-then-hibernate";
     };
 
     upower = {
