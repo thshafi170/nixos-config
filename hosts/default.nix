@@ -14,22 +14,6 @@
     ../users
   ];
 
-  # nixpkgs configuration
-  nixpkgs = {
-    config.allowUnfree = true;
-    # Lix overlays
-    overlays = [
-      (final: prev: {
-        inherit (prev.lixPackageSets.latest)
-          nixpkgs-review
-          nix-eval-jobs
-          nix-fast-build
-          colmena
-          ;
-      })
-    ];
-  };
-
   # System hostname
   networking.hostName = "X1-Yoga-2nd";
 
@@ -130,6 +114,9 @@
     user.extraConfig = "DefaultLimitNOFILE=524288";
     services.nix-daemon.environment.TMPDIR = "/var/tmp";
   };
+
+  # nixpkgs configuration
+  nixpkgs.config.allowUnfree = true;
 
   # Nix package manager configuration
   nix = {

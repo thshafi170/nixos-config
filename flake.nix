@@ -3,6 +3,7 @@
 
   inputs = {
     # Repositories
+    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/3.11.2";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
     nixpkgs-staging.url = "github:NixOS/nixpkgs/staging";
@@ -60,6 +61,7 @@
   outputs =
     {
       self,
+      determinate,
       nixpkgs,
       chaotic,
       home-manager,
@@ -95,6 +97,7 @@
 
         modules = [
           ./hosts/default.nix
+          determinate.nixosModules.default
           chaotic.nixosModules.default
           inputs.niri.nixosModules.niri
           inputs.iio-niri.nixosModules.default
