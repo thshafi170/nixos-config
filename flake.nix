@@ -3,7 +3,7 @@
 
   inputs = {
     # Repositories
-    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/3.11.2";
+    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
     nixpkgs-staging.url = "github:NixOS/nixpkgs/staging";
@@ -104,12 +104,16 @@
           inputs.nixos-06cb-009a-fingerprint-sensor.nixosModules."06cb-009a-fingerprint-sensor"
           inputs.home-manager.nixosModules.home-manager
 
-          # Configure nixpkgs with Chaotic overlay
+          # Configure nixpkgs with overlays
           {
             nixpkgs = {
               config = nixpkgsConfig;
-              # Use cache-friendly overlay for better performance
-              overlays = [ chaotic.overlays.cache-friendly ];
+              overlays = [ 
+                # Use cache-friendly overlay for better performance
+                chaotic.overlays.cache-friendly
+                # Custom openbangla-keyboard overlay
+                (import ./overlays/openbangla-keyboard.nix)
+              ];
             };
           }
 

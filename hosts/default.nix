@@ -119,36 +119,33 @@
   nixpkgs.config.allowUnfree = true;
 
   # Nix package manager configuration
-  nix = {
-    package = pkgs.lixPackageSets.latest.lix;
-    settings = {
-      auto-optimise-store = true;
-      builders-use-substitutes = true;
-      cores = 4;
-      max-jobs = 4;
-      experimental-features = [
-        "nix-command"
-        "flakes"
-      ];
-      trusted-users = [
-        "root"
-        "thshafi170"
-      ];
-      # Binary cache sources
-      substituters = [
-        "https://cache.nixos.org"
-        "https://nix-community.cachix.org"
-        "https://an-anime-team.cachix.org"
-        "https://niri.cachix.org"
-      ];
-      # Public keys for binary caches
-      trusted-public-keys = [
-        "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-        "an-anime-team.cachix.org-1:nr9QXfYG5tDXIImqxjSXd1b6ymLfGCvviuV8xRPIKPM="
-        "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
-      ];
-    };
+  nix.settings = {
+    auto-optimise-store = true;
+    builders-use-substitutes = true;
+    cores = 4;
+    max-jobs = 4;
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+    trusted-users = [
+      "root"
+      "thshafi170"
+    ];
+    # Binary cache sources
+    substituters = [
+      "https://cache.nixos.org"
+      "https://nix-community.cachix.org"
+      "https://an-anime-team.cachix.org"
+      "https://niri.cachix.org"
+    ];
+    # Public keys for binary caches
+    trusted-public-keys = [
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "an-anime-team.cachix.org-1:nr9QXfYG5tDXIImqxjSXd1b6ymLfGCvviuV8xRPIKPM="
+      "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
+    ];
   };
 
   # Allow unfree packages globally
