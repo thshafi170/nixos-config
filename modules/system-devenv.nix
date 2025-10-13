@@ -101,6 +101,7 @@
   environment.sessionVariables = {
     RUST_BACKTRACE = "1";
     CARGO_HOME = "$HOME/.cargo";
+    CARGO_TARGET_DIR = "/tmp/cargo-target"
     DOTNET_CLI_TELEMETRY_OPTOUT = "1";
     DOTNET_ROOT = "${pkgs.dotnet-sdk}";
     JAVA_HOME = "${pkgs.jdk}";

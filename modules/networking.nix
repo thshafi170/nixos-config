@@ -10,7 +10,11 @@
   networking = {
     wireless.iwd.enable = true;
     firewall = {
-      enable = false;
+      enable = true;
+      allowedUDPPorts = [
+        53
+        67
+      ];
       checkReversePath = "loose";
     };
     useDHCP = false;
