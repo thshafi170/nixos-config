@@ -7,8 +7,7 @@
 {
   # Import home-manager modules
   imports = [
-    inputs.dank-material-shell.homeModules.dankMaterialShell
-    inputs.chaotic.homeModules.default
+    inputs.chaotic.homeManagerModules.default
   ];
 
   # Basic home configuration
@@ -35,6 +34,12 @@
   xdg.userDirs = {
     enable = true;
     createDirectories = true;
+  };
+
+  # Configure Vicinae
+  services.vicinae = {
+    enable = true;
+    autoStart = true;
   };
 
   # Configure Dank Material Shell

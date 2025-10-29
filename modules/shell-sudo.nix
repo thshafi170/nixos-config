@@ -14,6 +14,8 @@
   # Default shell
   users.defaultUserShell = pkgs.zsh;
 
+
+  # System packages
   environment.systemPackages = with pkgs; [
     # Fish plugins
     fishPlugins.done
@@ -45,6 +47,7 @@
     zenity
   ];
 
+  # Zsh configuration
   programs.zsh = {
     enable = true;
     enableCompletion = true;

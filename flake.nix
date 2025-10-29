@@ -4,7 +4,7 @@
   inputs = {
     # Repositories
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1";
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
     nixpkgs-staging.url = "github:NixOS/nixpkgs/staging";
     nixpkgs-staging-next.url = "github:NixOS/nixpkgs/staging-next";
@@ -32,16 +32,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    niri = {
-      url = "github:sodiboo/niri-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    iio-niri = {
-      url = "github:Zhaith-Izaliel/iio-niri";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     xwayland-satellite = {
       url = "github:Supreeeme/xwayland-satellite";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -51,6 +41,8 @@
       url = "github:AvengeMedia/DankMaterialShell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    vicinae.url = "github:vicinaehq/vicinae";
 
     nixos-06cb-009a-fingerprint-sensor = {
       url = "github:iedame/nixos-06cb-009a-fingerprint-sensor/25.11";
@@ -66,10 +58,12 @@
       chaotic,
       home-manager,
       dank-material-shell,
+      vicinae,
       ...
     }@inputs:
     let
       system = "x86_64-linux";
+      pkgs = nixpkgs.legacyPackages.${system};
 
       # nixpkgs configuration
       nixpkgsConfig = {
@@ -99,8 +93,7 @@
           ./hosts/default.nix
           determinate.nixosModules.default
           chaotic.nixosModules.default
-          inputs.niri.nixosModules.niri
-          inputs.iio-niri.nixosModules.default
+          vicinae.homeManagerModules.default
           inputs.nixos-06cb-009a-fingerprint-sensor.nixosModules."06cb-009a-fingerprint-sensor"
           inputs.home-manager.nixosModules.home-manager
 
@@ -108,11 +101,9 @@
           {
             nixpkgs = {
               config = nixpkgsConfig;
-              overlays = [ 
+              overlays = [
                 # Use cache-friendly overlay for better performance
                 chaotic.overlays.cache-friendly
-                # Custom openbangla-keyboard overlay
-                (import ./overlays/openbangla-keyboard.nix)
               ];
             };
           }
@@ -142,8 +133,11 @@
               backupFileExtension = "bak";
               users.thshafi170 = import ./home/default.nix;
               extraSpecialArgs = {
-                inherit inputs;
+                inherit inputs pkgsMaster pkgsStaging pkgsNext;
               };
+              sharedModules = [
+                dank-material-shell.homeManagerModules.default
+              ];
             };
           }
         ];

@@ -10,14 +10,105 @@
 
   services = {
     # COSMIC Desktop Environment
-    desktopManager = {
-      cosmic.enable = true;
-      cosmic-greeter.enable = true;
-    };
+    desktopManager.cosmic = {
+        enable = true;
+        xwayland.enable = true;
+      };
+      displayManager.cosmic-greeter.enable = true;
 
     # Desktop services
     gnome.gnome-keyring.enable = true;
+    gnome.gnome-settings-daemon.enable = true;
     gvfs.enable = true;
+  };
+
+  # COSMIC-focused application packages
+  environment.systemPackages = with pkgs; [
+    # Essential COSMIC utilities
+    cosmic-ext-ctl
+    cosmic-ext-tweaks
+    cosmic-ext-calculator
+    cosmic-ext-applet-caffeine
+
+    (vivaldi.override {
+     commandLineArgs = [
+       "--password-store=gnome-libsecret"
+       "--ozone-platform=wayland"
+       "--enable-wayland-ime"
+       "--wayland-text-input-version=3"
+     ];
+    })
+
+    # Screenshot tools
+    slurp
+    grim
+    satty
+
+    # Nemo file manager and extensions
+    nemo
+    nemo-with-extensions
+    nemo-python
+    nemo-preview
+    nemo-seahorse
+    nemo-fileroller
+
+    # GNOME programs
+    file-roller
+    gnome-control-center
+    gnome-settings-daemon
+    gnome-tweaks
+    loupe
+    papers
+    showtime
+    xdg-user-dirs-gtk
+
+    # Theming
+    bibata-cursors
+    kdePackages.breeze
+    kdePackages.breeze-gtk
+    kdePackages.breeze-icons
+    kdePackages.qtstyleplugin-kvantum
+    kdePackages.qqc2-breeze-style
+    libsForQt5.qt5ct
+    libsForQt5.qtstyleplugin-kvantum
+    libsForQt5.qtstyleplugins
+    papirus-folders
+    papirus-icon-theme
+    adw-gtk3
+    colloid-gtk-theme
+    colloid-icon-theme
+    (qadwaitadecorations.override {
+      enableQt6 = true;
+      qt5ShadowsSupport = true;
+    })
+
+    # System tools
+    xdg-utils
+    xdg-user-dirs
+    xsettingsd
+
+    # Wayland
+    wl-clipboard
+    xwayland
+    wayland-utils
+  ];
+
+  # Essential programs
+  programs = {
+    dconf.enable = true;
+    seahorse.enable = true;
+    gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+    };
+  };
+
+  # PAM settings
+  security = {
+    pam.services = {
+      login.enableGnomeKeyring = true;
+      greetd.enableGnomeKeyring = true;
+    };
   };
 
   # XDG portals for COSMIC
@@ -32,28 +123,27 @@
     config.common.default = "cosmic";
   };
 
-  # COSMIC-focused application packages
-  environment.systemPackages = with pkgs; [
-    # Essential COSMIC utilities
-    cosmic-edit
-    cosmic-files
-    cosmic-settings
-    cosmic-term
-  ];
-
   # COSMIC-specific environment variables
   environment.sessionVariables = {
+    # COSMIC-specific
     COSMIC_DATA_CONTROL_ENABLED = "1";
-    XDG_CURRENT_DESKTOP = "cosmic";
-    XDG_SESSION_DESKTOP = "cosmic";
-    XDG_SESSION_TYPE = "wayland";
-    GDK_BACKEND = "wayland,x11";
-    QT_QPA_PLATFORM = "wayland;xcb";
+
+    # Qt settings
+    QT_QPA_PLATFORMTHEME = "gtk3";
+    QT_STYLE_OVERRIDE = "breeze";
+    QT_WAYLAND_DECORATION = "adwaita";
     QT_AUTO_SCREEN_SCALE_FACTOR = "1";
-    QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+
+    # Wayland
+    GDK_SCALE = "1.25";
     MOZ_ENABLE_WAYLAND = "1";
+    MOZ_WEBRENDER = "1";
     ELECTRON_OZONE_PLATFORM_HINT = "wayland";
     _JAVA_AWT_WM_NONREPARENTING = "1";
+
+    # Cursor theme
+    XCURSOR_THEME = "Bibata-Modern-Classic";
+    XCURSOR_SIZE = "28";
   };
 
 }

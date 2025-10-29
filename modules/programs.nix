@@ -24,6 +24,7 @@
     libappindicator-gtk2
 
     # Media & Graphics
+    pavucontrol
     ffmpegthumbnailer
     gdk-pixbuf
     icoextract
@@ -34,13 +35,14 @@
     wpgtk
     xournalpp
 
-    # Android development tools
+    # Android tools
     android-tools
     android-udev-rules
     heimdall
 
     # Communication
     (discord.override {
+      withEquicord = true;
       commandLineArgs = [
         "--ozone-platform=wayland"
         "--enable-wayland-ime"
@@ -50,30 +52,18 @@
     zapzap
 
     # Web browsers
-    # (vivaldi.override {
-    #  commandLineArgs = [
-    #    "--password-store=gnome-libsecret"
-    #    "--ozone-platform=wayland"
-    #    "--enable-wayland-ime"
-    #    "--wayland-text-input-version=3"
-    #  ];
-    #})
+    # vivaldi has different overrides for both COSMIC and Plasma6
     vivaldi-ffmpeg-codecs
 
     # Gaming & Wine
     (bottles.override {
       removeWarningPopup = true;
     })
-    cartridges
     lutris
     mangohud
     goverlay
     protonplus
-    #(steam.override {
-    #  extraArgs = ''
-    #    -system-composer
-    #  '';
-    #})
+    steam
     steamcmd
     steam-run
     umu-launcher
@@ -84,6 +74,7 @@
     winetricks
 
     # Other programs
+    gnome-boxes
     proton-authenticator
 
     # Productivity

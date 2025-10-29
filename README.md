@@ -16,9 +16,8 @@ Personal NixOS configuration for ThinkPad X1 Yoga 2nd Gen using flakes and modul
 ## Quick Overview
 
 ### Desktop
-- **Primary**: KDE Plasma 6 (Wayland)
-- **Alternatives**: Niri compositor, COSMIC DE (disabled by default)
-- SDDM display manager with HiDPI support
+- **Primary**: COSMIC DE (Wayland)
+- **Alternatives**: Plasma 6 (disabled by default)
 
 ### Key Features
 - **Kernel**: CachyOS with sched_ext (scx_rustland)
@@ -41,8 +40,6 @@ QEMU/KVM, Podman containers, Waydroid (Android)
 ├── home/                 # Home Manager configs
 ├── hosts/                # System configuration
 ├── modules/              # Modular system components
-├── overlays/             # Custom package overlays
-├── pkgs/                 # Custom packages
 ├── services/             # User services
 └── users/                # User definitions
 ```
@@ -103,7 +100,6 @@ sudo nixos-rebuild test --flake .
 - cache.nixos.org (official)
 - nix-community.cachix.org
 - Chaotic Nyx (CachyOS kernel)
-- niri.cachix.org
 - an-anime-team.cachix.org
 
 ## License
@@ -112,7 +108,7 @@ MIT - See [LICENSE](LICENSE)
 
 ## Acknowledgments
 
-Chaotic Nyx • NixOS Community • OpenBangla • Niri Project
+Chaotic Nyx • NixOS Community
 
 ---
 
