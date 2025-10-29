@@ -41,6 +41,7 @@
 
     # Communication
     (discord.override {
+      withEquicord = true;
       commandLineArgs = [
         "--ozone-platform=wayland"
         "--enable-wayland-ime"
