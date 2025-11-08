@@ -64,9 +64,8 @@ sudo nixos-rebuild switch --flake .#X1-Yoga-2nd
 **Switch Desktop**: Edit `modules/default.nix`
 ```nix
 imports = [
-  ./plasma6.nix    # Default
-  # ./niri.nix     # Uncomment for Niri
-  # ./cosmic.nix   # Uncomment for COSMIC
+  ./cosmic.nix    # Default
+  # ./plasma6.nix   # Uncomment for Plasma 6
 ];
 ```
 
