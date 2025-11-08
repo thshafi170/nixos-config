@@ -33,7 +33,6 @@
     curl
     dhcpcd
     networkmanagerapplet
-    protonvpn-cli
     protonvpn-gui
     wget
     wireguard-tools

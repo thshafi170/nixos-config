@@ -8,6 +8,8 @@
   # Import home-manager modules
   imports = [
     inputs.chaotic.homeManagerModules.default
+    inputs.vicinae.homeManagerModules.default
+    inputs.dankMaterialShell.homeModules.dankMaterialShell.default
   ];
 
   # Basic home configuration

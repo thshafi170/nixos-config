@@ -37,9 +37,21 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    dank-material-shell = {
+    dgop = {
+      url = "github:AvengeMedia/dgop";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    dms-cli = {
+      url = "github:AvengeMedia/danklinux";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    dankMaterialShell = {
       url = "github:AvengeMedia/DankMaterialShell";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.dgop.follows = "dgop";
+      inputs.dms-cli.follows = "dms-cli";
     };
 
     vicinae.url = "github:vicinaehq/vicinae";
@@ -57,7 +69,7 @@
       nixpkgs,
       chaotic,
       home-manager,
-      dank-material-shell,
+      dankMaterialShell,
       vicinae,
       ...
     }@inputs:
@@ -93,7 +105,6 @@
           ./hosts/default.nix
           determinate.nixosModules.default
           chaotic.nixosModules.default
-          vicinae.homeManagerModules.default
           inputs.nixos-06cb-009a-fingerprint-sensor.nixosModules."06cb-009a-fingerprint-sensor"
           inputs.home-manager.nixosModules.home-manager
 
@@ -134,10 +145,8 @@
               users.thshafi170 = import ./home/default.nix;
               extraSpecialArgs = {
                 inherit inputs pkgsMaster pkgsStaging pkgsNext;
+                inherit (inputs) vicinae;
               };
-              sharedModules = [
-                dank-material-shell.homeManagerModules.default
-              ];
             };
           }
         ];

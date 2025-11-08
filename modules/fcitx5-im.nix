@@ -13,7 +13,7 @@
       type = "fcitx5";
       fcitx5 = {
         waylandFrontend = true;
-        addons = with pkgs; [
+        addons = (with pkgs; [
           fcitx5-material-color
           fcitx5-gtk
           fcitx5-openbangla-keyboard
@@ -21,8 +21,9 @@
           fcitx5-mozc
           fcitx5-skk
           fcitx5-m17n
+        ]) ++ ( with pkgs.kdePackages; [
           fcitx5-chinese-addons
-        ];
+        ]);
       };
     };
   };

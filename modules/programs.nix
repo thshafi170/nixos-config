@@ -37,7 +37,6 @@
 
     # Android tools
     android-tools
-    android-udev-rules
     heimdall
 
     # Communication

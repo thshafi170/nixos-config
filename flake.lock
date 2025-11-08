@@ -23,21 +23,24 @@
         "type": "github"
       }
     },
-    "dank-material-shell": {
+    "dankMaterialShell": {
       "inputs": {
-        "dgop": "dgop",
-        "dms-cli": "dms-cli",
+        "dgop": [
+          "dgop"
+        ],
+        "dms-cli": [
+          "dms-cli"
+        ],
         "nixpkgs": [
           "nixpkgs"
-        ],
-        "quickshell": "quickshell"
+        ]
       },
       "locked": {
-        "lastModified": 1758486017,
-        "narHash": "sha256-yKLi7Z0byXTUcI2CllHbC0X+B/V3I99lK27z0pnNJvM=",
+        "lastModified": 1762564068,
+        "narHash": "sha256-IWrXHGg5fgUDRyDk+H2PYXvIzscuHgdgMJT6SJrqfqw=",
         "owner": "AvengeMedia",
         "repo": "DankMaterialShell",
-        "rev": "227081c5c95f7c9b609d993946d8b6f7e0384120",
+        "rev": "c8fcf50095d8f1c8b9317d8cc750b158d7e82da8",
         "type": "github"
       },
       "original": {
@@ -110,16 +113,15 @@
     "dgop": {
       "inputs": {
         "nixpkgs": [
-          "dank-material-shell",
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1757252286,
-        "narHash": "sha256-QwWQzlxAGvIi6VAc8DQ6ONCKKwtPyaHQW1cQyGbP7Og=",
+        "lastModified": 1762562974,
+        "narHash": "sha256-JqOEEI+rtSLTz4zWT2UEKWXCJfYSXLi7ELV98iffjTA=",
         "owner": "AvengeMedia",
         "repo": "dgop",
-        "rev": "a65a02ddf8bade9c109d055e644e4bd851183bd5",
+        "rev": "ec6b4dadb29b290159deea80a02dfc59bbb75860",
         "type": "github"
       },
       "original": {
@@ -131,16 +133,15 @@
     "dms-cli": {
       "inputs": {
         "nixpkgs": [
-          "dank-material-shell",
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1757296630,
-        "narHash": "sha256-3H236F5oIKkqpfnwrvZQs4Y5imKb6JCMFGDkHs8VDjQ=",
+        "lastModified": 1762558898,
+        "narHash": "sha256-IcaTBY+NgXE88pUkoUyC4l+3Wer7WAd/ZwRw1lGTPMg=",
         "owner": "AvengeMedia",
         "repo": "danklinux",
-        "rev": "dac591711ab30d6b071a5cec674a3d2e04665ee1",
+        "rev": "1d717700419e919393f33e04899f42479cfe1108",
         "type": "github"
       },
       "original": {
@@ -683,32 +684,13 @@
         "type": "github"
       }
     },
-    "quickshell": {
-      "inputs": {
-        "nixpkgs": [
-          "dank-material-shell",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1756981260,
-        "narHash": "sha256-GhuD9QVimjynHI0OOyZsqJsnlXr2orowh9H+HYz4YMs=",
-        "ref": "refs/heads/master",
-        "rev": "6eb12551baf924f8fdecdd04113863a754259c34",
-        "revCount": 672,
-        "type": "git",
-        "url": "https://git.outfoxxed.me/quickshell/quickshell"
-      },
-      "original": {
-        "type": "git",
-        "url": "https://git.outfoxxed.me/quickshell/quickshell"
-      }
-    },
     "root": {
       "inputs": {
         "chaotic": "chaotic",
-        "dank-material-shell": "dank-material-shell",
+        "dankMaterialShell": "dankMaterialShell",
         "determinate": "determinate",
+        "dgop": "dgop",
+        "dms-cli": "dms-cli",
         "fenix": "fenix",
         "flake-utils": "flake-utils",
         "home-manager": "home-manager_2",

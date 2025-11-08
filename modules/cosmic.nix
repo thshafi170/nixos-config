@@ -78,7 +78,7 @@
     colloid-gtk-theme
     colloid-icon-theme
     (qadwaitadecorations.override {
-      enableQt6 = true;
+      useQt6 = true;
       qt5ShadowsSupport = true;
     })
 
