@@ -26,7 +26,7 @@
     };
 
     # Resume device for hibernation support
-    resumeDevice = "/dev/disk/by-uuid/0ca281f0-ea77-4833-9552-8df1f81e387c";
+    resumeDevice = "/dev/disk/by-uuid/14b6e8da-d76f-4d6d-af2d-199ef907585c";
 
     # Kernel boot parameters optimized for CachyOS kernel
     kernelParams = [
@@ -64,8 +64,6 @@
   # sched_ext configuration using scx_git from Chaotic Nyx
   services.scx = {
     enable = true;
-    # Use the git version from Chaotic Nyx for latest features
-    package = pkgs.scx_git.full;
     scheduler = "scx_rustland";
   };
 }

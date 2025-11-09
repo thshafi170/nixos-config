@@ -61,13 +61,14 @@
       enable = true;
       decompressFonts = true;
     };
-    fontconfig.useEmbeddedBitmaps = true;
-    enableDefaultPackages = false;
+    fontconfig = {
+      enable = true;
+      useEmbeddedBitmaps = true;
+    };
+    enableDefaultPackages = true;
     packages = with pkgs; [
       # Essential fonts
       noto-fonts
-      noto-fonts-cjk-sans
-      noto-fonts-cjk-serif
       noto-fonts-color-emoji
       liberation_ttf
       dejavu_fonts
@@ -92,11 +93,14 @@
 
       # Language-specific fonts
       lohit-fonts.bengali
+      noto-fonts-cjk-sans
+      noto-fonts-cjk-serif
       source-sans
       source-serif
       source-han-sans
       source-han-serif
       source-han-mono
+      wqy_zenhei
     ];
   };
 

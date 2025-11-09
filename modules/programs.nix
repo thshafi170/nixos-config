@@ -58,7 +58,7 @@
     (bottles.override {
       removeWarningPopup = true;
     })
-    lutris
+    heroic
     mangohud
     goverlay
     protonplus

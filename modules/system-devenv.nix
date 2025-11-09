@@ -51,7 +51,12 @@
 
     # Code editors and IDEs
     jetbrains.pycharm-community-bin
-    vscode-fhs
+    (vscode.override {
+      commandLineArgs = [
+        "--password-store=gnome-libsecret"
+        "--ozone-platform=wayland"
+      ];
+    }).fhs
     zed-editor
 
     # Command line tools
@@ -66,6 +71,7 @@
     git
     gh
     libcap
+    sqlite
     nix-search-tv
 
     # Language servers and formatters

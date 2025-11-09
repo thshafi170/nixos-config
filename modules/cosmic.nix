@@ -67,20 +67,16 @@
     kdePackages.breeze
     kdePackages.breeze-gtk
     kdePackages.breeze-icons
+    kdePackages.qt6ct
     kdePackages.qtstyleplugin-kvantum
     kdePackages.qqc2-breeze-style
     libsForQt5.qt5ct
     libsForQt5.qtstyleplugin-kvantum
     libsForQt5.qtstyleplugins
-    papirus-folders
-    papirus-icon-theme
     adw-gtk3
-    colloid-gtk-theme
-    colloid-icon-theme
-    (qadwaitadecorations.override {
-      useQt6 = true;
-      qt5ShadowsSupport = true;
-    })
+    qadwaitadecorations
+    qadwaitadecorations-qt6
+    themechanger
 
     # System tools
     xdg-utils
@@ -114,7 +110,6 @@
   # XDG portals for COSMIC
   xdg.portal = {
     enable = true;
-    wlr.enable = true;
     extraPortals = with pkgs; [
       xdg-desktop-portal
       xdg-desktop-portal-cosmic
@@ -130,7 +125,7 @@
 
     # Qt settings
     QT_QPA_PLATFORMTHEME = "gtk3";
-    QT_STYLE_OVERRIDE = "breeze";
+    #QT_STYLE_OVERRIDE = "breeze";
     QT_WAYLAND_DECORATION = "adwaita";
     QT_AUTO_SCREEN_SCALE_FACTOR = "1";
 
@@ -145,5 +140,4 @@
     XCURSOR_THEME = "Bibata-Modern-Classic";
     XCURSOR_SIZE = "28";
   };
-
 }
