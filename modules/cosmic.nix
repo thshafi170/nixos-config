@@ -1,4 +1,5 @@
 {
+  inputs,
   pkgs,
   ...
 }:
@@ -63,16 +64,12 @@
     xdg-user-dirs-gtk
 
     # Theming
+    inputs.cutecosmic.packages.${pkgs.system}.default
     bibata-cursors
     kdePackages.breeze
     kdePackages.breeze-gtk
     kdePackages.breeze-icons
-    kdePackages.qt6ct
-    kdePackages.qtstyleplugin-kvantum
     kdePackages.qqc2-breeze-style
-    libsForQt5.qt5ct
-    libsForQt5.qtstyleplugin-kvantum
-    libsForQt5.qtstyleplugins
     adw-gtk3
     qadwaitadecorations
     qadwaitadecorations-qt6
@@ -124,9 +121,8 @@
     COSMIC_DATA_CONTROL_ENABLED = "1";
 
     # Qt settings
-    QT_QPA_PLATFORMTHEME = "gtk3";
-    #QT_STYLE_OVERRIDE = "breeze";
-    QT_WAYLAND_DECORATION = "adwaita";
+    QT_QPA_PLATFORMTHEME = "cosmic";
+    #QT_WAYLAND_DECORATION = "adwaita";
     QT_AUTO_SCREEN_SCALE_FACTOR = "1";
 
     # Wayland

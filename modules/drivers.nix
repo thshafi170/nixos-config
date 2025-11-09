@@ -16,24 +16,7 @@
   services = {
     hardware.bolt.enable = true;
     libinput.enable = true;
-    tuned = {
-      enable = true;
-      ppdSupport = true;
-      ppdSettings = {
-        main.battery_detection = true;
-        profiles = {
-          balanced = "balanced";
-          performance = "throughput-performance";
-          power-saver = "powersave";
-        };
-      };
-      settings = {
-        daemon = true;
-        recommend_command = true;
-        reapply_sysctl = true;
-        dynamic_tuning = true;
-      };
-    };
+    power-profiles-daemon.enable = true;
     "06cb-009a-fingerprint-sensor" = {
       enable = true;
       backend = "python-validity";

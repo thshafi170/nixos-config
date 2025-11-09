@@ -60,7 +60,9 @@
       url = "github:ezKEa/aagl-gtk-on-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
+    
+    cutecosmic.url = "github:thshafi170/cutecosmic-nix";
+    
     nixos-06cb-009a-fingerprint-sensor = {
       url = "github:iedame/nixos-06cb-009a-fingerprint-sensor/25.11";
       inputs.nixpkgs.follows = "nixpkgs";
