@@ -90,6 +90,9 @@
     XMODIFIERS = "@im=fcitx";
   };
 
-  # Enable Plasma Browser Integration for Chromium
-  programs.chromium.enablePlasmaBrowserIntegration = true;
+  # Plasma-specific options
+  programs = {
+    chromium.enablePlasmaBrowserIntegration = true;
+    kdeconnect.enable = true;
+  };
 }

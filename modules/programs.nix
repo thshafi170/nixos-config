@@ -126,7 +126,6 @@
     command-not-found.enable = true;
     chromium.enable = true;
     dconf.enable = true;
-    kdeconnect.enable = true;
     appimage.enable = true;
     gamemode.enable = true;
     gamescope.enable = true;
