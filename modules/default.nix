@@ -9,6 +9,7 @@
     ./cosmic.nix
     ./drivers.nix
     ./fcitx5-im.nix
+    ./fonts.nix
     ./kernel.nix
     ./networking.nix
     ./nix-ld.nix

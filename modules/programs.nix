@@ -1,6 +1,8 @@
 {
   inputs,
   pkgs,
+  aagl,
+  sharedFonts,
   ...
 }:
 
@@ -145,10 +147,14 @@
         systemd
         wayland
         libxkbcommon
-      ];
+      ] ++ sharedFonts;
       remotePlay.openFirewall = true;
       gamescopeSession.enable = true;
       protontricks.enable = true;
     };
+    # An Anime Team Launchers
+    honkers-railway-launcher.enable = true;
+    honkers-launcher.enable = true;
+    sleepy-launcher.enable = true;
   };
 }

@@ -55,6 +55,11 @@
     };
 
     vicinae.url = "github:vicinaehq/vicinae";
+    
+    aagl = {
+      url = "github:ezKEa/aagl-gtk-on-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     nixos-06cb-009a-fingerprint-sensor = {
       url = "github:iedame/nixos-06cb-009a-fingerprint-sensor/25.11";
@@ -71,6 +76,7 @@
       home-manager,
       dankMaterialShell,
       vicinae,
+      aagl,
       ...
     }@inputs:
     let
@@ -105,6 +111,7 @@
           ./hosts/default.nix
           determinate.nixosModules.default
           chaotic.nixosModules.default
+          aagl.nixosModules.default
           inputs.nixos-06cb-009a-fingerprint-sensor.nixosModules."06cb-009a-fingerprint-sensor"
           inputs.home-manager.nixosModules.home-manager
 

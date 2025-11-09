@@ -3,6 +3,7 @@
   inputs,
   lib,
   pkgs,
+  sharedFonts,
   ...
 }:
 
@@ -66,42 +67,7 @@
       useEmbeddedBitmaps = true;
     };
     enableDefaultPackages = true;
-    packages = with pkgs; [
-      # Essential fonts
-      noto-fonts
-      noto-fonts-color-emoji
-      liberation_ttf
-      dejavu_fonts
-      cantarell-fonts
-      jetbrains-mono
-      fira-code
-      fira-code-symbols
-      terminus_font
-
-      # Development fonts
-      nerd-fonts.meslo-lg
-      source-code-pro
-
-      # UI fonts
-      adwaita-fonts
-      font-awesome
-      inter
-      material-icons
-      material-symbols
-      powerline-fonts
-      powerline-symbols
-
-      # Language-specific fonts
-      lohit-fonts.bengali
-      noto-fonts-cjk-sans
-      noto-fonts-cjk-serif
-      source-sans
-      source-serif
-      source-han-sans
-      source-han-serif
-      source-han-mono
-      wqy_zenhei
-    ];
+    packages = sharedFonts;
   };
 
   # zRAM swap configuration
@@ -141,14 +107,14 @@
     # Binary cache sources
     substituters = [
       "https://nix-community.cachix.org"
-      "https://an-anime-team.cachix.org"
       "https://vicinae.cachix.org"
+      "https://ezkea.cachix.org"
     ];
     # Public keys for binary caches
     trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      "an-anime-team.cachix.org-1:nr9QXfYG5tDXIImqxjSXd1b6ymLfGCvviuV8xRPIKPM="
       "vicinae.cachix.org-1:1kDrfienkGHPYbkpNj1mWTr7Fm1+zcenzgTizIcI3oc="
+      "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI="
     ];
   };
 
