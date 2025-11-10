@@ -41,8 +41,10 @@
     # Core development tools
     jdk
     gcc
+    cachix
     clang
     cmake
+    devenv
     gnumake
     gdb
     dotnet-sdk
@@ -57,6 +59,7 @@
         "--ozone-platform=wayland"
       ];
     }).fhs
+    warp-terminal
     zed-editor
 
     # Command line tools

@@ -109,12 +109,14 @@
       "https://nix-community.cachix.org"
       "https://vicinae.cachix.org"
       "https://ezkea.cachix.org"
+      "https://cutecosmic.cachix.org"
     ];
     # Public keys for binary caches
     trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "vicinae.cachix.org-1:1kDrfienkGHPYbkpNj1mWTr7Fm1+zcenzgTizIcI3oc="
       "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI="
+      "cutecosmic.cachix.org-1:M2oYEewcaHGXvY5E0gk5hM/te42lRJHeG+x6v7VmWoo="
     ];
   };
 
