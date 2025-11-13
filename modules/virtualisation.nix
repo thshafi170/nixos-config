@@ -57,6 +57,7 @@
     # Android emulation tools
     waydroid
     waydroid-helper
+    wl-clipboard
 
     # Virtualization utilities
     swtpm

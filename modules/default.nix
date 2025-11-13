@@ -6,14 +6,14 @@
   imports = [
     ./audio.nix
     ./boot.nix
-    ./cosmic.nix
+    # ./cosmic.nix
     ./drivers.nix
     ./fcitx5-im.nix
     ./fonts.nix
     ./kernel.nix
     ./networking.nix
     ./nix-ld.nix
-    # ./plasma6.nix
+    ./plasma6.nix
     ./programs.nix
     ./services.nix
     ./shell-sudo.nix

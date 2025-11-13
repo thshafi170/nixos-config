@@ -45,16 +45,7 @@
     grim
     satty
 
-    # Nemo file manager and extensions
-    nemo
-    nemo-with-extensions
-    nemo-python
-    nemo-preview
-    nemo-seahorse
-    nemo-fileroller
-
     # GNOME programs
-    file-roller
     gnome-control-center
     gnome-settings-daemon
     gnome-tweaks

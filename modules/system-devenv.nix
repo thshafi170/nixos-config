@@ -55,7 +55,7 @@
     jetbrains.pycharm-community-bin
     (vscode.override {
       commandLineArgs = [
-        "--password-store=gnome-libsecret"
+        "--password-store=kwallet6"
         "--ozone-platform=wayland"
       ];
     }).fhs

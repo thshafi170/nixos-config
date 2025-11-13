@@ -35,30 +35,40 @@
     (with pkgs; [
       adwaita-fonts
       adwaita-icon-theme
-      adwaita-icon-theme-legacy
-      adwaita-qt
       adw-gtk3
+      bibata-cursors
+      (colloid-icon-theme.override {
+          schemeVariants = [ "default" ];
+          colorVariants = [ "all" ];
+      })
+      (fluent-gtk-theme.override {
+          themeVariants = [ "all" ];
+          colorVariants = [ "standard" ];
+          sizeVariants = [ "standard" ];
+          tweaks = [
+            "solid"
+            "float"
+          ];
+      })
       dee
-      morewaita-icon-theme
       libappindicator
       libappindicator-gtk2
       libayatana-appindicator
       libunity
       vlc
-      (
-        (vivaldi.override {
+      ((vivaldi.override {
           commandLineArgs = [
+            "--password-store=kwallet6"
             "--ozone-platform=wayland"
             "--enable-wayland-ime"
             "--wayland-text-input-version=3"
           ];
-        }).overrideAttrs
-        (oldAttrs: {
-          dontWrapQtApps = false;
-          dontPatchELF = true;
-          nativeBuildInputs = oldAttrs.nativeBuildInputs ++ [ pkgs.kdePackages.wrapQtAppsHook ];
-        })
-      )
+       }).overrideAttrs
+       (oldAttrs: {
+         dontWrapQtApps = false;
+         dontPatchELF = true;
+         nativeBuildInputs = oldAttrs.nativeBuildInputs ++ [ pkgs.kdePackages.wrapQtAppsHook ];
+       }))
     ])
     ++ (with pkgs.kdePackages; [
       markdownpart
@@ -68,10 +78,14 @@
       phonon-vlc
       sddm-kcm
       flatpak-kcm
+      kdeplasma-addons
+      plasma5support
       kjournald
       ksystemlog
       ocean-sound-theme
-      xwaylandvideobridge
+      qtstyleplugin-kvantum
+    ]) ++ (with pkgs.libsForQt5; [
+      qtstyleplugin-kvantum
     ]);
 
   # XDG configuration

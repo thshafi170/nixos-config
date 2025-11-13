@@ -16,8 +16,8 @@ Personal NixOS configuration for ThinkPad X1 Yoga 2nd Gen using flakes and modul
 ## Quick Overview
 
 ### Desktop
-- **Primary**: COSMIC DE (Wayland)
-- **Alternatives**: Plasma 6 (disabled by default)
+- **Primary**: Plasma 6 (Wayland)
+- **Alternatives**: COSMIC (disabled by default), mangoWC (planned)
 
 ### Key Features
 - **Kernel**: CachyOS with sched_ext (scx_rustland)

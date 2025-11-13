@@ -73,7 +73,16 @@
     wineWowPackages.fonts
     wineWowPackages.stagingFull
     winetricks
-
+    
+    # Nemo file manager and extensions
+    file-roller
+    nemo
+    nemo-with-extensions
+    nemo-python
+    nemo-preview
+    nemo-seahorse
+    nemo-fileroller
+    
     # Other programs
     gnome-boxes
     proton-authenticator
