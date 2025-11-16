@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  pkgsMaster,
   ...
 }:
 
@@ -21,6 +22,9 @@
     networkmanager = {
       enable = true;
       wifi.backend = "iwd";
+      plugins = with pkgs; [
+        networkmanager-openvpn
+      ];
     };
     resolvconf.enable = true;
   };
@@ -29,12 +33,15 @@
   services.openssh.enable = true;
 
   # Network utilities
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = (with pkgs; [
     curl
     dhcpcd
     networkmanagerapplet
-    protonvpn-gui
+    openvpn
+    openvpn3
     wget
     wireguard-tools
-  ];
+  ]) ++ (with pkgsMaster; [ 
+    protonvpn-gui
+  ]);
 }
