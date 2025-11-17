@@ -33,15 +33,14 @@
   services.openssh.enable = true;
 
   # Network utilities
-  environment.systemPackages = (with pkgs; [
+  environment.systemPackages = with pkgs; [
     curl
     dhcpcd
     networkmanagerapplet
     openvpn
     openvpn3
+    protonvpn-gui
     wget
     wireguard-tools
-  ]) ++ (with pkgsMaster; [ 
-    protonvpn-gui
-  ]);
+  ];
 }

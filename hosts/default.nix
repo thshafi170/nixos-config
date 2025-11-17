@@ -92,8 +92,8 @@
   nix.settings = {
     auto-optimise-store = true;
     builders-use-substitutes = true;
-    max-jobs = 0;
-    cores = 0;
+    max-jobs = 4;
+    cores = 4;
     experimental-features = [
       "nix-command"
       "flakes"
