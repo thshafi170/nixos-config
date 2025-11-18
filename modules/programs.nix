@@ -22,8 +22,8 @@
     ntfs3g
     seatd
     libunity
-    libappindicator
     libappindicator-gtk2
+    libappindicator-gtk3
 
     # Media & Graphics
     pavucontrol

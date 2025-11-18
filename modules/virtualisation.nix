@@ -47,6 +47,8 @@
 
     # VM guest management tools
     libguestfs-with-appliance
+    python312Packages.guestfs
+    python313Packages.guestfs
 
     # Container management tools
     boxbuddy
