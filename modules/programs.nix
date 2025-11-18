@@ -74,6 +74,13 @@
     wineWowPackages.stagingFull
     winetricks
     
+    # Emulations
+    dosbox-x
+    (_86Box-with-roms.override {
+      unfreeEnableDiscord = true;
+      unfreeEnableRoms = true;
+    })
+    
     # Nemo file manager and extensions
     file-roller
     nemo
