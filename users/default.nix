@@ -4,13 +4,13 @@
 }:
 
 {
-  users.users.thshafi170 = {
+  users.users.tenshou170 = {
     isNormalUser = true;
     shell = pkgs.fish;
     createHome = true;
-    name = "thshafi170";
-    description = "Tawsif Hossain Shafi";
-    home = "/home/thshafi170";
+    name = "tenshou170";
+    description = "Tenshou Zmeyev";
+    home = "/home/tenshou170";
     extraGroups = [
       "adbusers"
       "adm"
@@ -27,7 +27,7 @@
       "qemu"
       "qemu-libvirtd"
       "sys"
-      "thshafi170"
+      "tenshou170"
       "tss"
       "users"
       "wheel"

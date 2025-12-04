@@ -123,7 +123,11 @@
 
   # System configuration
   system = {
-    rebuild.enableNg = true;
-    stateVersion = "25.11";
+    etc.overlay = {
+      enable = true;
+      mutable = false;
+    };
+    nixos-init.enable = true;
+    stateVersion = "26.05";
   };
 }

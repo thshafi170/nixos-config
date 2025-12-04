@@ -14,9 +14,9 @@
 
   # Basic home configuration
   home = {
-    username = "thshafi170";
-    homeDirectory = "/home/thshafi170";
-    stateVersion = "25.11";
+    username = "tenshou170";
+    homeDirectory = "/home/tenshou170";
+    stateVersion = "26.05";
   };
 
   # Enable home-manager self-management

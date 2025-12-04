@@ -1,5 +1,5 @@
 {
-  description = "thshafi170's NixOS configuration";
+  description = "tenshou170's NixOS configuration";
 
   inputs = {
     # Repositories
@@ -55,7 +55,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     
-    cutecosmic.url = "github:thshafi170/cutecosmic-nix";
+    cutecosmic.url = "github:tenshou170/cutecosmic-nix";
     
     nixos-06cb-009a-fingerprint-sensor = {
       url = "github:iedame/nixos-06cb-009a-fingerprint-sensor/25.11";
@@ -145,7 +145,7 @@
               useGlobalPkgs = true;
               useUserPackages = true;
               backupFileExtension = "bak";
-              users.thshafi170 = import ./home/default.nix;
+              users.tenshou170 = import ./home/default.nix;
               extraSpecialArgs = {
                 inherit inputs pkgsMaster pkgsStaging pkgsNext;
                 inherit (inputs) vicinae;
