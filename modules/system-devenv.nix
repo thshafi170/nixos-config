@@ -59,7 +59,12 @@
         "--ozone-platform=wayland"
       ];
     }).fhs
-    warp-terminal
+    (antigravity.override {
+      commandLineArgs = [
+        "--password-store=kwallet6"
+        "--ozone-platform=wayland"
+      ];
+    }).fhs
     zed-editor
 
     # Command line tools

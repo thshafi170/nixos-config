@@ -6,9 +6,6 @@
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
     nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1";
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
-    nixpkgs-staging.url = "github:NixOS/nixpkgs/staging";
-    nixpkgs-staging-next.url = "github:NixOS/nixpkgs/staging-next";
-    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
     flake-utils.url = "github:numtide/flake-utils";
 
@@ -16,6 +13,8 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel";
 
     fenix = {
       url = "github:nix-community/fenix";
@@ -36,7 +35,7 @@
       url = "github:Supreeeme/xwayland-satellite";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    
+
     dgop = {
       url = "github:AvengeMedia/dgop";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -49,14 +48,14 @@
     };
 
     vicinae.url = "github:vicinaehq/vicinae";
-    
+
     aagl = {
       url = "github:ezKEa/aagl-gtk-on-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    
+
     cutecosmic.url = "github:tenshou170/cutecosmic-nix";
-    
+
     nixos-06cb-009a-fingerprint-sensor = {
       url = "github:iedame/nixos-06cb-009a-fingerprint-sensor/25.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -68,8 +67,8 @@
       self,
       determinate,
       nixpkgs,
-      chaotic,
       home-manager,
+      nix-cachyos-kernel,
       dankMaterialShell,
       vicinae,
       aagl,
@@ -92,10 +91,8 @@
           config = nixpkgsConfig;
         };
 
-      # Create alternative package sets for use in modules
+      # Declare package sets
       pkgsMaster = mkPkgs inputs.nixpkgs-master;
-      pkgsStaging = mkPkgs inputs.nixpkgs-staging;
-      pkgsNext = mkPkgs inputs.nixpkgs-staging-next;
     in
     {
       packages.${system}.default = inputs.fenix.packages.${system}.stable.toolchain;
@@ -106,7 +103,6 @@
         modules = [
           ./hosts/default.nix
           determinate.nixosModules.default
-          chaotic.nixosModules.default
           aagl.nixosModules.default
           inputs.nixos-06cb-009a-fingerprint-sensor.nixosModules."06cb-009a-fingerprint-sensor"
           inputs.home-manager.nixosModules.home-manager
@@ -116,26 +112,8 @@
             nixpkgs = {
               config = nixpkgsConfig;
               overlays = [
-                # Use cache-friendly overlay for better performance
-                chaotic.overlays.cache-friendly
+                nix-cachyos-kernel.overlays.default
               ];
-            };
-          }
-
-          # Chaotic Nyx configuration
-          {
-            chaotic = {
-              nyx = {
-                # Enable binary cache for faster builds
-                cache.enable = true;
-                # Use cache-friendly overlay for better performance
-                overlay = {
-                  enable = true;
-                  onTopOf = "flake-nixpkgs";
-                };
-                # Add to registry for convenience
-                registry.enable = true;
-              };
             };
           }
 
@@ -147,7 +125,10 @@
               backupFileExtension = "bak";
               users.tenshou170 = import ./home/default.nix;
               extraSpecialArgs = {
-                inherit inputs pkgsMaster pkgsStaging pkgsNext;
+                inherit
+                  inputs
+                  pkgsMaster
+                  ;
                 inherit (inputs) vicinae;
               };
             };
@@ -160,8 +141,6 @@
             self
             inputs
             pkgsMaster
-            pkgsStaging
-            pkgsNext
             ;
         };
       };

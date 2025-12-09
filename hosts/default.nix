@@ -100,7 +100,7 @@
     ];
     trusted-users = [
       "root"
-      "thshafi170"
+      "tenshou170"
     ];
     # Binary cache sources
     substituters = [

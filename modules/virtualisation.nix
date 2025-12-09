@@ -52,7 +52,7 @@
 
     # Container management tools
     boxbuddy
-    distrobox_git
+    distrobox
 
     # Android emulation tools
     waydroid
